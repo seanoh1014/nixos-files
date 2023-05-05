@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) st -e sudo wpa_cli -i wlp0s20f3; pkill -RTMIN+3 dwmblocks ;;
+	3) notify-send " Internet module" "\- Click to connect
+睊: no wifi connection
+直: wifi connection with quality
+: no ethernet
+: ethernet working
+" ;;
+esac
+
+[ "$(cat /sys/class/net/wlp0s20f3/operstate)" = 'down' ] && wifiicon="睊"
+
+[ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "直"}')
+
+printf "%s %s\n" "$wifiicon" "$(iwgetid -r)" "$(cat /sys/class/net/wlp0s20f3/operstate | sed "s/down/ /;s/up//")"

@@ -1,0 +1,2 @@
+#!/run/current-system/sw/bin/bash
+feh --no-fehbg --bg-fill '/home/ohsean/.config/home-manager/wallpaper/astolfo.png'

@@ -1,0 +1,10 @@
+#!/bin/sh
+n_from_start=0
+while [ $(expr length "$(pidof dwmblocks)") != 0]
+do
+  # notify all with 1 second cooldown
+  pkill -RTMIN+3 dwmblocks # internet
+  pkill -RTMIN+12 dwmblocks # battery
+  sleep 1
+  ((n_from_start++))
+ done

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cupd=$(xbps-install -Mun | wc -l)
+printf "$cupd \n"

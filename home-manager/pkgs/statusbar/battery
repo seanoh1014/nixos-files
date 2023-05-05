@@ -1,0 +1,47 @@
+#!/bin/sh
+# Give a battery name (Check the battery name from sys/class/power_supply/ e.g. BAT0 or BAT1 and pass it as an argument.
+
+case $BLOCK_BUTTON in
+    3) notify-send " Battery module" ": discharging
+: not charging
+♻: stagnant charge
+: charging
+⚡: charged
+󱈸: battery very low!
+- Text color reflects charge left" ;;
+#    4) xbacklight -inc 1 ;;
+#    5) xbacklight -dec 1 ;;
+#    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+for battery in /sys/class/power_supply/CMB0
+do
+capacity=$(cat "$battery"/capacity) || exit
+status=$(cat "$battery"/status)
+#left=$(acpi | awk '{print $5}')
+
+if [ "$capacity" -ge 98 ]; then
+	[ -z $BAT_ICON ] && BAT_ICON="  "
+elif [ "$capacity" -ge 75 ]; then
+	color="#00ff00"
+	[ -z $BAT_ICON ] && BAT_ICON="  "
+elif [ "$capacity" -ge 50 ]; then
+	color="#ffffff"
+	[ -z $BAT_ICON ] && BAT_ICON="  "
+elif [ "$capacity" -ge 25 ]; then
+	color="#ffff00"
+	[ -z $BAT_ICON ] && BAT_ICON="^c#ffb86c^  "
+else
+	color="#ff0000"
+	warn=" 󱈸"
+	[ -z $BAT_ICON ] && BAT_ICON="^c#ff5555^  "
+fi
+
+[ -z $warn ] && warn=" "
+
+[ "$status" = "Charging" ] && color="#ffffff"
+
+printf "%s%s%s%s\n" "$(echo "$status" | sed "s/,//;s/Discharging//;s/Not charging/ﮖ/;s/Charging/  /;s/Unknown/♻️/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g")" "$BAT_ICON" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')" 
+done
+
+
