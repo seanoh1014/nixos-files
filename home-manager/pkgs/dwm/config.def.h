@@ -7,7 +7,7 @@ static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Fira Code:size=10:weight=bold:antialias=true", "FiraCode Nerd Font:pixelsize=12:autohint:true" };
+static const char *fonts[]          = { "FiraCode Nerd Font:size=10:weight=bold:antialias=true", "Symbols Nerd Font:pixelsize=15:autohint:true" };
 static const char dmenufont[]       = {"Fira Code:size=10:antialias=true:autohint=true"};
 //static const char *upvol[] = { "/usr/bin/amixer","-c0", "set", "Master", "5%+", NULL };
 //static const char *downvol[] = { "/usr/bin/amixer","-c0", "set", "Master", "5%-", NULL };
@@ -32,9 +32,9 @@ static const char *colors[][3]      = {
 
 
 /* tagging */
-static const char *tags[] = { "  ", "  ", "  ", "  " };
+static const char *tags[] = { "   ", "   ", "   ", "  " };
 static const char *tagsel[][2] = {
-		{ "#67b58b", "#44475a" }, //#478061
+		{ "#7db6e0", "#44475a" }, //#478061 for void linux, #67b58b
 		{ "#a6a6a6", "#44475a" }, //#a6a6a6 #4078f2
 		{ "#8261f7", "#44475a" }, //#f66244 #f73451
 		{ "#f8e9d4", "#44475a" },
@@ -60,11 +60,14 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "󰟾",      tile },    /* first entry is default */
+    { "",      spiral }, /* first entry is default */
 	{ "",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+    { "󰟾",      tile },
+ 	{ "[\\]",      dwindle },
 };
 
 /* key definitions */
@@ -100,6 +103,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -114,7 +119,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,  		XK_s, spawn, SHCMD  ("flameshot gui") },
 	{ MODKEY,              		XK_i,      shiftview,  { .i = -1 } },
 	{ MODKEY,             		XK_o,      shiftview,  { .i = +1 } },
-	{ MODKEY|ShiftMask, 		XK_w, spawn,	         SHCMD("sxiv -t -b ~/home/ohsean/.config/home-manager/wallpaper")}, 
+	{ MODKEY|ShiftMask, 		XK_w, spawn,	         SHCMD("sxiv -t -b ~/wallpaper")}, 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

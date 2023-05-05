@@ -9,9 +9,6 @@ let
       xorg.libXinerama
     ];
   });
-  #dwmblocks = pkgs.dwmblocks.overrideAttrs (old: {
-  #  src = fetchTarball https://github.com/seanoh1014/dwmblocks/tarball/master;
-  #});
   dmenu = pkgs.dmenu.overrideAttrs (old: {
     src = pkgs/dmenu;
   });
