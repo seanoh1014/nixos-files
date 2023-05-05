@@ -60,7 +60,6 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
-#include "~/nixos-files/home-manager/pkgs/dwm/fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
     { "󰟾",      tile }, /* first entry is default */
