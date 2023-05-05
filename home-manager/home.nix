@@ -83,11 +83,11 @@
     enable = true;
     userName  = "seanoh1014";
     userEmail = "ohsean1014@gmail.com";
-    #extraConfig = {
-    #  credential.helper = "${
-    #      pkgs.git.override { withLibsecret = true; }
-    #    }/bin/git-credential-libsecret";
-    #};
+    extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+    };
   };
 
   services.picom.enable = true;
@@ -96,10 +96,6 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
     ".xinitrc".source = dotfiles/.xinitrc;
     ".Xresources".source = dotfiles/.Xresources;
     ".config/sxiv".source = dotfiles/sxiv;
