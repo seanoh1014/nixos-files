@@ -57,6 +57,8 @@
     # backlight
     acpilight
 
+    # store password
+    libsecret
     
     # Fonts 
     nanum
@@ -81,11 +83,11 @@
     enable = true;
     userName  = "seanoh1014";
     userEmail = "ohsean1014@gmail.com";
-    extraConfig = {
-      credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
-        }/bin/git-credential-libsecret";
-    };
+    #extraConfig = {
+    #  credential.helper = "${
+    #      pkgs.git.override { withLibsecret = true; }
+    #    }/bin/git-credential-libsecret";
+    #};
   };
 
   services.picom.enable = true;
