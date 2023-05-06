@@ -33,6 +33,7 @@
     libnotify
     glib
     toybox
+    pkg-config
 
     # video player
     mpv
@@ -63,19 +64,6 @@
     # Fonts 
     nanum
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    (st.overrideAttrs (oldAttrs: rec {
-      buildInputs = oldAttrs.buildInputs ++ [ harfbuzz ];
-      src = builtins.fetchTarball {
-      url = "https://github.com/seanoh1014/st/tarball/master";
-      sha256 = "13djp8iaincqvj2nhily8vwfxn7aywi579w52lz305imif32gv69";
-    };
-  }))
-    (dwmblocks.overrideAttrs (oldAttrs: rec {
-      src = builtins.fetchTarball {
-      url = "https://github.com/seanoh1014/dwmblocks-nix/tarball/master";
-      sha256 = "08f4qn5cm1amhxx0q717yj5vcfb2lp5ha3rdb10mfb1nrmbsm7y0";
-    };
-  }))
 
   ];
 
