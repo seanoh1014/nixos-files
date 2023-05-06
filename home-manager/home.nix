@@ -5,6 +5,7 @@
     ./dwm.nix
     ./neovim.nix
     #./firefox.nix
+    ./sxiv.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -40,7 +41,7 @@
 
     # image viewer
     feh
-    sxiv
+    #sxiv
 
     # screenshot
     flameshot

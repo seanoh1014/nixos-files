@@ -1,6 +1,6 @@
 #compositor and background wms only
 #~/.fehbg &
-feh --no-fehbg --bg-fill '/home/ohsean/.config/home-manager/wallpaper/astolfo.png' &
+feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 
 # execute dwmblocks
 dwmblocks & 

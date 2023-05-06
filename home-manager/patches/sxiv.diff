@@ -1,0 +1,25 @@
+diff --git a/main.c b/main.c
+index 8adbf78..be6e8a1 100644
+--- a/main.c
++++ b/main.c
+@@ -573,6 +573,7 @@ void on_keypress(XKeyEvent *kev)
+ 	unsigned int sh = 0;
+ 	KeySym ksym, shksym;
+ 	char dummy, key;
++	bool bound = false;
+ 	bool dirty = false;
+ 
+ 	XLookupString(kev, &key, 1, &ksym, NULL);
+@@ -603,8 +604,11 @@ void on_keypress(XKeyEvent *kev)
+ 		{
+ 			if (cmds[keys[i].cmd].func(keys[i].arg))
+ 				dirty = true;
++			bound = true;
+ 		}
+ 	}
++	if (!bound)
++		run_key_handler(XKeysymToString(ksym), kev->state & ~sh);
+ 	if (dirty)
+ 		redraw();
+ 	prefix = 0;
+
