@@ -104,7 +104,7 @@
   ];
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = false;
   # rtkit is optional but recommended
   #security.rtkit.enable = true;
   #services.pipewire = {
