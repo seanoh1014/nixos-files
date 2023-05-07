@@ -6,6 +6,7 @@
     ./neovim.nix
     #./firefox.nix
     ./sxiv.nix
+    ./dotfiles/fonts/symbols.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -61,7 +62,7 @@
 
     # store password
     libsecret
-    
+
     # Fonts 
     nanum
     (nerdfonts.override { fonts = [ "FiraCode" ]; })

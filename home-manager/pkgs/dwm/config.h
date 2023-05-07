@@ -37,7 +37,7 @@ static const char *tags[] = { "   ", "   ", "   ", "  " };
 static const char *tagsel[][2] = {
 		{ "#7db6e0", "#44475a" }, //#478061 for void linux, #67b58b
 		{ "#a6a6a6", "#44475a" }, //#a6a6a6 #4078f2
-		{ "#ff6a0f", "#44475a" }, //#f66244 #f73451 #ff6a0f #8261f7
+		{ "#ffb86c", "#44475a" }, //#f66244 #f73451 #ff6a0f #8261f7
 		{ "#f8e9d4", "#44475a" },
 };
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
