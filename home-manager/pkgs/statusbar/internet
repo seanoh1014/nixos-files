@@ -1,6 +1,6 @@
 #!/bin/sh
 
-case $BLOCK_BUTTON in
+case $BUTTON in
 	1) st -e sudo wpa_cli -i wlp0s20f3; pkill -RTMIN+3 dwmblocks ;;
 	3) notify-send " Internet module" "\- Click to connect
 睊: no wifi connection

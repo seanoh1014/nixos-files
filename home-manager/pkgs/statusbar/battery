@@ -1,7 +1,7 @@
 #!/bin/sh
 # Give a battery name (Check the battery name from sys/class/power_supply/ e.g. BAT0 or BAT1 and pass it as an argument.
 
-case $BLOCK_BUTTON in
+case $BUTTON in
     3) notify-send " Battery module" ": discharging
 : not charging
 ♻: stagnant charge
