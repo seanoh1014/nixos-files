@@ -104,7 +104,13 @@
   ];
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = false;
+  services.openssh = {
+    enable = true;
+    # require public key authentication for better security
+    settings.passwordAuthentication = false;
+    settings.kbdInteractiveAuthentication = false;
+  #permitRootLogin = "yes";
+  };
   # rtkit is optional but recommended
   #security.rtkit.enable = true;
   #services.pipewire = {
