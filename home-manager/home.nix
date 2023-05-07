@@ -1,4 +1,4 @@
-{ config, pkgs, lib, callPackage, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -6,6 +6,7 @@
     ./dotfiles/neovim.nix
     #./firefox.nix
     ./sxiv.nix
+    ./dotfiles/fonts.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -65,7 +66,6 @@
     # Fonts 
     nanum
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    (callPackage ./dotfiles/fonts/symbols.nix { })
 
   ];
 
