@@ -27,9 +27,9 @@ let
      url = "https://github.com/seanoh1014/dwmblocks-nix2/tarball/master";
      sha256 = "0qk41bjvaj6hg59ypyp91g5ifijssdwzwjbcsaflqgsks456pfdd";
   };
-  #patches = [
-  #  ./patches/dwmblocks-statuscmd.diff
-  #];
+  patches = [
+    ./patches/dwmblocks-statuscmd.diff
+  ];
   });
 
 in
