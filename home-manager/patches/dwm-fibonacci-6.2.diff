@@ -20,10 +20,11 @@ index 1c0b587..5708487 100644
 +#include "fibonacci.c"
  static const Layout layouts[] = {
  	/* symbol     arrange function */
- 	{ "[]=",      tile },    /* first entry is default */
++ 	{ "",      spiral },  /* first entry is default */
+- 	{ "[]=",      tile },    /* first entry is default */
  	{ "><>",      NULL },    /* no layout function means floating behavior */
  	{ "[M]",      monocle },
-+ 	{ "[@]",      spiral },
++   { "[]=",      tile },
 + 	{ "[\\]",      dwindle },
  };
  
@@ -111,3 +112,4 @@ index 0000000..fce0a57
 +}
 -- 
 2.20.1
+
