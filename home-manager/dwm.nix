@@ -24,8 +24,8 @@ let
 
   dwmblocks = pkgs.dwmblocks.overrideAttrs (oldAttrs: rec {
      src = builtins.fetchTarball {
-     url = "https://github.com/seanoh1014/dwmblocks-nix/tarball/master";
-     sha256 = "08f4qn5cm1amhxx0q717yj5vcfb2lp5ha3rdb10mfb1nrmbsm7y0";
+     url = "https://github.com/seanoh1014/dwmblocks/tarball/master";
+     sha256 = "08py394s83jsg4sykp2683kljwld8kmzsy73zj8dbphwrr1pnjnr";
   };
   });
 
