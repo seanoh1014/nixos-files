@@ -1,25 +1,16 @@
-{ config, pkgs,  ... }: 
+{ stdenv, fetchurl }:
 
-let
+let 
 
-    batify = import 
-            ( pkgs.fetchFromGitHub 
-                { 
-                    owner = "ikrivosheev"; 
-                    repo = "batify2"; 
-                    rev= "";
-                    sha256= "";
-                }
-            );
+  stdenv.mkDerivation {
+    name = "batify";
+    src = fetchurl {
+    url = "http://github.com/Ventto/batify/tarball/master";
+    sha256 = "1111111111111111111111111111111111111111111111111111";
+    };
+  }
 
 in
-
-{ 
-    environment = 
-        {
-            systemPackages = 
-                [
-                    batify
-                ];
-        };
+{
+  home.packages = [ batify ];
 }
