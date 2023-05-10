@@ -37,7 +37,7 @@ static const char *tags[] = { "   ", "   ", "   ", "  " };
 static const char *tagsel[][2] = {
 		{ "#7db6e0", "#44475a" }, //#478061 for void linux, #67b58b
 		{ "#a6a6a6", "#44475a" }, //#a6a6a6 #4078f2
-		{ "#8261f7", "#44475a" }, //#f66244 #f73451
+		{ "#44475a", "#44475a" }, //#f66244 #f73451 #ff6a0f #8261f7
 		{ "#f8e9d4", "#44475a" },
 };
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
@@ -65,11 +65,10 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-    { "",      spiral },
+    { "󰟾",      tile }, /* first entry is default */
 	{ "",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
     { "󰟾",      tile }, /* first entry is default */
- 	{ "[\\]",      dwindle },
 };
 
 /* key definitions */
@@ -105,8 +104,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

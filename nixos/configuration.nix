@@ -105,7 +105,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = false;
+    enable = true;
     # require public key authentication for better security
     settings.passwordAuthentication = false;
     settings.kbdInteractiveAuthentication = false;

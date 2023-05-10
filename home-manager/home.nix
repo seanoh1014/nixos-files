@@ -8,6 +8,7 @@
     ./sxiv.nix
     ./dotfiles/fonts.nix
     #./batify.nix
+    ./dotfiles/zsh.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -113,29 +114,7 @@
   #  /etc/profiles/per-user/ohsean/etc/profile.d/hm-session-vars.sh
   #
 
-  # Zsh configuration
-  programs.zsh = {
-    enable = true;
-    dotDir = ".config/zsh";
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    history = {
-      size = 10000;
-      path = "${config.xdg.dataHome}/zsh/history";
-    };
-    zplug = {
-      enable = true;
-      plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
-	    { name = "zsh-users/zsh-syntax-highlighting"; }
-        #{ name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } 
-      ];
-    };
-  };
 
-  
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
