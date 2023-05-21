@@ -27,7 +27,6 @@
   home.packages = with pkgs; [
     # Browsers
     firefox 
-    mullvad-browser
     brave
 
     # necessary packages
@@ -46,8 +45,6 @@
     # image viewer
     feh
     #sxiv
-
-    # pdf viewer
 
     # screenshot
     flameshot

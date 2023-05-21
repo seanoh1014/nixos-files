@@ -5,25 +5,43 @@
     enable = true;
     package = pkgs.zathura;
     extraConfig = ''
-      set guioptions shv
-      set statusbar-home-tilde true
-      set window-title-home-tilde true
-      set selection-clipboard clipboard
-      set recolor true
-      set default-bg #2E344E
-      set default-fg #D8DEE9
-      set recolor-lightcolor #2E3440
-      set recolor-darkcolor #D8DEE9
-      set statusbar-fg #000000
-      set statusbar-bg #F0B050
-      set inputbar-fg #D8DEE9
-      set inputbar-bg #3B4252
-      set completion-highlight-fg #000000
-      set completion-highlight-bg #5E81AC
-      set highlight-color #5E81AC
-      set highlight-active-color #88C0D0
-      set notification-fg #000000
-      set notification-bg #5E81AC
-      '';
+      set default-fg                "#4C4F69"
+      set default-bg 	            "#EFF1F5"
+
+      set completion-bg		          "#CCD0DA"
+      set completion-fg		          "#4C4F69"
+      set completion-highlight-bg	  "#575268"
+      set completion-highlight-fg	  "#4C4F69"
+      set completion-group-bg		    "#CCD0DA"
+      set completion-group-fg		    "#1E66F5"
+
+      set statusbar-fg		          "#4C4F69"
+      set statusbar-bg		          "#CCD0DA"
+
+      set notification-bg		        "#CCD0DA"
+      set notification-fg		        "#4C4F69"
+      set notification-error-bg	    "#CCD0DA"
+      set notification-error-fg	    "#D20F39"
+      set notification-warning-bg	  "#CCD0DA"
+      set notification-warning-fg	  "#FAE3B0"
+
+      set inputbar-fg			      "#4C4F69"
+      set inputbar-bg 		          "#CCD0DA"
+
+      set recolor-lightcolor	      "#EFF1F5"
+      set recolor-darkcolor		      "#4C4F69"
+
+      set index-fg			            "#4C4F69"
+      set index-bg			            "#EFF1F5"
+      set index-active-fg		        "#4C4F69"
+      set index-active-bg		        "#CCD0DA"
+
+      set render-loading-bg		      "#EFF1F5"
+      set render-loading-fg		      "#4C4F69"
+
+      set highlight-color		        "#575268"
+      set highlight-fg                  "#EA76CB"
+      set highlight-active-color	    "#EA76CB"
+     '';
   };
 }

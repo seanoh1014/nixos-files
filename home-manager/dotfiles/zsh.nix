@@ -6,7 +6,7 @@
       dotDir = ".config/zsh";
       shellAliases = {
         ll = "ls -l";
-        update = "sudo nixos-rebuild switch";
+        update = "doas nixos-rebuild switch";
         z = "zathura";
       };
       history = {
