@@ -46,6 +46,8 @@
     feh
     #sxiv
 
+    # pdf viewer
+
     # screenshot
     flameshot
 
