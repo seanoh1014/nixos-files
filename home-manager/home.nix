@@ -9,6 +9,7 @@
     ./dotfiles/fonts.nix
     #./batify.nix
     ./dotfiles/zsh.nix
+    ./dotfiles/zathura.nix 
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
