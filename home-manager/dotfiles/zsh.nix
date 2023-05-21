@@ -7,6 +7,7 @@
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
+        z = "zathura";
       };
       history = {
         size = 10000;
