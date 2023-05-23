@@ -65,6 +65,9 @@
     # store password
     libsecret
 
+    # archiving tool
+    archivebox
+
     # Fonts 
     nanum
     (nerdfonts.override { fonts = [ "FiraCode" ]; })

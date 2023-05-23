@@ -158,6 +158,11 @@
     };
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "python3.10-django-3.1.14"
+  ];
+
+
   #services.xserver.synaptics.enable = true;
 
   #environment.shells = with pkgs; [ zsh ];
