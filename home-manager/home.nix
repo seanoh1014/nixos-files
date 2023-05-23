@@ -66,7 +66,7 @@
     libsecret
 
     # archiving tool
-    archivebox
+    #archivebox
 
     # Fonts 
     nanum

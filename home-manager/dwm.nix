@@ -20,6 +20,9 @@ let
      url = "https://github.com/seanoh1014/st/tarball/master";
      sha256 = "13djp8iaincqvj2nhily8vwfxn7aywi579w52lz305imif32gv69";
   };
+  patches = [
+    ./patches/dwm-exitmenu.diff
+  ]
   });
 
   dwmblocks = pkgs.dwmblocks.overrideAttrs (oldAttrs: rec {
