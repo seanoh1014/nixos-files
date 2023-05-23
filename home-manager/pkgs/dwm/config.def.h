@@ -37,7 +37,7 @@ static const char *tags[] = { "   ", "   ", "   ", "  " };
 static const char *tagsel[][2] = {
 		{ "#7db6e0", "#44475a" }, //#478061 for void linux, #67b58b
 		{ "#a6a6a6", "#44475a" }, //#a6a6a6 #4078f2
-		{ "#44475a", "#44475a" }, //#f66244 #f73451 #ff6a0f #8261f7
+		{ "#bbbbbb", "#44475a" }, //#f66244 #f73451 #ff6a0f #8261f7
 		{ "#f8e9d4", "#44475a" },
 };
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
@@ -87,6 +87,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = {"dmenu_run", NULL};
 static const char *termcmd[]  = { "st", NULL };
 
+#include "exitdwm.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -128,7 +129,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+    { MODKEY|ShiftMask,             XK_e,      exitdwm,       {0} },
+    { MODKEY,                       XK_s, scratchpad_show, {.i = 1} },
+    { MODKEY,                       XK_y, scratchpad_show, {.i = 2} },
+    { MODKEY,                       XK_u, scratchpad_show, {.i = 3} },
+    /*{ MODKEY|ShiftMask,                       XK_s, scratchpad_hide, {.i = 1} },*/
+    { MODKEY|ShiftMask,                       XK_y, scratchpad_hide, {.i = 2} },
+    { MODKEY|ShiftMask,                       XK_u, scratchpad_hide, {.i = 3} },
+	{ MODKEY|ShiftMask,             XK_r,      scratchpad_remove,           {0} },
 	/*specific keys*/
 	{ MODKEY,                       XK_F11, spawn, 		SHCMD("amixer -c0 set Master 5%- ; kill -44 $(pidof dwmblocks)") /*{.v = downvol  }*/ },
 	{ MODKEY,                       XK_F10, spawn, 		SHCMD("amixer -c0 set Master toggle ; kill -44 $(pidof dwmblocks)") /*{.v = mutevol  }*/ },

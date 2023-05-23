@@ -87,6 +87,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = {"dmenu_run", NULL};
 static const char *termcmd[]  = { "st", NULL };
 
+#include "exitdwm.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -128,7 +129,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+    { MODKEY|ShiftMask,             XK_e,      exitdwm,       {0} },
     { MODKEY,                       XK_s, scratchpad_show, {.i = 1} },
     { MODKEY,                       XK_y, scratchpad_show, {.i = 2} },
     { MODKEY,                       XK_u, scratchpad_show, {.i = 3} },
