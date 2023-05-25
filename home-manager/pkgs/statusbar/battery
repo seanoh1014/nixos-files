@@ -35,6 +35,7 @@ else
 	color="#ff0000"
 	warn=" 󱈸"
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ff5555^  "
+    $ notify-send -u critical -i battery-empty \"Battery status\" \"Battery level is CRITICAL at $attr{capacity}%\"
 fi
 
 [ -z $warn ] && warn=" "

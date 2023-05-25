@@ -159,7 +159,6 @@
   };
 
 
-
   #services.xserver.synaptics.enable = true;
 
   #environment.shells = with pkgs; [ zsh ];
