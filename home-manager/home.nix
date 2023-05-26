@@ -38,6 +38,7 @@
     glib
     toybox
     pkg-config
+    mlocate
 
     # video player
     mpv
@@ -45,6 +46,7 @@
     # image viewer
     feh
     #sxiv
+    betterlockscreen
 
     # screenshot
     flameshot

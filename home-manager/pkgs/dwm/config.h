@@ -125,10 +125,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
-	{ MODKEY|ShiftMask,  		XK_s, spawn, SHCMD  ("flameshot gui") },
-	{ MODKEY,              		XK_i,      shiftview,  { .i = -1 } },
-	{ MODKEY,             		XK_o,      shiftview,  { .i = +1 } },
-	{ MODKEY|ShiftMask, 		XK_w, spawn,	         SHCMD("sxiv -t -b ~/wallpaper")}, 
+	{ MODKEY|ShiftMask,  		    XK_s,      spawn,          SHCMD("flameshot gui") },
+	{ MODKEY,              		    XK_i,      shiftview,      { .i = -1 } },
+	{ MODKEY,             	     	XK_o,      shiftview,      { .i = +1 } },
+	{ MODKEY|ShiftMask, 		    XK_w,      spawn,	       SHCMD("sxiv -t -b ~/wallpaper")}, 
+	{ MODKEY, 		                XK_x,      spawn,	       SHCMD("betterlockscreen -l & sleep .5; xset dpms force off")}, 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -142,7 +143,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_s, scratchpad_show, {.i = 1} },
     { MODKEY,                       XK_y, scratchpad_show, {.i = 2} },
     { MODKEY,                       XK_u, scratchpad_show, {.i = 3} },
-    /*{ MODKEY|ShiftMask,                       XK_s, scratchpad_hide, {.i = 1} },*/
+  //{ MODKEY|ShiftMask,                       XK_s, scratchpad_hide, {.i = 1} },
     { MODKEY|ShiftMask,                       XK_y, scratchpad_hide, {.i = 2} },
     { MODKEY|ShiftMask,                       XK_u, scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             XK_r,      scratchpad_remove,           {0} },

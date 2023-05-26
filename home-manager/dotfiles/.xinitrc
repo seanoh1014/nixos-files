@@ -26,9 +26,11 @@ dunst -config ~/.config/dunst/dunstrc &
 # make CapsLock behave like Ctrl:
 setxkbmap -option ctrl:nocaps
 
-# # make short-pressed Ctrl behave like Escape:
+# make short-pressed Ctrl behave like Escape:
 xcape -e 'Control_L=Escape'
 
+# betterlockscreen
+betterlockscreen -u "$HOME/wallpaper" --fx blur --blur 0.5 & 
 
 # exec picom
 picom &
