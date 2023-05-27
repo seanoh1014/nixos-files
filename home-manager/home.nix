@@ -100,7 +100,7 @@
     ".config/dunst".source = dotfiles/dunst;
     "./wallpaper".source = ./wallpaper;
     ".config/flameshot".source = dotfiles/flameshot;
-    #".p10k.zsh".source = dotfiles/.p10k.zsh;
+    ".p10k.zsh".source = dotfiles/.p10k.zsh;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''

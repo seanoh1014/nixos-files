@@ -25,5 +25,14 @@
         src = pkgs.zsh-autosuggestions;
       }
     ];
+    initExtraBeforeCompInit = ''
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
+      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    '';
+    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+    initExtra = ''
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    '';
     };
 }
