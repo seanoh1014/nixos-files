@@ -69,6 +69,7 @@
 
     # archiving tool
     #archivebox
+    ytfzf
 
     # Fonts 
     nanum
@@ -101,6 +102,8 @@
     "./wallpaper".source = ./wallpaper;
     ".config/flameshot".source = dotfiles/flameshot;
     ".p10k.zsh".source = dotfiles/.p10k.zsh;
+    ".config/mpv/scripts".source = dotfiles/mpv/modern.lua;
+    ".config/mpv/fonts".source = dotfiles/mpv/Material-Design-Iconic-Font.ttf;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''

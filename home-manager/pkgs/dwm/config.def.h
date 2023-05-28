@@ -3,7 +3,6 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
@@ -40,10 +39,10 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "   ", "   ", "   ", "  " };
 static const char *tagsel[][2] = {
-		{ "#7db6e0", "#44475a" }, //#478061 for void linux, #67b58b
-		{ "#a6a6a6", "#44475a" }, //#a6a6a6 #4078f2
-		{ "#bbbbbb", "#44475a" }, //#f66244 #f73451 #ff6a0f #8261f7
-		{ "#f8e9d4", "#44475a" },
+		{ "#7db6e0", "#4e5061" }, //#478061 for void linux, #67b58b
+		{ "#a6a6a6", "#4e5061" }, //#a6a6a6 #4078f2
+		{ "#bbbbbb", "#4e5061" }, //#f66244 #f73451 #ff6a0f #8261f7
+		{ "#f8e9d4", "#4e5061" },
 };
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
@@ -109,10 +108,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -122,9 +121,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+	{ MODKEY,                       XK_minus,  incrgaps,        {.i = -1 } },
+	{ MODKEY,                       XK_equal,  incrgaps,        {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_equal,  togglegaps,        {.i = 0  } },
 	{ MODKEY|ShiftMask,  		    XK_s,      spawn,          SHCMD("flameshot gui") },
 	{ MODKEY,              		    XK_i,      shiftview,      { .i = -1 } },
 	{ MODKEY,             	     	XK_o,      shiftview,      { .i = +1 } },
@@ -140,12 +139,12 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
     { MODKEY|ShiftMask,             XK_e,      exitdwm,       {0} },
-    { MODKEY,                       XK_s, scratchpad_show, {.i = 1} },
-    { MODKEY,                       XK_y, scratchpad_show, {.i = 2} },
-    { MODKEY,                       XK_u, scratchpad_show, {.i = 3} },
-  //{ MODKEY|ShiftMask,                       XK_s, scratchpad_hide, {.i = 1} },
-    { MODKEY|ShiftMask,                       XK_y, scratchpad_hide, {.i = 2} },
-    { MODKEY|ShiftMask,                       XK_u, scratchpad_hide, {.i = 3} },
+    { MODKEY,                       XK_g,      scratchpad_show, {.i = 1} },
+    { MODKEY,                       XK_y,      scratchpad_show, {.i = 2} },
+    { MODKEY,                       XK_u,      scratchpad_show, {.i = 3} },
+    { MODKEY|ShiftMask,             XK_g,      scratchpad_hide, {.i = 1} },
+    { MODKEY|ShiftMask,             XK_y,      scratchpad_hide, {.i = 2} },
+    { MODKEY|ShiftMask,             XK_u,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             XK_r,      scratchpad_remove,           {0} },
 	/*specific keys*/
 	{ MODKEY,                       XK_F11, spawn, 		SHCMD("amixer -c0 set Master 5%- ; kill -44 $(pidof dwmblocks)") /*{.v = downvol  }*/ },
