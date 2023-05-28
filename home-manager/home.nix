@@ -104,6 +104,7 @@
     ".p10k.zsh".source = dotfiles/.p10k.zsh;
     ".config/mpv/scripts/modern.lua".source = dotfiles/mpv/modern.lua;
     ".config/mpv/fonts/Material-Design-Iconic-Font.ttf".source = dotfiles/mpv/Material-Design-Iconic-Font.ttf;
+    ".config/mpv/mpv.conf".source = dotfiles/mpv/mpv.conf;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
