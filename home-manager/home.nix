@@ -42,6 +42,7 @@
 
     # video player
     mpv
+    ytfzf
 
     # image viewer
     feh
@@ -69,7 +70,7 @@
 
     # archiving tool
     #archivebox
-    ytfzf
+    wine
 
     # Fonts 
     nanum

@@ -57,10 +57,6 @@
     packages = with pkgs; [];
   };
 
-  # Fonts for programs
-  #fonts.fonts = with pkgs; [
-  #  (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  #];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -75,10 +71,6 @@
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     git
-    #firefox
-    #dmenu
-    #st
-    #xorg.xbacklight
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -94,14 +86,6 @@
   # Enable dwm, dmenu, and st
   services.xserver.windowManager.dwm.enable = true;
 
-  nixpkgs.overlays = [
-    #(final: prev: {
-      #dwm = prev.dwm.overrideAttrs (old: { src = pkgs/dwm ;});
-      #dmenu = prev.dmenu.overrideAttrs (old: { src = pkgs/dmenu ;});
-      #st = prev.st.overrideAttrs (old: { src = /home/ohsean/.config/home-manager/pkgs/st ;});
-      #dwmblocks = prev.dwmblocks.overrideAttrs (old: { src = pkgs/dwmblocks ;});
-    #})
-  ];
 
   # Enable the OpenSSH daemon.
   services.openssh = {
