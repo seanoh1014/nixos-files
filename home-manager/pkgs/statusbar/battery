@@ -6,7 +6,7 @@ case $BUTTON in
 : not charging
 ♻: stagnant charge
 : charging
-⚡: charged 
+󱐋: charged 
 󱈸: battery very low!
 - Text color reflects charge left" ;;
 #    4) xbacklight -inc 1 ;;
@@ -41,7 +41,7 @@ fi
 
 [ "$status" = "Charging" ] && color="#ffffff" 
 
-printf "%s%s%s%s\n" "$(echo "$status" | sed "s/,//;s/Discharging//;s/Not charging/ﮖ/;s/Charging/  /;s/Unknown/♻️/;s/Full/⚡/;s/ 0*/ /g;s/ :/ /g")" "$BAT_ICON" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')" 
+printf "%s%s%s%s\n" "$(echo "$status" | sed "s/,//;s/Discharging//;s/Not charging/ﮖ/;s/Charging/  /;s/Unknown/♻️/;s/Full/ 󱐋/;s/ 0*/ /g;s/ :/ /g")" "$BAT_ICON" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')" 
 done
 
 
