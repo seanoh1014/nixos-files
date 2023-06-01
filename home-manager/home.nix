@@ -69,8 +69,8 @@
     libsecret
 
     # archiving tool
-    #archivebox
     wine
+    weechat
 
     # Fonts 
     nanum
