@@ -43,10 +43,15 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+  # Configure X11
+  services = {
+    xserver = {
+      enable = true;
+      layout = "us";
+      xkbVariant = "";
+      displayManager.startx.enable = true;
+      windowManager.dwm.enable = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -58,9 +63,6 @@
   };
 
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.displayManager.startx.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -82,10 +84,6 @@
   # };
 
   # List services that you want to enable:
-
-  # Enable dwm, dmenu, and st
-  services.xserver.windowManager.dwm.enable = true;
-
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -141,6 +139,14 @@
       }];
     };
   };
+
+  services.emacs.package = pkgs.emacsUnstable;
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
 
 
   #services.xserver.synaptics.enable = true;
