@@ -140,14 +140,12 @@
     };
   };
 
-  services.emacs.package = pkgs.emacsUnstable;
-
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-  ];
-
+#  nixpkgs.overlays = [
+#    (import (builtins.fetchTarball {
+#      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+#      sha256 = "1l92fspl2rcz383xsgn06f8ppx18qxcj3d3ffhz2zjz8w4s94yz1";
+#    }))
+#  ];
 
   #services.xserver.synaptics.enable = true;
 
