@@ -44,15 +44,15 @@
   };
 
   # Configure X11
-  services = {
-    xserver = {
-      enable = true;
-      layout = "us";
-      xkbVariant = "";
-      displayManager.startx.enable = true;
-      windowManager.dwm.enable = true;
-    };
-  };
+  #services = {
+  #  xserver = {
+  #    enable = true;
+  #    layout = "us";
+  #    xkbVariant = "";
+  #    displayManager.startx.enable = true;
+  #    windowManager.dwm.enable = true;
+  #  };
+  #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ohsean = {
