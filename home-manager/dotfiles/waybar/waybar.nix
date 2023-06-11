@@ -1,7 +1,7 @@
 { config, lib, pkgs, user, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     waybar
   ];
 
@@ -15,7 +15,6 @@
     })
   ];
 
-  home-manager.users.${user} = {
     # Home-manager waybar config
     programs.waybar = {
       enable = true;
@@ -25,7 +24,7 @@
       };
       style = ''
                * {
-                 font-family: "JetBrainsMono Nerd Font";
+                 font-family: "FiraCode Nerd Font";
                  font-size: 12pt;
                  font-weight: bold;
                  border-radius: 0px;
@@ -877,5 +876,5 @@
               }
       '';
     };
-  };
+  
 }

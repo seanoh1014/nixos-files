@@ -2,14 +2,16 @@
 
 {
   imports = [
-    #./dwm.nix
+    ./dwm.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
     ./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix 
+    # hyprland
     ./dotfiles/hyprland/hyprland.nix
     ./dotfiles/waybar/waybar.nix
+    ./dotfiles/foot.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

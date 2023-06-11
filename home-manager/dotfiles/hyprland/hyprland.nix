@@ -1,12 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  programs = {
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
-    nvidiaPatches = false;
     extraConfig = ''
       $mainMod = ALT
       # $scripts=$HOME/.config/hypr/scripts
@@ -136,8 +134,8 @@
         sensitivity = -0.5
       }
 
-      bind = $mainMod, Return, exec, kitty
-      bind = $mainMod SHIFT, Return, exec, kitty --class="termfloat"
+      bind = $mainMod, Return, exec, foot
+      bind = $mainMod SHIFT, Return, exec, foot --class="termfloat"
       bind = $mainMod SHIFT, P, killactive,
       bind = $mainMod SHIFT, Q, exit,
       bind = $mainMod SHIFT, Space, togglefloating,
@@ -245,8 +243,8 @@
       #------------------------# 
       bind=$mainMod,B,exec,nvidia-offload firefox
       bind=$mainMod,M,exec,netease-cloud-music-gtk4 
-      bind=$mainMod SHIFT,M,exec,kitty --class="musicfox" --hold sh -c "musicfox" 
-      bind=$mainMod SHIFT,D,exec,kitty  --class="danmufloat" --hold sh -c "export TERM=xterm-256color && bili"
+      bind=$mainMod SHIFT,M,exec,foot --class="musicfox" --hold sh -c "musicfox" 
+      bind=$mainMod SHIFT,D,exec,foot  --class="danmufloat" --hold sh -c "export TERM=xterm-256color && bili"
       bind=$mainMod SHIFT,X,exec,myswaylock
       bind=$mainMod,T,exec,telegram-desktop
       bind=$mainMod,Q,exec,nvidia-offload icalingua-plus-plus --enable-features=UseOzonePlatform --ozone-platform=wayland
@@ -343,7 +341,7 @@
       windowrule=opacity 0.95,title:Telegram
       windowrule=opacity 0.95,title:QQ
       windowrule=opacity 0.95,title:NetEase Cloud Music Gtk4
-      windowrule=animation slide right,kitty
+      windowrule=animation slide right,foot
       windowrule=workspace name:QQ, title:Icalingua++
       windowrule=workspace name:TG, title:Telegram
       windowrule=workspace name:Music, title:NetEase Cloud Music Gtk4
