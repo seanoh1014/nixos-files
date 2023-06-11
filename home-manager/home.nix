@@ -9,9 +9,9 @@
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix 
     # hyprland
-    ./dotfiles/hyprland/hyprland.nix
-    ./dotfiles/waybar/waybar.nix
-    ./dotfiles/foot.nix
+    #./dotfiles/hyprland/hyprland.nix
+    #./dotfiles/waybar/waybar.nix
+    #./dotfiles/foot.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -95,11 +95,13 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".xinitrc".source = dotfiles/.xinitrc;
-    ".Xresources".source = dotfiles/.Xresources;
-    ".config/sxiv".source = dotfiles/sxiv;
-    ".config/picom.conf".source = dotfiles/picom.conf;
-    ".config/dunst".source = dotfiles/dunst;
+    # dwm
+#    ".xinitrc".source = dotfiles/.xinitrc;
+#    ".Xresources".source = dotfiles/.Xresources;
+#    ".config/sxiv".source = dotfiles/sxiv;
+#    ".config/picom.conf".source = dotfiles/picom.conf;
+#    ".config/dunst".source = dotfiles/dunst;
+    # common
     "./wallpaper".source = ./wallpaper;
     ".config/flameshot".source = dotfiles/flameshot;
     ".p10k.zsh".source = dotfiles/.p10k.zsh;
