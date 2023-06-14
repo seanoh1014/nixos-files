@@ -13,7 +13,7 @@
       #latex-live-preview
       coc-nvim
       #coc-clangd
-      #nerdtree
+      nerdtree
       #nerdtree-git-plugin
       auto-pairs
     ];

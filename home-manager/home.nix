@@ -2,16 +2,16 @@
 
 {
   imports = [
-    ./dwm.nix
+    #./dwm.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
     ./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix 
     # hyprland
-    #./dotfiles/hyprland/hyprland.nix
-    #./dotfiles/waybar/waybar.nix
-    #./dotfiles/foot.nix
+    ./dotfiles/hyprland/hyprland.nix
+    ./dotfiles/waybar/waybar.nix
+    ./dotfiles/foot.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -35,6 +35,7 @@
     p7zip
     bc 
     neofetch
+    #uwufetch
     libnotify
     glib
     toybox
@@ -96,11 +97,11 @@
   # plain files is through 'home.file'.
   home.file = {
     # dwm
-#    ".xinitrc".source = dotfiles/.xinitrc;
-#    ".Xresources".source = dotfiles/.Xresources;
-#    ".config/sxiv".source = dotfiles/sxiv;
-#    ".config/picom.conf".source = dotfiles/picom.conf;
-#    ".config/dunst".source = dotfiles/dunst;
+    ".xinitrc".source = dotfiles/.xinitrc;
+    ".Xresources".source = dotfiles/.Xresources;
+    ".config/sxiv".source = dotfiles/sxiv;
+    ".config/picom.conf".source = dotfiles/picom.conf;
+    ".config/dunst".source = dotfiles/dunst;
     # common
     "./wallpaper".source = ./wallpaper;
     ".config/flameshot".source = dotfiles/flameshot;

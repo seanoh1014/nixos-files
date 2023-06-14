@@ -241,16 +241,16 @@
       #------------------------#
       # quickly launch program #
       #------------------------# 
-      bind=$mainMod,B,exec,nvidia-offload firefox
+      bind=$mainMod,B,exec, brave
       bind=$mainMod,M,exec,netease-cloud-music-gtk4 
-      bind=$mainMod SHIFT,M,exec,foot --class="musicfox" --hold sh -c "musicfox" 
-      bind=$mainMod SHIFT,D,exec,foot  --class="danmufloat" --hold sh -c "export TERM=xterm-256color && bili"
-      bind=$mainMod SHIFT,X,exec,myswaylock
-      bind=$mainMod,T,exec,telegram-desktop
-      bind=$mainMod,Q,exec,nvidia-offload icalingua-plus-plus --enable-features=UseOzonePlatform --ozone-platform=wayland
-      bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
-      bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
-      bind=$mainMod,A,exec, grimblast_watermark
+      # bind=$mainMod SHIFT,M,exec,foot --class="musicfox" --hold sh -c "musicfox" 
+      # bind=$mainMod SHIFT,D,exec,foot  --class="danmufloat" --hold sh -c "export TERM=xterm-256color && bili"
+      # bind=$mainMod SHIFT,X,exec,myswaylock
+      # bind=$mainMod,T,exec,telegram-desktop
+      # bind=$mainMod,Q,exec,nvidia-offload icalingua-plus-plus --enable-features=UseOzonePlatform --ozone-platform=wayland
+      # bind=$mainMod,bracketleft,exec,grimblast --notify --cursor  copysave area ~/Pictures/$(date "+%Y-%m-%d"T"%H:%M:%S_no_watermark").png
+      # bind=$mainMod,bracketright,exec, grimblast --notify --cursor  copy area
+      # bind=$mainMod,A,exec, grimblast_watermark
       bind=,Super_L,exec, pkill rofi || ~/.config/rofi/launcher.sh
       bind=$mainMod,Super_L,exec, bash ~/.config/rofi/powermenu.sh
 
@@ -308,10 +308,10 @@
       #------------#
       # auto start #
       #------------#
-      exec-once = launch_waybar &
-      exec-once = mako &
-      exec-once = border_color &
-      exec-once = nm-applet --indicator &
+      exec-once = waybar &
+      # exec-once = mako &
+      # exec-once = border_color &
+      # exec-once = nm-applet --indicator &
 
       #---------------#
       # windows rules #
@@ -349,7 +349,7 @@
       windowrule=float,ncmpcpp
       windowrule=move 25%-,ncmpcpp
       windowrule=size 960 540,ncmpcpp
-      windowrule=noblur,^(firefox)$
+      windowrule=noblur,^(brave)$
 
       #-----------------#
       # workspace rules #
