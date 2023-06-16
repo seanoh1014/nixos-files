@@ -10,6 +10,7 @@
         ll = "ls -l";
         update = "doas nixos-rebuild switch";
         z = "zathura";
+        c = "nix-shell -p libgccjit";
       };
       plugins = [
       {
