@@ -136,7 +136,7 @@
 
       bind = $mainMod, SHIFT, Return, exec, foot
       # bind = $mainMod SHIFT, Return, exec, foot --class="termfloat"
-      bind = $mainMod SHIFT, P, killactive,
+      bind = $mainMod SHIFT, C, killactive,
       bind = $mainMod SHIFT, Q, exit,
       bind = $mainMod SHIFT, Space, togglefloating,
       bind = $mainMod,F,fullscreen

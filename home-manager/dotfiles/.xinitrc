@@ -38,6 +38,9 @@ picom &
 # exec .Xresources
 exec xrdb -merge ~/.Xresources &
 
+# export env var
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 # dbus
 exec dbus-run-session dwm
 

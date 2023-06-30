@@ -58,7 +58,7 @@
   users.users.ohsean = {
     isNormalUser = true;
     description = "ohsean";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
     packages = with pkgs; [];
   };
 
@@ -107,6 +107,12 @@
     alias vim='nvim'
   '';
   sound.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
   programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
@@ -139,6 +145,9 @@
       }];
     };
   };
+
+  # docker
+  virtualisation.docker.enable = true;
 
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {

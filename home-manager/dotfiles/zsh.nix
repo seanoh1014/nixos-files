@@ -12,6 +12,11 @@
         z = "zathura";
         c = "nix-shell -p libgccjit";
       };
+
+      envExtra = ''
+       _JAVA_AWT_WM_NONREPARENTING=1
+       '';
+
       plugins = [
       {
         name = "zsh-fast-syntax-highlighting";

@@ -42,10 +42,13 @@
     pkg-config
     mlocate
     docker
+    docker-compose
+    ghidra
 
     # video player
     mpv
-    ytfzf
+    #ytfzf
+    youtube-tui
 
     # image viewer
     feh
