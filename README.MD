@@ -6,7 +6,7 @@
     git clone https://seanoh1014/nixos-files.git
     ```
 
-- In nixos/, replace hardware-configuration.nix to yours 
+- In /nixos, replace hardware-configuration.nix to yours 
 
 - Install 'home-manager' and add these channels
 
