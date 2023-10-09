@@ -149,6 +149,24 @@
   # docker
   virtualisation.docker.enable = true;
 
+  networking.extraHosts =
+  ''
+    127.0.0.1 dcinside.com
+    127.0.0.1 www.dcinside.com
+    127.0.0.1 https://dcinside.com
+    127.0.0.1 fmkorea.com
+    127.0.0.1 www.fmkorea.com
+    127.0.0.1 https://fmkorea.com
+    127.0.0.1 arca.live
+    127.0.0.1 www.arca.live
+    127.0.0.1 https://arca.live
+    127.0.0.1 afreecatv.com
+    127.0.0.1 www.afreecatv.com
+  #  127.0.0.1 https://afreecatv.com
+  #  127.0.0.1 bj.afreecatv.com
+  #  127.0.0.1 www.bj.afreecatv.com
+  #  127.0.0.1 https://bj.afreecatv.com
+  '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
 #      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;

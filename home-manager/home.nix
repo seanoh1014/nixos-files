@@ -134,7 +134,6 @@
   #  /etc/profiles/per-user/ohsean/etc/profile.d/hm-session-vars.sh
   #
 
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
