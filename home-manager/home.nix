@@ -29,6 +29,7 @@
   home.packages = with pkgs; [
     # Browsers
     brave
+    firefox
 
     # necessary packages
     unzip
@@ -44,6 +45,7 @@
     docker
     docker-compose
     ghidra
+    hugo
 
     # video player
     mpv
@@ -74,7 +76,8 @@
     libsecret
 
     # archiving tool
-    wine
+    #wine
+    qemu
 
     # Fonts 
     nanum

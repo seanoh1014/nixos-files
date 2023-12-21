@@ -113,6 +113,9 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  hardware.bluetooth = {
+    enable = true;
+  };
   programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
@@ -154,9 +157,9 @@
     127.0.0.1 dcinside.com
     127.0.0.1 www.dcinside.com
     127.0.0.1 https://dcinside.com
-    127.0.0.1 fmkorea.com
-    127.0.0.1 www.fmkorea.com
-    127.0.0.1 https://fmkorea.com
+  # 127.0.0.1 fmkorea.com
+  # 127.0.0.1 www.fmkorea.com
+  # 127.0.0.1 https://fmkorea.com
     127.0.0.1 arca.live
     127.0.0.1 www.arca.live
     127.0.0.1 https://arca.live
