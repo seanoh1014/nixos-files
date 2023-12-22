@@ -50,7 +50,8 @@
     # video player
     mpv
     #ytfzf
-    youtube-tui
+    #youtube-tui
+    yt-dlp-light
 
     # image viewer
     feh
