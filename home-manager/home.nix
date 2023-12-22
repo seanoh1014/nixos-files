@@ -49,7 +49,7 @@
 
     # video player
     mpv
-    #ytfzf
+    ytfzf
     #youtube-tui
     yt-dlp-light
 
