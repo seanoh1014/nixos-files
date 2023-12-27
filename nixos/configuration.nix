@@ -101,9 +101,9 @@
   services.openssh = {
     enable = true;
     # require public key authentication for better security
-    settings.passwordAuthentication = false;
-    settings.kbdInteractiveAuthentication = false;
-  #permitRootLogin = "yes";
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  #PermitRootLogin = "yes";
   };
   # rtkit is optional but recommended
   #security.rtkit.enable = true;
