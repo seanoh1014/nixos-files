@@ -60,6 +60,7 @@
           tapping = true;
           middleEmulation = true;
           naturalScrolling = true;
+          disableWhileTyping = true;
         };
       };
     };
