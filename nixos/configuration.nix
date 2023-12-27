@@ -53,6 +53,15 @@
       xkbVariant = "";
       displayManager.startx.enable = true;
       windowManager.dwm.enable = true;
+      # Enable touchpad
+      libinput = {
+        enable = true;
+        touchpad = {
+          tapping = true;
+          middleEmulation = true;
+          naturalScrolling = true;
+        };
+      };
     };
   };
 
