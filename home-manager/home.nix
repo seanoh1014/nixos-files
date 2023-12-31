@@ -84,6 +84,9 @@
     nanum
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
+    # others
+    emacs
+
   ];
 
   programs.git = {
