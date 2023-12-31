@@ -35,7 +35,7 @@
     unzip
     p7zip
     bc 
-    neofetch
+    #neofetch
     #uwufetch
     libnotify
     glib
@@ -49,9 +49,9 @@
 
     # video player
     mpv
-    ytfzf
+    #ytfzf
     #youtube-tui
-    yt-dlp-light
+    #yt-dlp-light
 
     # image viewer
     feh
