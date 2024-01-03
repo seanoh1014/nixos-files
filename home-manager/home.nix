@@ -85,7 +85,8 @@
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
     # others
-    emacs
+    #emacs
+    aseprite
 
   ];
 
