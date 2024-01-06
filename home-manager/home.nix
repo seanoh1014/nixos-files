@@ -27,11 +27,12 @@
 
   
   home.packages = with pkgs; [
-    # Browsers
+
+    # browsers
     brave
     firefox
 
-    # necessary packages
+    # tools
     unzip
     p7zip
     bc 
@@ -67,7 +68,7 @@
     xorg.setxkbmap
     xcape
 
-    # Network
+    # network
     wirelesstools
 
     # backlight
@@ -76,17 +77,18 @@
     # store password
     libsecret
 
-    # archiving tool
+    # emulator/non-emulator
     #wine
-    qemu
+    #qemu
 
-    # Fonts 
+    # fonts 
     nanum
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
 
     # others
     #emacs
     aseprite
+    tmux
 
   ];
 
