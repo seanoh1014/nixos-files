@@ -121,6 +121,7 @@
     ".config/mpv/scripts/modern.lua".source = dotfiles/mpv/modern.lua;
     ".config/mpv/fonts/Material-Design-Iconic-Font.ttf".source = dotfiles/mpv/Material-Design-Iconic-Font.ttf;
     ".config/mpv/mpv.conf".source = dotfiles/mpv/mpv.conf;
+    # doom emacs
     #"./doom.d/config.el".source = dotfiles/doom/config.el;
     #"./doom.d/init.el".source = dotfiles/doom/init.el;
     #"./doom.d/packages.el".source = dotfiles/doom/packages.el;
