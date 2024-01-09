@@ -37,7 +37,7 @@
     p7zip
     bc 
     #neofetch
-    uwufetch
+    #uwufetch
     libnotify
     glib
     toybox
@@ -67,6 +67,7 @@
     # key binding
     xorg.setxkbmap
     xcape
+    xclip
 
     # network
     wirelesstools
