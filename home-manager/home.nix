@@ -37,7 +37,7 @@
     p7zip
     bc 
     #neofetch
-    #uwufetch
+    uwufetch
     libnotify
     glib
     toybox
@@ -45,7 +45,7 @@
     mlocate
     docker
     docker-compose
-    ghidra
+    #ghidra
     hugo
 
     # video player
