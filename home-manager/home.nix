@@ -88,7 +88,7 @@
 
     # others
     #emacs
-    aseprite
+    #aseprite
     tmux
 
   ];
