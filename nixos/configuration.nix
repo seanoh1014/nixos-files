@@ -118,19 +118,24 @@
   environment.interactiveShellInit = ''
     alias vim='nvim'
   '';
+
   sound.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
   hardware.bluetooth = {
     enable = true;
   };
+
   programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
+
   boot.extraModprobeConfig = ''
     options snd slots=snd-hda-intel
   '';
