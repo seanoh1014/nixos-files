@@ -36,7 +36,7 @@
     unzip
     p7zip
     bc 
-    #neofetch
+    neofetch
     #uwufetch
     libnotify
     glib
