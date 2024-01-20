@@ -30,7 +30,6 @@
 
     # browsers
     brave
-    #firefox
 
     # tools
     unzip
