@@ -89,6 +89,7 @@
     #emacs
     #aseprite
     tmux
+    acpi
 
   ];
 
