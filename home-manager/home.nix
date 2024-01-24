@@ -30,6 +30,7 @@
 
     # browsers
     brave
+    mullvad-browser
 
     # tools
     unzip
@@ -90,6 +91,7 @@
     #aseprite
     tmux
     acpi
+    gnome.gnome-keyring
 
   ];
 
