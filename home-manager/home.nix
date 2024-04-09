@@ -92,6 +92,7 @@
     tmux
     acpi
     gnome.gnome-keyring
+    filezilla
 
   ];
 
