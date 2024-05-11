@@ -93,7 +93,7 @@
     acpi
     gnome.gnome-keyring
     filezilla
-    inkscape
+    arandr
 
   ];
 
