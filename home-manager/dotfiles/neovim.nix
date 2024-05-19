@@ -16,6 +16,7 @@
       nerdtree
       #nerdtree-git-plugin
       auto-pairs
+      catppuccin-nvim
     ];
     extraConfig = builtins.readFile ./init.vim;
   };
