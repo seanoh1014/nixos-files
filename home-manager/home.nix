@@ -94,6 +94,7 @@
     gnome.gnome-keyring
     filezilla
     arandr
+    obsidian
 
   ];
 
