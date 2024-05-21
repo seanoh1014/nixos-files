@@ -16,6 +16,7 @@ set nostartofline
 inoremap <silent><expr> <c-space> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"   
 
+colorscheme catppuccin-mocha
 
 lua << END
 require('lualine').setup {
