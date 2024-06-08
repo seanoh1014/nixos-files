@@ -95,6 +95,7 @@
     filezilla
     arandr
     obsidian
+    teams-for-linux
 
   ];
 

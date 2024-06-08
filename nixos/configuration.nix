@@ -47,22 +47,24 @@
 
   # Configure X11
   services = {
+    # Enable touchpad
+    libinput = {
+      enable = true;
+      touchpad = {
+        tapping = true;
+        middleEmulation = true;
+        naturalScrolling = true;
+        disableWhileTyping = true;
+      };
+    };
     xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "";
+      xkb = {  
+        layout = "us";
+        variant = "";
+      }; 
       displayManager.startx.enable = true;
       windowManager.dwm.enable = true;
-      # Enable touchpad
-      libinput = {
-        enable = true;
-        touchpad = {
-          tapping = true;
-          middleEmulation = true;
-          naturalScrolling = true;
-          disableWhileTyping = true;
-        };
-      };
     };
   };
 
