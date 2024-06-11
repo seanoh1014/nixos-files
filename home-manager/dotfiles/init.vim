@@ -1,5 +1,6 @@
 set showmatch
 set number
+set relativenumber
 set mouse=a
 set formatoptions+=o
 set expandtab
@@ -17,6 +18,10 @@ inoremap <silent><expr> <c-space> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"   
 
 colorscheme catppuccin-mocha
+
+hi LineNrAbove guibg=none guifg=#5e6175
+hi LineNr      guibg=none guifg=#8286a1, gui=bold
+hi LineNrBelow guibg=none guifg=#5e6175
 
 lua << END
 require('lualine').setup {
