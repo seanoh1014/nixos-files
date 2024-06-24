@@ -97,6 +97,7 @@
     obsidian
     teams-for-linux
 
+
   ];
 
   programs.git = {
