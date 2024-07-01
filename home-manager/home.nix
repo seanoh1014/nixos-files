@@ -96,7 +96,7 @@
     arandr
     obsidian
     teams-for-linux
-
+    zoom-us
 
   ];
 
