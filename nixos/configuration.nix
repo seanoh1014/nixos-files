@@ -174,18 +174,6 @@
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
-   127.0.0.1 fmkorea.com/*
-   127.0.0.1 image.fmkorea.com
-   127.0.0.1 static.fmkorea.com
-   127.0.0.1 https://m.fmkorea.com/*
-   127.0.0.1 fmkorea.com
-   127.0.0.1 https://www.fmkorea.com/*
-   127.0.0.1 dcinside.com
-   127.0.0.1 gall.dcinside.com
-   127.0.0.1 m.dcinside.com
-   127.0.0.1 https://www.dcinside.com
-   127.0.0.1 arca.live
-   127.0.0.1 https://www.arca.live
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
