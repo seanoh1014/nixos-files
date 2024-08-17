@@ -121,7 +121,7 @@
     alias vim='nvim'
   '';
 
-  sound.enable = true;
+  #sound.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -144,10 +144,8 @@
 
   i18n = {
     inputMethod = {
-      enabled = "kime";
-      #kime.config = {
-      #  indicator.icon_color = "White";
-      #};
+      enable = true;
+      type = "kime";
     };
   };
 
