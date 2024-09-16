@@ -97,7 +97,9 @@
     obsidian
     teams-for-linux
     zoom-us
-    kiwitalk
+    exfat
+    parted
+    gptfdisk
 
   ];
 
