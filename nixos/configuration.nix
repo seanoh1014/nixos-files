@@ -172,6 +172,9 @@
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
+   dcinside.com
+   fmkorea.com
+   arca.live
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {

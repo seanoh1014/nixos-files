@@ -100,6 +100,7 @@
     exfat
     parted
     gptfdisk
+    alsa-utils
 
   ];
 
