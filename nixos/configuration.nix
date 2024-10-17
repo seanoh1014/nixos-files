@@ -182,8 +182,8 @@
    127.0.0.1 gall.dcinside.com
    127.0.0.1 m.dcinside.com
    127.0.0.1 https://www.dcinside.com
-   127.0.0.1 arca.live
-   127.0.0.1 https://www.arca.live
+   #127.0.0.1 arca.live
+   #127.0.0.1 https://www.arca.live
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
