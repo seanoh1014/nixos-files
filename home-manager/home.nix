@@ -62,7 +62,7 @@
     flameshot
 
     # theme
-    gnome.adwaita-icon-theme
+    pkgs.adwaita-icon-theme
      
     # key binding
     xorg.setxkbmap
@@ -91,12 +91,12 @@
     #aseprite
     tmux
     acpi
-    gnome.gnome-keyring
+    pkgs.gnome-keyring
     filezilla
     arandr
-    obsidian
-    teams-for-linux
-    zoom-us
+    #obsidian
+    #teams-for-linux
+    #zoom-us
     exfat
     parted
     gptfdisk
