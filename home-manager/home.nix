@@ -30,7 +30,7 @@
 
     # browsers
     brave
-    mullvad-browser
+    #mullvad-browser
 
     # tools
     unzip
