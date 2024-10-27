@@ -153,7 +153,7 @@
 
   security = {
     sudo = {
-      enable = false;
+      enable = true;
     };
     doas = {
       enable = true;
