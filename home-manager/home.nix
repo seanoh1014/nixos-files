@@ -5,7 +5,7 @@
     ./dwm.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
-    ./dotfiles/fonts.nix
+    #./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix 
     # hyprland
@@ -36,7 +36,8 @@
     unzip
     p7zip
     bc 
-    neofetch
+    nitch
+    zfxtop
     #uwufetch
     libnotify
     glib
@@ -84,7 +85,7 @@
 
     # fonts 
     nanum
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    #(nerdfonts.override { fonts = [ "FiraCode" ]; })
 
     # others
     #emacs

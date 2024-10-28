@@ -2,10 +2,16 @@
 #~/.fehbg &
 feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 
+# unmute volume
+amixer set Master unmute & 
+
+# set volume to 75%
+amixer -c0 set Master 75% &
+
 # execute dwmblocks
 dwmblocks & 
 
-# set brightness as 10%
+# set brightness to 10%
 xbacklight -set 10% &
 
 # execute dunst
