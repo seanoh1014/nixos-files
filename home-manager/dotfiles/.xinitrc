@@ -6,7 +6,7 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 amixer set Master unmute & 
 
 # set volume to 75%
-amixer -c0 set Master 75% &
+#amixer -c0 set Master 75% &
 
 # execute dwmblocks
 dwmblocks & 
