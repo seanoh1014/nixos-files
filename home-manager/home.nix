@@ -103,6 +103,7 @@
     gptfdisk
     alsa-utils
     doas-sudo-shim
+    opensnitch
 
   ];
 
