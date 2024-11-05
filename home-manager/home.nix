@@ -5,6 +5,7 @@
     ./dwm.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
+    #./dotfiles/emacs.nix
     #./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix 
@@ -103,7 +104,10 @@
     gptfdisk
     alsa-utils
     doas-sudo-shim
-    opensnitch
+    #distrobox
+    #eza
+    #opensnitch-ui
+    blocky
 
   ];
 

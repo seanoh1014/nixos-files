@@ -193,6 +193,10 @@
    #127.0.0.1 www.youtu.be
    #127.0.0.1 https://www.youtu.be
    #127.0.0.1 https://www.youtube.com/?feature=youtu.be
+   127.0.0.1 translate.goog
+   127.0.0.1 *.translate.goog
+   127.0.0.1 https://translate.google.com
+   127.0.0.1 ch.sooplive.co.kr
    
   '';
 #  nixpkgs.overlays = [
