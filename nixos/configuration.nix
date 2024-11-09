@@ -144,7 +144,7 @@
 
   i18n = {
     inputMethod = {
-      enable = true;
+      enable = false;
       type = "kime";
     };
   };
@@ -186,17 +186,17 @@
    127.0.0.1 https://www.arca.live
    127.0.0.1 namu.wiki
    127.0.0.1 https://www.namu.wiki
-   127.0.0.1 youtube.com
-   127.0.0.1 www.youtube.com
-   127.0.0.1 https://www.youtube.com
-   127.0.0.1 youtu.be
-   127.0.0.1 www.youtu.be
-   127.0.0.1 https://www.youtu.be
-   127.0.0.1 https://www.youtube.com/?feature=youtu.be
+   #127.0.0.1 youtube.com
+   #127.0.0.1 www.youtube.com
+   #127.0.0.1 https://www.youtube.com
+   #127.0.0.1 youtu.be
+   #127.0.0.1 www.youtu.be
+   #127.0.0.1 https://www.youtu.be
+   #127.0.0.1 https://www.youtube.com/?feature=youtu.be
    127.0.0.1 translate.goog
    127.0.0.1 *.translate.goog
    127.0.0.1 https://translate.google.com
-   127.0.0.1 ch.sooplive.co.kr
+   #127.0.0.1 ch.sooplive.co.kr
    
   '';
 #  nixpkgs.overlays = [

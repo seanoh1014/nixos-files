@@ -107,7 +107,6 @@
     #distrobox
     #eza
     #opensnitch-ui
-    blocky
 
   ];
 
