@@ -10,9 +10,9 @@ let
     ];
   });
 
-#  dmenu = pkgs.dmenu.overrideAttrs (old: {
-#    src = pkgs/dmenu-5.3;
-#  });
+  dmenu = pkgs.dmenu.overrideAttrs (old: {
+    src = pkgs/dmenu-5.3;
+  });
 
   st = pkgs.st.overrideAttrs (oldAttrs: rec {
      buildInputs = oldAttrs.buildInputs ++ [ pkgs.harfbuzz ];
@@ -34,6 +34,6 @@ let
 
 in
 {
-  home.packages = [ dwm dwmblocks st];
+  home.packages = [ dwm dmenu dwmblocks st ];
 }
 
