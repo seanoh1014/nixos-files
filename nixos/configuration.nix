@@ -174,31 +174,6 @@
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
-   127.0.0.1 fmkorea.com/*
-   127.0.0.1 image.fmkorea.com
-   127.0.0.1 static.fmkorea.com
-   127.0.0.1 https://m.fmkorea.com/*
-   127.0.0.1 fmkorea.com
-   127.0.0.1 https://www.fmkorea.com/*
-   127.0.0.1 dcinside.com
-   127.0.0.1 gall.dcinside.com
-   127.0.0.1 m.dcinside.com
-   127.0.0.1 https://www.dcinside.com
-   127.0.0.1 arca.live
-   127.0.0.1 https://www.arca.live
-   127.0.0.1 namu.wiki
-   127.0.0.1 https://www.namu.wiki
-   #127.0.0.1 youtube.com
-   #127.0.0.1 www.youtube.com
-   #127.0.0.1 https://www.youtube.com
-   #127.0.0.1 youtu.be
-   #127.0.0.1 www.youtu.be
-   #127.0.0.1 https://www.youtu.be
-   #127.0.0.1 https://www.youtube.com/?feature=youtu.be
-   127.0.0.1 translate.goog
-   127.0.0.1 *.translate.goog
-   127.0.0.1 https://translate.google.com
-   #127.0.0.1 ch.sooplive.co.kr
    
   '';
 #  nixpkgs.overlays = [

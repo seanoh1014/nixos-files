@@ -96,7 +96,7 @@
     pkgs.gnome-keyring
     filezilla
     arandr
-    #obsidian
+    obsidian
     #teams-for-linux
     #zoom-us
     exfat
@@ -104,6 +104,7 @@
     gptfdisk
     alsa-utils
     doas-sudo-shim
+    anki
     #distrobox
     #eza
     #opensnitch-ui
