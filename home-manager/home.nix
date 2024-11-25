@@ -38,15 +38,15 @@
     p7zip
     bc 
     nitch
-    zfxtop
+    #zfxtop
     #uwufetch
     libnotify
     glib
     toybox
     pkg-config
     mlocate
-    docker
-    docker-compose
+    #docker
+    #docker-compose
     #ghidra
     hugo
 
@@ -105,6 +105,8 @@
     alsa-utils
     doas-sudo-shim
     anki
+    git-remote-gcrypt
+    gnupg
     #distrobox
     #eza
     #opensnitch-ui
