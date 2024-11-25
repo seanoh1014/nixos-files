@@ -105,8 +105,9 @@
     alsa-utils
     doas-sudo-shim
     anki
-    git-remote-gcrypt
-    gnupg
+    #git-remote-gcrypt
+    #gnupg
+    #pinentry-gtk2
     #distrobox
     #eza
     #opensnitch-ui
