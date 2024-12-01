@@ -173,22 +173,38 @@
   virtualisation.docker.enable = true;
 
   #dns
-  #services.resolved = {
-  #  enable = true;
-  #  extraConfig = ''
-  #    [Resolve]
-  #    DNS=45.90.28.0#31c977.dns.nextdns.io
-  #    DNS=2a07:a8c0::#31c977.dns.nextdns.io
-  #    DNS=45.90.30.0#31c977.dns.nextdns.io
-  #    DNS=2a07:a8c1::#31c977.dns.nextdns.io
-  #    DNSOverTLS=yes
-  #  '';
-  #};
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+      [Resolve]
+      DNS=45.90.28.0#31c977.dns.nextdns.io
+      DNS=2a07:a8c0::#31c977.dns.nextdns.io
+      DNS=45.90.30.0#31c977.dns.nextdns.io
+      DNS=2a07:a8c1::#31c977.dns.nextdns.io
+      DNSOverTLS=yes
+    '';
+  #  dnsovertls = "true";
+  #  dnssec = "true";
+  };
 
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
-   
+   127.0.0.1 nextdns.io
+   127.0.0.1 www.nextdns.io
+   127.0.0.1 https://nextdns.io
+   127.0.0.1 dcinside.com
+   127.0.0.1 www.dcinside.com
+   127.0.0.1 https://dcinside.com
+   127.0.0.1 fmkorea.com
+   127.0.0.1 www.fmkorea.com
+   127.0.0.1 https://fmkorea.com
+   127.0.0.1 arca.live
+   127.0.0.1 www.arca.live
+   127.0.0.1 https://arca.live
+   127.0.0.1 namu.wiki
+   127.0.0.1 www.namu.wiki
+   127.0.0.1 https://namu.wiki
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
