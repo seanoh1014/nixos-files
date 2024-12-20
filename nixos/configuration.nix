@@ -190,21 +190,6 @@
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
-   127.0.0.1 nextdns.io
-   127.0.0.1 www.nextdns.io
-   127.0.0.1 https://nextdns.io
-   127.0.0.1 dcinside.com
-   127.0.0.1 www.dcinside.com
-   127.0.0.1 https://dcinside.com
-   127.0.0.1 fmkorea.com
-   127.0.0.1 www.fmkorea.com
-   127.0.0.1 https://fmkorea.com
-   127.0.0.1 arca.live
-   127.0.0.1 www.arca.live
-   127.0.0.1 https://arca.live
-   127.0.0.1 namu.wiki
-   127.0.0.1 www.namu.wiki
-   127.0.0.1 https://namu.wiki
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
