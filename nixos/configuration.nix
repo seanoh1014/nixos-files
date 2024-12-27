@@ -146,9 +146,9 @@
   i18n = {
     inputMethod = {
       enable = true;
-      type = "kime";
-      #type = "ibus";
-      #ibus.engines = with pkgs.ibus-engines; [ hangul ];
+      #type = "kime";
+      type = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [ hangul ];
     };
   };
 

@@ -10,7 +10,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
   };
   # add hyprland in outputs
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ... }: 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
@@ -34,5 +34,4 @@
         };
       };
     };
-    overlay = import ./default.nix;
 }
