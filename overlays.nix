@@ -1,0 +1,3 @@
+[
+  ./kime-overlay.nix
+]

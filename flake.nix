@@ -34,4 +34,5 @@
         };
       };
     };
+    overlay = import ./default.nix;
 }
