@@ -135,6 +135,8 @@
     enable = true;
   };
 
+  services.blueman.enable = true;
+
   programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
@@ -190,6 +192,7 @@
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
+   # 127.0.0.1 nextdns.io
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {

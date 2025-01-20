@@ -147,9 +147,9 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,             XK_u,      scratchpad_hide, {.i = 3} },
 	{ MODKEY|ShiftMask,             XK_r,      scratchpad_remove,           {0} },
 	/*specific keys*/
-	{ MODKEY,                       XK_F11, spawn, 		SHCMD("amixer -c0 set Master 5%- ; kill -44 $(pidof dwmblocks)") /*{.v = downvol  }*/ },
-	{ MODKEY,                       XK_F10, spawn, 		SHCMD("amixer -c0 set Master toggle ; kill -44 $(pidof dwmblocks)") /*{.v = mutevol  }*/ },
-	{ MODKEY,                       XK_F12, spawn, 		SHCMD("amixer -c0 set Master 5%+ ; kill -44 $(pidof dwmblocks)") /*{.v = upvol  }*/ },
+	{ MODKEY,                       XK_F11, spawn, 		SHCMD("amixer -Ddefault set Master 5%- ; kill -44 $(pidof dwmblocks)") /*{.v = downvol  }*/ },
+	{ MODKEY,                       XK_F10, spawn, 		SHCMD("amixer -Ddefault set Master toggle ; kill -44 $(pidof dwmblocks)") /*{.v = mutevol  }*/ },
+	{ MODKEY,                       XK_F12, spawn, 		SHCMD("amixer -Ddefault set Master 5%+ ; kill -44 $(pidof dwmblocks)") /*{.v = upvol  }*/ },
 	{ 0, 				XK_F3,	spawn,		SHCMD("xbacklight -inc 1 ; pkill -RTMIN+1 dwmblocks") },
         { 0, 				XK_F2,	spawn,		SHCMD("xbacklight -dec 1 ; pkill -RTMIN+1 dwmblocks") },
 	/*{ MODKEY,			XK_r,		spawn,          SHCMD("rofi -show drun") },*/

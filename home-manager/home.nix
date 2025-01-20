@@ -105,6 +105,7 @@
     alsa-utils
     doas-sudo-shim
     anki
+    blueman
     #nextdns
     #git-remote-gcrypt
     #gnupg
