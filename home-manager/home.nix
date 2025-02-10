@@ -30,7 +30,8 @@
   home.packages = with pkgs; [
 
     # browsers
-    brave
+    (brave.override { commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ]; })
+    #brave
     #mullvad-browser
 
     # tools
