@@ -107,6 +107,8 @@
     doas-sudo-shim
     anki
     blueman
+    shattered-pixel-dungeon
+    crawlTiles
     #nextdns
     #git-remote-gcrypt
     #gnupg
