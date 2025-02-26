@@ -130,7 +130,7 @@
       safe = { directory = "*"; };
     };
   };
-  services.kdeconnect.enable = false;
+  #services.kdeconnect.enable = false;
 
   services.picom.enable = true;
   services.dunst.enable = true;
