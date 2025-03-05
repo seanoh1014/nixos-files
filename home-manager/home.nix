@@ -109,6 +109,7 @@
     blueman
     shattered-pixel-dungeon
     crawlTiles
+    mupdf
     #nextdns
     #git-remote-gcrypt
     #gnupg
