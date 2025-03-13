@@ -107,6 +107,7 @@
     doas-sudo-shim
     anki
     blueman
+    spotifywm
     #shattered-pixel-dungeon
     #crawlTiles
     #nextdns
