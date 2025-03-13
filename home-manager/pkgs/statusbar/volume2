@@ -4,7 +4,7 @@ echo "$volstat" | grep "\[off\]" >/dev/null && printf "󰖁 \\n" && exit
 
 #vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q")
 # Try extracting the volume percentage by looking for the pattern [xx%]
-vol=$(echo "$volstat" | grep -oP "\[\K[0-9]+(?=%\])")
+vol=$(echo "$volstat" | grep -oP "\[\K[0-9]+(?=%\])" | sed "s/[^0-9]*//g;1q")
 
 if [ "$vol" -gt "70" ]; then
 	icon="󰕾"
