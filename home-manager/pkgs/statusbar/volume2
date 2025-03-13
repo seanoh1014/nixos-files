@@ -4,6 +4,11 @@ echo "$volstat" | grep "\[off\]" >/dev/null && printf "󰖁 \\n" && exit
 
 vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q")
 
+# If vol is empty or cannot be extracted, set a default value
+if [ -z "$vol" ]; then
+    vol=0
+fi
+
 if [ "$vol" -gt "70" ]; then
 	icon="󰕾"
 elif [ "$vol" -lt "30" ]; then
