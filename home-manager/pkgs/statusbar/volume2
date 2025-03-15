@@ -1,3 +1,5 @@
+sleep 2
+
 volstat="$(amixer -Ddefault get Master)"
 #volstat="$(amixer get Master)"
 
