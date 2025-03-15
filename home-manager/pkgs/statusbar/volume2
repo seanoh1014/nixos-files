@@ -1,7 +1,4 @@
-sleep 2
-
 volstat="$(amixer -Ddefault get Master)"
-#volstat="$(amixer get Master)"
 
 echo "$volstat" | grep "\[off\]" >/dev/null && printf "󰖁 \\n" && exit
 
