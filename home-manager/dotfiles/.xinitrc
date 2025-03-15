@@ -11,6 +11,10 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 # execute dwmblocks
 dwmblocks & 
 
+amixer set Master 75% &
+
+kill -44 $(pidof dwmblocks) &
+
 # set brightness to 10%
 xbacklight -set 10% &
 
@@ -51,8 +55,3 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 exec dbus-run-session dwm
 
 exec dwm &
-
-amixer set Master 75% &
-
-kill -44 $(pidof dwmblocks) 
-
