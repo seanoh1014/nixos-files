@@ -3,11 +3,11 @@
 feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 
 # unmute volume
-amixer set Master unmute & 
+#amixer set Master unmute & 
 
 # set volume to 75%
 #amixer -Ddefault set Master 75% &
-
+pipewire &
 # execute dwmblocks
 dwmblocks & 
 
