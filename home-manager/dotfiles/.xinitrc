@@ -52,5 +52,7 @@ exec dbus-run-session dwm
 
 exec dwm &
 
+amixer set Master 75% &
+
 kill -44 $(pidof dwmblocks) 
 
