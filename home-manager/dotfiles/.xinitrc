@@ -11,7 +11,7 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 # execute dwmblocks
 dwmblocks & 
 
-amixer -Ddefault set Master 75% &
+amixer set Master 75% &
 
 kill -44 $(pidof dwmblocks) &
 
