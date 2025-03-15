@@ -11,6 +11,8 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 # execute dwmblocks
 dwmblocks & 
 
+amixer -Ddefault set Master 75% &
+
 kill -44 $(pidof dwmblocks) &
 
 # set brightness to 10%
