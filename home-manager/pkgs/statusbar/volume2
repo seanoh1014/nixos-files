@@ -14,6 +14,7 @@ fi
 
 printf "%s %s%%\\n" "$icon" "$vol"
 
+kill -44 $(pidof dwmblocks)
 
 
 
