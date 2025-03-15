@@ -169,6 +169,7 @@
         persist = true;  
       }];
     };
+    rtkit.enable = true;
   };
 
   # docker

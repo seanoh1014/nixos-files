@@ -7,7 +7,7 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 
 # set volume to 75%
 #amixer -Ddefault set Master 75% &
-pipewire &
+
 # execute dwmblocks
 dwmblocks & 
 
