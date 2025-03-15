@@ -10,6 +10,9 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 
 # execute dwmblocks
 dwmblocks & 
+pipewire &
+pipewire-pulse &
+wireplumber &
 
 amixer set Master 75% &
 
