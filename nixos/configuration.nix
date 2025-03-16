@@ -154,8 +154,6 @@
     };
   };
 
-
-
   security = {
     sudo = {
       enable = true;
@@ -189,6 +187,34 @@
   #  dnsovertls = "true";
   #  dnssec = "true";
   };
+
+  services.udev.extraRules = ''
+    ACTION=="change", KERNEL=="CMB0", \
+    SUBSYSTEM=="power_supply", \
+    ATTR{status}=="Discharging", \
+    ATTR{capacity}=="[0-9]", \
+    IMPORT{program}="/usr/bin/xpub", \
+    RUN+="/bin/su $env{XUSER} -c 'notify-send -u critical -i battery-empty \"Battery status\" \"Battery level is CRITICAL at $attr{capacity}%\"'"
+
+    ACTION=="change", KERNEL=="BAT[0-9]", \
+    SUBSYSTEM=="power_supply", \
+    ATTR{status}=="Discharging", \
+    ATTR{capacity}=="1[0-9]", \
+    IMPORT{program}="/usr/bin/xpub", \
+    RUN+="/bin/su $env{XUSER} -c 'notify-send -u normal -i battery-caution \"Battery status\" \"Battery is getting low at $attr{capacity}%\"'"
+
+    SUBSYSTEM=="power_supply", ACTION=="change", \
+    ENV{POWER_SUPPLY_ONLINE}=="0", ENV{POWER}="off", \
+    OPTIONS+="last_rule", \
+    IMPORT{program}="/usr/bin/xpub", \
+    RUN+="/bin/su $env{XUSER} -c 'notify-send -u low -i battery-missing \"Battery status\" \"Charging cable has been unplugged.\"'"
+
+    SUBSYSTEM=="power_supply", ACTION=="change", \
+    ENV{POWER_SUPPLY_ONLINE}=="1", ENV{POWER}="on", \
+    OPTIONS+="last_rule", \
+    IMPORT{program}="/usr/bin/xpub", \
+    RUN+="/bin/su $env{XUSER} -c 'notify-send -u low -i battery-full-charging \"Battery status\" \"Charging cable is now plugged.\"'"
+  '';
 
   networking.extraHosts =
   ''

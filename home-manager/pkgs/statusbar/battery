@@ -14,9 +14,6 @@ case $BUTTON in
 #    6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-# Initialize warn_sent flag as false (no warning sent initially)
-warn_sent=false
-
 for battery in /sys/class/power_supply/CMB0
 do
 capacity=$(cat "$battery"/capacity) || exit
@@ -34,18 +31,10 @@ elif [ "$capacity" -ge 50 ]; then
 elif [ "$capacity" -ge 25 ]; then
 	color="#ffff00"
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ffb86c^  "
-    # Reset the flag when battery level goes above 25%
-    warn_sent=false
 else
 	color="#ff0000"
 	warn=" 󱈸"
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ff5555^  "
-fi
-
-# Check if battery is below 25% and send a warning notification
-if [ "$capacity" -le 25 ] && [ "$warn_sent" = false ]; then
-    notify-send "Battery Warning" "Battery level is at $capacity%. Please plug in your charger!"
-    warn_sent=true  # Set the flag to avoid sending multiple notifications
 fi
 
 [ -z $warn ] && warn=" "
