@@ -200,6 +200,10 @@
 #    }))
 #  ];
 
+  #services.udev.extraRules = builtins.readFile ../home-manager/dotfiles/99-batify.rules;
+
+  
+
   #services.xserver.synaptics.enable = true;
 
   #environment.shells = with pkgs; [ zsh ];
