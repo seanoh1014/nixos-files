@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    clefru.url = "github:k3a/nurpkgs";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,7 +11,7 @@
     # hyprland.url = "github:hyprwm/Hyprland";
   };
   # add hyprland in outputs
-  outputs = { nixpkgs, home-manager, ... }: 
+  outputs = { self, nixpkgs, home-manager, clefru, ... }: 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };

@@ -107,7 +107,6 @@
     doas-sudo-shim
     anki
     blueman
-    poweralertd
     #shattered-pixel-dungeon
     #crawlTiles
     #nextdns
