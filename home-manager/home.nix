@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports = [
@@ -107,6 +107,7 @@
     doas-sudo-shim
     anki
     blueman
+    #clefru.ib-tws
     #shattered-pixel-dungeon
     #crawlTiles
     #nextdns
