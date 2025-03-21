@@ -107,7 +107,7 @@
     doas-sudo-shim
     anki
     blueman
-    #clefru.ib-tws
+    #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
     #crawlTiles
     #nextdns
