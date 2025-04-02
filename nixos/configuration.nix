@@ -191,7 +191,7 @@
   networking.extraHosts =
   ''
    # 127.0.0.1 example.com
-   127.0.0.1 nextdns.io
+   # 127.0.0.1 nextdns.io
   '';
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
