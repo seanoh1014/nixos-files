@@ -175,10 +175,10 @@
 
   #dns
   services.resolved = {
-    enable = true;
+    enable = false;
     extraConfig = ''
       [Resolve]
-      DNS=45.90.28.0#31c977.dns.nextdns.io
+      DNS=45.90.28.0#31c977.dns.xnextdns.io
       DNS=2a07:a8c0::#31c977.dns.nextdns.io
       DNS=45.90.30.0#31c977.dns.nextdns.io
       DNS=2a07:a8c1::#31c977.dns.nextdns.io

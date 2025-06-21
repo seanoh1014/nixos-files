@@ -59,7 +59,7 @@
 
     # image viewer
     feh
-    betterlockscreen
+    #betterlockscreen
 
     # screenshot
     flameshot
