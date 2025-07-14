@@ -107,6 +107,8 @@
     doas-sudo-shim
     anki
     blueman
+    #notion-app-enhanced
+    syncthing
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
     #crawlTiles
