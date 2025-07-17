@@ -175,7 +175,7 @@
 
   #dns
   services.resolved = {
-    enable = false;
+    enable = true;
     extraConfig = ''
       [Resolve]
       DNS=45.90.28.0#31c977.dns.xnextdns.io

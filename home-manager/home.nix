@@ -109,6 +109,7 @@
     blueman
     #notion-app-enhanced
     syncthing
+    #balatro
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
     #crawlTiles
