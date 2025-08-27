@@ -105,10 +105,11 @@
     gptfdisk
     alsa-utils
     doas-sudo-shim
-    anki
+    #anki
     blueman
     #notion-app-enhanced
     syncthing
+    #vscode-fhs
     #balatro
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
