@@ -57,4 +57,4 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # dbus
 exec dbus-run-session dwm
 
-exec dwm &
+exec dwm
