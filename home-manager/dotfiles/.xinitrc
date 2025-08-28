@@ -57,7 +57,4 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # dbus
 exec dbus-run-session dwm
 
-# free unused vt
-deallocvt
-
 exec dwm &
