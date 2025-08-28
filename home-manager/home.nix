@@ -79,7 +79,7 @@
     acpilight
 
     # store password
-    libsecret
+
 
     # emulator/non-emulator
     #wine
