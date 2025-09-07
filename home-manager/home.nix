@@ -83,7 +83,7 @@
 
     # emulator/non-emulator
     #wine
-    #qemu
+    qemu
 
     # fonts 
     nanum
@@ -110,6 +110,13 @@
     #notion-app-enhanced
     syncthing
     #vscode-fhs
+    #vscode
+    libgcc
+    gdb
+    simplescreenrecorder
+    #networkmanager_dmenu
+    #connman_dmenu
+    networkmanagerapplet
     #balatro
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
@@ -135,6 +142,14 @@
       safe = { directory = "*"; };
     };
   };
+
+  programs.vscode = {
+    enable = true;
+    #package = pkgs.vscode.fhs;
+  };
+
+  programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gdb ]);
+
   #services.kdeconnect.enable = false;
 
   services.picom.enable = true;
