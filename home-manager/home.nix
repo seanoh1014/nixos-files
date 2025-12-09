@@ -82,7 +82,7 @@
 
 
     # emulator/non-emulator
-    #wine
+    wine
     qemu
 
     # fonts 
@@ -114,9 +114,12 @@
     libgcc
     gdb
     simplescreenrecorder
+    scrcpy
+    android-tools
     #networkmanager_dmenu
     #connman_dmenu
     networkmanagerapplet
+    bottles
     #balatro
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
