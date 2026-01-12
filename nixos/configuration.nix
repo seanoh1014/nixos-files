@@ -137,6 +137,8 @@
 
   services.blueman.enable = true;
 
+  services.flatpak.enable = true;
+
   programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
@@ -193,6 +195,9 @@
    # 127.0.0.1 example.com
    #127.0.0.1 nextdns.io
   '';
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.common.default = "gtk";
 #  nixpkgs.overlays = [
 #    (import (builtins.fetchTarball {
 #      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;

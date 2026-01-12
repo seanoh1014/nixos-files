@@ -46,6 +46,8 @@
     toybox
     pkg-config
     mlocate
+    distrobox
+    #fuse
     #docker
     #docker-compose
     #ghidra
@@ -83,7 +85,13 @@
 
     # emulator/non-emulator
     wine
+    #wine-staging
+    #wine64
+    #flatpak
+    gnome-software
     qemu
+    nautilus
+    koreader
 
     # fonts 
     nanum
@@ -105,7 +113,7 @@
     gptfdisk
     alsa-utils
     doas-sudo-shim
-    #anki
+    anki
     blueman
     #notion-app-enhanced
     syncthing
@@ -119,7 +127,7 @@
     #networkmanager_dmenu
     #connman_dmenu
     networkmanagerapplet
-    bottles
+    #bottles
     #balatro
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
@@ -136,14 +144,22 @@
 
   programs.git = {
     enable = true;
-    userName  = "seanoh1014";
-    userEmail = "ohsean1014@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "seanoh1014"; 
+      user.email = "ohsean1014@gmail.com";
       credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
       safe = { directory = "*"; };
     };
+    #userName  = "seanoh1014";
+    #userEmail = "ohsean1014@gmail.com";
+    #extraConfig = {
+    #  credential.helper = "${
+    #      pkgs.git.override { withLibsecret = true; }
+    #    }/bin/git-credential-libsecret";
+    #  safe = { directory = "*"; };
+    #};
   };
 
   programs.vscode = {
