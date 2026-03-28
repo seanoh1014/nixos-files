@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # hyprland.url = "github:hyprwm/Hyprland";
+    tws.url = "./tws";
   };
   # add hyprland in outputs
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
@@ -31,6 +32,7 @@
           inherit pkgs;
           modules = [
             ./home-manager/home.nix
+            ./tws/flake.nix
             # hyprland.homeManagerModules.default
             # {wayland.windowManager.hyprland.enable = true;}
           ];
