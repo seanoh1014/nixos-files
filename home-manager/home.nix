@@ -47,6 +47,12 @@
     pkg-config
     mlocate
     distrobox
+    texliveFull
+    texstudio
+    sioyek
+    tradingview
+    #factorio-demo
+    #bitwarden-desktop
     #fuse
     #docker
     #docker-compose
@@ -76,6 +82,8 @@
 
     # network
     wirelesstools
+    libimobiledevice
+    ifuse
 
     # backlight
     acpilight
@@ -90,8 +98,13 @@
     #flatpak
     gnome-software
     qemu
+    spice-gtk
+    usbmuxd2
+    quickemu
+    virt-manager
     nautilus
     koreader
+    prismlauncher
 
     # fonts 
     nanum
