@@ -139,7 +139,7 @@
 
   services.flatpak.enable = true;
 
-  programs.light.enable = true;
+  #programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
 
@@ -178,14 +178,14 @@
   #dns
   services.resolved = {
     enable = false;
-    extraConfig = ''
-      [Resolve]
-      DNS=45.90.28.0#31c977.dns.xnextdn.io
-      DNS=2a07:a8c0::#31c977.dns.nextdns.io
-      DNS=45.90.30.0#31c977.dns.nextdns.io
-      DNS=2a07:a8c1::#31c977.dns.nextdns.io
-      DNSOverTLS=yes
-    '';
+#    settings = ''
+#      [Resolve]
+#      DNS=45.90.28.0#31c977.dns.xnextdn.io
+#      DNS=2a07:a8c0::#31c977.dns.nextdns.io
+#      DNS=45.90.30.0#31c977.dns.nextdns.io
+#      DNS=2a07:a8c1::#31c977.dns.nextdns.io
+#      DNSOverTLS=yes
+#    '';
   #  dnsovertls = "true";
   #  dnssec = "true";
   };
