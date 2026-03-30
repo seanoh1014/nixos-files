@@ -150,8 +150,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F11, spawn, 		SHCMD("amixer -Ddefault set Master 5%- ; kill -44 $(pidof dwmblocks)") /*{.v = downvol  }*/ },
 	{ MODKEY,                       XK_F10, spawn, 		SHCMD("amixer -Ddefault set Master toggle ; kill -44 $(pidof dwmblocks)") /*{.v = mutevol  }*/ },
 	{ MODKEY,                       XK_F12, spawn, 		SHCMD("amixer -Ddefault set Master 5%+ ; kill -44 $(pidof dwmblocks)") /*{.v = upvol  }*/ },
-	{ 0, 				XK_F3,	spawn,		SHCMD("xbacklight -inc 1 ; pkill -RTMIN+1 dwmblocks") },
-        { 0, 				XK_F2,	spawn,		SHCMD("xbacklight -dec 1 ; pkill -RTMIN+1 dwmblocks") },
+	{ 0, 				XK_F3,	spawn,		SHCMD("brightnessctl set 5%+ ; pkill -RTMIN+1 dwmblocks") },
+    { 0, 				XK_F2,	spawn,		SHCMD("brightnessctl set 5%- ; pkill -RTMIN+1 dwmblocks") },
 	/*{ MODKEY,			XK_r,		spawn,          SHCMD("rofi -show drun") },*/
 	
 };

@@ -34,6 +34,6 @@ let
 
 in
 {
-  home.packages = [ dmenu st dwmblocks ];
+  home.packages = [ dmenu st ];
 }
 

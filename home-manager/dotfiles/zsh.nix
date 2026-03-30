@@ -31,14 +31,15 @@
         src = pkgs.zsh-autosuggestions;
       }
     ];
-    initExtraBeforeCompInit = ''
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    initContent = lib.mkOrder 550 ''
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+        source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+        source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh 
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
     '';
     # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-    initExtra = ''
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
+#    initContent = ''
+#      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#    '';
     };
 }

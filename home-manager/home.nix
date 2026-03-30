@@ -55,6 +55,7 @@
     #bitwarden-desktop
     #fuse
     #docker
+    podman
     #docker-compose
     #ghidra
     hugo
@@ -76,7 +77,7 @@
     pkgs.adwaita-icon-theme
      
     # key binding
-    xorg.setxkbmap
+    setxkbmap
     xcape
     xclip
 
@@ -165,6 +166,7 @@
         }/bin/git-credential-libsecret";
       safe = { directory = "*"; };
     };
+    signing.format = null;
     #userName  = "seanoh1014";
     #userEmail = "ohsean1014@gmail.com";
     #extraConfig = {
