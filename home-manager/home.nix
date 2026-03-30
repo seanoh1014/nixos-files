@@ -3,6 +3,7 @@
 {
   imports = [
     ./dwm.nix
+    ./dwm1.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
     #./dotfiles/emacs.nix

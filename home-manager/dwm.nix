@@ -22,18 +22,18 @@ let
   };
   });
 
-  dwmblocks = pkgs.dwmblocks.overrideAttrs (oldAttrs: rec {
-     src = builtins.fetchTarball {
-     url = "https://github.com/seanoh1014/dwmblocks-torrinfail/tarball/master";
-     sha256 = "1cw78y7i9373a0s3i7ny1b45lizq9b4hxrrqhvrra8ayl4fmqrcm";
-  };
-  patches = [
-    ./patches/dwmblocks-statuscmd.diff
-  ];
-  });
+#  dwmblocks = pkgs.dwmblocks.overrideAttrs (oldAttrs: rec {
+#     src = builtins.fetchTarball {
+#     url = "https://github.com/seanoh1014/dwmblocks-torrinfail/tarball/master";
+#     sha256 = "1cw78y7i9373a0s3i7ny1b45lizq9b4hxrrqhvrra8ayl4fmqrcm";
+#  };
+#  patches = [
+#    ./patches/dwmblocks-statuscmd.diff
+#  ];
+#  });
 
 in
 {
-  home.packages = [ dmenu st dwmblocks ];
+  home.packages = [ dmenu st ];
 }
 
