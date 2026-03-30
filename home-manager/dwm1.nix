@@ -1,14 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ pinnedPkgs, pkgs, lib }:
 
-let
-  pinnedPkgs = import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-21.05.tar.gz";
-  }) {};
-
-  callPinned = path: import path { inherit pinnedPkgs; };
-
-in {
-  home.packages = [
-    (callPinned ./dwmblocks.nix)
+pinnedPkgs.dwm.overrideAttrs (old {
+  src = pkgs/dwm;
+  nativeBuildInputs = with pkgs; [ #writing once works for both currently, sort of bug and feature
+    xorg.libX11.dev
+    xorg.libXft
+    imlib2
+    xorg.libXinerama
   ];
-}
+});
