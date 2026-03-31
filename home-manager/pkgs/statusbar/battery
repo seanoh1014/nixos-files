@@ -33,7 +33,7 @@ elif [ "$capacity" -ge 25 ]; then
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ffb86c^  "
 else
 	color="#ff0000"
-	warn=" 󱈸"
+	warn="󱈸 "
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ff5555^  "
 fi
 

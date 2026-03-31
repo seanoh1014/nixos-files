@@ -4,7 +4,7 @@ case $BUTTON in
 	1) st -e nmcli dev wifi list && st -e nmcli --ask dev wifi connect; pkill -RTMIN+3 dwmblocks ;;
 	3) notify-send " Internet module" "\- Click to connect
 睊: no wifi connection
-直: wifi connection with quality
+󰖩: wifi connection with quality
 : no ethernet
 : ethernet working
 " ;;
@@ -12,6 +12,6 @@ esac
 
 [ "$(cat /sys/class/net/wlp0s20f3/operstate)" = 'down' ] && wifiicon="睊"
 
-[ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "直"}')
+[ ! -n "${wifiicon+var}" ] && wifiicon=$(grep "^\s*w" /proc/net/wireless | awk '{ print "󰖩"}')
 
 printf "%s %s\n" "$wifiicon" "$(iwgetid -r)" "$(cat /sys/class/net/wlp0s20f3/operstate | sed "s/down/ /;s/up//")"

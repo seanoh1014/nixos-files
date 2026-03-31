@@ -55,8 +55,8 @@
     #factorio-demo
     #bitwarden-desktop
     #fuse
-    #docker
-    podman
+    docker
+    #podman
     #docker-compose
     #ghidra
     hugo
@@ -127,7 +127,7 @@
     parted
     gptfdisk
     alsa-utils
-    doas-sudo-shim
+    #doas-sudo-shim
     anki
     blueman
     #notion-app-enhanced
@@ -151,7 +151,7 @@
     #git-remote-gcrypt
     #gnupg
     #pinentry-gtk2
-    #distrobox
+    distrobox
     #eza
     #opensnitch-ui
 
