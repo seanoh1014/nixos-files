@@ -100,12 +100,12 @@
     #flatpak
     gnome-software
     qemu
-    spice-gtk
+    #spice-gtk
     usbmuxd2
     quickemu
     virt-manager
     nautilus
-    koreader
+    #koreader
     prismlauncher
 
     # fonts 
@@ -184,6 +184,9 @@
   };
 
   programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gdb ]);
+
+  programs.neovim.withRuby = true;
+  programs.neovim.withPython3 = true;
 
   #services.kdeconnect.enable = false;
 

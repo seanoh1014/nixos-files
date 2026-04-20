@@ -20,21 +20,33 @@ capacity=$(cat "$battery"/capacity) || exit
 status=$(cat "$battery"/status)
 #left=$(acpi | awk '{print $5}')
 
+LOW_BAT_FLAG="/tmp/low_battery_warned"
+
 if [ "$capacity" -ge 98 ]; then
 	[ -z $BAT_ICON ] && BAT_ICON="  "
+    rm -f "$LOW_BAT_FLAG"
 elif [ "$capacity" -ge 75 ]; then
 	color="#00ff00"
 	[ -z $BAT_ICON ] && BAT_ICON="  "
+    rm -f "$LOW_BAT_FLAG"
 elif [ "$capacity" -ge 50 ]; then
 	color="#ffffff"
 	[ -z $BAT_ICON ] && BAT_ICON="  "
+    rm -f "$LOW_BAT_FLAG"
 elif [ "$capacity" -ge 25 ]; then
 	color="#ffff00"
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ffb86c^  "
+    rm -f "$LOW_BAT_FLAG"
 else
 	color="#ff0000"
 	warn="󱈸 "
 	[ -z $BAT_ICON ] && BAT_ICON="^c#ff5555^  "
+
+    # Send notification ONLY once
+    if [ ! -f "$LOW_BAT_FLAG" ] && [ "$status" = "Discharging" ]; then
+        notify-send "Low Battery" "Battery is at ${capacity}%"
+        touch "$LOW_BAT_FLAG"
+    fi
 fi
 
 [ -z $warn ] && warn=" "
