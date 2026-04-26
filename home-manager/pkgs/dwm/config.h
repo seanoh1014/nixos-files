@@ -124,7 +124,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  incrgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  incrgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  togglegaps,        {.i = 0  } },
-	{ MODKEY|ShiftMask,  		    XK_s,      spawn,          SHCMD("flameshot gui") },
+	{ MODKEY|ShiftMask,  		    XK_s,      spawn,          SHCMD("spectacle") },
 	{ MODKEY,              		    XK_i,      shiftview,      { .i = -1 } },
 	{ MODKEY,             	     	XK_o,      shiftview,      { .i = +1 } },
 	{ MODKEY|ShiftMask, 		    XK_w,      spawn,	       SHCMD("sxiv -t -b ~/wallpaper")}, 

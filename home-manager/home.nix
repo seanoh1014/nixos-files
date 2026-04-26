@@ -73,6 +73,7 @@
 
     # screenshot
     flameshot
+    kdePackages.spectacle
 
     # theme
     pkgs.adwaita-icon-theme
@@ -143,7 +144,6 @@
     #connman_dmenu
     networkmanagerapplet
     #bottles
-    #balatro
     #nur.repos.mic92.hello-nur
     #shattered-pixel-dungeon
     #crawlTiles
