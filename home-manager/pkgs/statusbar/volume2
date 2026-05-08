@@ -1,15 +1,31 @@
-volstat="$(amixer -Ddefault get Master)"
+#!/bin/sh
 
-echo "$volstat" | grep "\[off\]" >/dev/null && printf "󰖁 \\n" && exit
+tries=0
+while [ "$tries" -lt 20 ]; do
+	volstat="$(amixer -Ddefault get Master 2>/dev/null)"
+	vol="$(printf '%s\n' "$volstat" | grep -o '\[[0-9]\+%\]' | sed 's/[^0-9]*//g;1q')"
 
-vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q")
+	if [ -n "$vol" ]; then
+		break
+	fi
 
-if [ "$vol" -gt "70" ]; then
+	tries=$((tries + 1))
+	sleep 0.25
+done
+
+printf '%s\n' "$volstat" | grep '\[off\]' >/dev/null && printf '󰖁 \n' && exit
+
+if [ -z "$vol" ]; then
+	printf '󰖀 --%%\n'
+	exit
+fi
+
+if [ "$vol" -gt 70 ]; then
 	icon="󰕾"
-elif [ "$vol" -lt "30" ]; then
+elif [ "$vol" -lt 30 ]; then
 	icon="󰕿"
 else
 	icon="󰖀"
 fi
 
-printf "%s %s%%\\n" "$icon" "$vol"
+printf '%s %s%%\n' "$icon" "$vol"
