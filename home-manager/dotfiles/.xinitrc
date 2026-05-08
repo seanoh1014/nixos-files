@@ -8,13 +8,14 @@ feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 # set volume to 75%
 #amixer -Ddefault set Master 75% &
 
+# set startup volume on the same device the status script reads
+amixer -Ddefault set Master 75% &
+
 # execute dwmblocks
-dwmblocks & 
+dwmblocks &
 #pipewire &
 #pipewire-pulse &
 #wireplumber &
-
-amixer set Master 75% &
 
 #kill -44 $(pidof dwmblocks) &
 

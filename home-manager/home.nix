@@ -56,10 +56,12 @@
     #bitwarden-desktop
     #fuse
     docker
+    codex
     #podman
     #docker-compose
     #ghidra
     hugo
+    nodejs
 
     # video player
     mpv
