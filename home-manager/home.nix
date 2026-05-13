@@ -42,6 +42,7 @@
     nitch
     #zfxtop
     #uwufetch
+    btop
     libnotify
     glib
     toybox
