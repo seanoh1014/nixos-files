@@ -18,7 +18,7 @@ let
      buildInputs = oldAttrs.buildInputs ++ [ pkgs.harfbuzz ];
      src = builtins.fetchTarball {
      url = "https://github.com/seanoh1014/st/tarball/master";
-     sha256 = "13djp8iaincqvj2nhily8vwfxn7aywi579w52lz305imif32gv69";
+     sha256 = "04vwhc9sld8pi80g6pqinrqqc234g60d0c1grqqjay0l24cz0kgx";
   };
   });
 
