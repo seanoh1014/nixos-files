@@ -33,6 +33,7 @@
     # browsers
     (brave.override { commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ]; })
     #brave
+    firefox
     #mullvad-browser
 
     # tools
