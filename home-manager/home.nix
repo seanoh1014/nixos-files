@@ -46,7 +46,8 @@
     btop
     libnotify
     glib
-    toybox
+    # Avoid toybox here: its applets shadow NixOS utilities in ~/.nix-profile.
+    # In particular, its hostname lacks the --fqdn option used by /etc/zshrc.
     pkg-config
     mlocate
     distrobox
@@ -55,15 +56,26 @@
     sioyek
     tradingview
     #factorio-demo
+    tetrio-desktop
     #bitwarden-desktop
     #fuse
     docker
     codex
     #podman
+    #podman-compose
+    #freerdp
     #docker-compose
     #ghidra
     hugo
     nodejs
+    #python3
+    (python3.withPackages (ps: with ps; [
+      #requests
+      #numpy
+      #pandas
+      python-dotenv
+      pip
+    ]))
 
     # video player
     mpv
@@ -105,11 +117,13 @@
     #flatpak
     gnome-software
     qemu
+    #waydroid
     #spice-gtk
     usbmuxd2
-    quickemu
+    #quickemu
     virt-manager
     nautilus
+    kdePackages.dolphin
     #koreader
     prismlauncher
 

@@ -14,8 +14,19 @@
       };
 
       envExtra = ''
-       _JAVA_AWT_WM_NONREPARENTING=1
-       '';
+        _JAVA_AWT_WM_NONREPARENTING=1
+
+        # /etc/zshrc calls `hostname --fqdn`, while Toybox only supports `-f`.
+        # This function is removed in initContent after the global zshrc runs.
+        hostname() {
+          if [[ "$1" == "--fqdn" ]]; then
+            shift
+            command hostname -f "$@"
+          else
+            command hostname "$@"
+          fi
+        }
+      '';
 
       plugins = [
       {
@@ -32,6 +43,7 @@
       }
     ];
     initContent = lib.mkOrder 550 ''
+        unfunction hostname 2>/dev/null || true
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
         source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh 
