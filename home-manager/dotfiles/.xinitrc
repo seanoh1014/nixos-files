@@ -54,8 +54,9 @@ exec xrdb -merge ~/.Xresources &
 
 # export env var
 export _JAVA_AWT_WM_NONREPARENTING=1
+export XDG_SESSION_TYPE=x11
+export QT_QPA_PLATFORM=xcb
 
-# dbus
-exec dbus-run-session dwm
-
-exec dwm
+# Start Flameshot inside the same D-Bus session as DWM. Flameshot 14 uses a
+# single background instance to handle subsequent `flameshot gui` commands.
+exec dbus-run-session sh -c 'flameshot & exec dwm'
