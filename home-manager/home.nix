@@ -31,7 +31,13 @@
   home.packages = with pkgs; [
 
     # browsers
-    (brave.override { commandLineArgs = [ "--enable-features=TouchpadOverscrollHistoryNavigation" ]; })
+    (brave.overrideAttrs (old: {
+      preFixup = (old.preFixup or "") + ''
+        gappsWrapperArgs+=(
+          --add-flags "--enable-features=TouchpadOverscrollHistoryNavigation"
+        )
+      '';
+    }))
     #brave
     firefox
     #mullvad-browser
