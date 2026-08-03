@@ -1444,7 +1444,8 @@ manage(Window w, XWindowAttributes *wa)
 		c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
 	c->x = MAX(c->x, c->mon->wx);
 	c->y = MAX(c->y, c->mon->wy);
-	c->bw = borderpx;
+	/* Child dialogs/popups should not inherit the normal client border. */
+	c->bw = trans != None ? 0 : borderpx;
 
 	wc.border_width = c->bw;
 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -2449,8 +2450,11 @@ updatewindowtype(Client *c)
 
 	if (state == netatom[NetWMFullscreen])
 		setfullscreen(c, 1);
-	if (wtype == netatom[NetWMWindowTypeDialog])
+	if (wtype == netatom[NetWMWindowTypeDialog]) {
 		c->isfloating = 1;
+		c->bw = 0;
+		XSetWindowBorderWidth(dpy, c->win, c->bw);
+	}
 }
 
 void

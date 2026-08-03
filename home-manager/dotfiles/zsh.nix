@@ -7,6 +7,7 @@
       autosuggestion.enable = true;
       enableCompletion = true;
       shellAliases = {
+        t = "tmux";
         ll = "ls -l";
         update = "doas nixos-rebuild switch";
         z = "zathura";

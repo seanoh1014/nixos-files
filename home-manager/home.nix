@@ -2,11 +2,11 @@
 
 {
   imports = [
+    ./doom.nix
     ./dwm.nix
     ./suckless.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
-    #./dotfiles/emacs.nix
     #./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix 
@@ -62,7 +62,7 @@
     sioyek
     tradingview
     #factorio-demo
-    tetrio-desktop
+    #tetrio-desktop
     #bitwarden-desktop
     #fuse
     docker
@@ -95,7 +95,9 @@
 
     # screenshot
     flameshot
-    kdePackages.spectacle
+    #maim
+    #satty
+    #kdePackages.spectacle
 
     # theme
     pkgs.adwaita-icon-theme
@@ -118,6 +120,9 @@
 
     # emulator/non-emulator
     wine
+    #zellij #tmux alt
+    yazi
+    ueberzugpp
     #wine-staging
     #wine64
     #flatpak
@@ -128,8 +133,8 @@
     usbmuxd2
     #quickemu
     virt-manager
-    nautilus
-    kdePackages.dolphin
+    #nautilus
+    #kdePackages.dolphin
     #koreader
     prismlauncher
 
@@ -138,9 +143,8 @@
     #(nerdfonts.override { fonts = [ "FiraCode" ]; })
 
     # others
-    #emacs
+    emacs
     #aseprite
-    #tmux
     acpi
     pkgs.gnome-keyring
     filezilla
@@ -176,10 +180,23 @@
     #gnupg
     #pinentry-gtk2
     distrobox
+    #winboat
     #eza
     #opensnitch-ui
 
   ];
+
+  programs.tmux = {
+    enable = true;
+    prefix = "C-a";
+    terminal = "tmux-256color";
+
+    extraConfig = ''
+      unbind C-b
+      bind C-a send-prefix
+      set -as terminal-features ",st-256color:RGB"
+    '';
+  };
 
   programs.git = {
     enable = true;
@@ -216,7 +233,6 @@
 
   services.picom.enable = true;
   services.dunst.enable = true;
-  #services.emacs.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -237,11 +253,6 @@
     #"/etc/udev/rules.d/99-local.rules".source = dotfiles/99-batify.rules;
 
     #"/etc/static/systemd/resolved.conf".source = dotfiles/resolved.conf;
-    # doom emacs
-    #"./doom.d/config.el".source = dotfiles/doom/config.el;
-    #"./doom.d/init.el".source = dotfiles/doom/init.el;
-    #"./doom.d/packages.el".source = dotfiles/doom/packages.el;
-
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
