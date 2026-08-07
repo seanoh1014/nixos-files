@@ -3,21 +3,21 @@
 {
   imports = [
     ./doom.nix
+    ./tmux.nix
     ./dwm.nix
     ./suckless.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
-    #./dotfiles/fonts.nix
+    # ./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
-    ./dotfiles/zathura.nix 
-    # hyprland
-    #./dotfiles/hyprland/hyprland.nix
-    #./dotfiles/waybar/waybar.nix
-    #./dotfiles/foot.nix
+    ./dotfiles/zathura.nix
+
+    # Hyprland
+    # ./dotfiles/hyprland/hyprland.nix
+    # ./dotfiles/waybar/waybar.nix
+    # ./dotfiles/foot.nix
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "ohsean";
   home.homeDirectory = "/home/ohsean";
   home.sessionVariables = {
@@ -25,12 +25,11 @@
     LESSCHARSET = "utf-8";
   };
 
-  home.stateVersion = "22.11"; # Please read the comment before changing.
+  home.stateVersion = "22.11"; # Keep unchanged after initial setup.
 
-  
   home.packages = with pkgs; [
-
-    # browsers
+    # Browsers
+    firefox
     (brave.overrideAttrs (old: {
       preFixup = (old.preFixup or "") + ''
         gappsWrapperArgs+=(
@@ -38,190 +37,182 @@
         )
       '';
     }))
-    #brave
-    firefox
-    #mullvad-browser
+    # mullvad-browser
 
-    # tools
+    # Command-line and system tools
     unzip
     p7zip
-    bc 
+    gh
+    bc
     nitch
-    #zfxtop
-    #uwufetch
     btop
     libnotify
     glib
-    # Avoid toybox here: its applets shadow NixOS utilities in ~/.nix-profile.
-    # In particular, its hostname lacks the --fqdn option used by /etc/zshrc.
     pkg-config
     mlocate
+    acpi
+    # zfxtop
+    # uwufetch
+    # eza
+
+    # Media
+    mpv
+    feh
+    flameshot
+    simplescreenrecorder
+    # ytfzf
+    # youtube-tui
+    # yt-dlp-light
+    # maim
+    # satty
+    # kdePackages.spectacle
+
+    # Desktop and X11
+    pkgs.adwaita-icon-theme
+    setxkbmap
+    xcape
+    xclip
+    arandr
+    networkmanagerapplet
+    # betterlockscreen
+    # networkmanager_dmenu
+    # connman_dmenu
+
+    # Networking and connected devices
+    wirelesstools
+    libimobiledevice
+    ifuse
+    usbmuxd2
+    filezilla
+    syncthing
+    scrcpy
+    android-tools
+    # nextdns
+    # opensnitch-ui
+
+    # Power and hardware
+    acpilight
+    alsa-utils
+    blueman
+
+    # Containers and virtualization
     distrobox
+    docker
+    qemu
+    virt-manager
+    # podman
+    # podman-compose
+    # docker-compose
+    # fuse
+    # flatpak
+    # waydroid
+    # spice-gtk
+    # quickemu
+    # winboat
+
+    # Compatibility and remote access
+    wine
+    gnome-software
+    # wine-staging
+    # wine64
+    # freerdp
+    # bottles
+
+    # Development
+    codex
+    hugo
+    nodejs
+    libgcc
+    gdb
+    (python3.withPackages (ps: with ps; [
+      # requests
+      # numpy
+      # pandas
+      python-dotenv
+      pip
+    ]))
+    # ghidra
+    # python3
+    # vscode-fhs
+    # vscode
+    # doas-sudo-shim
+    # git-remote-gcrypt
+
+    # Documents and productivity
     texliveFull
     texstudio
     sioyek
     tradingview
-    #factorio-demo
-    #tetrio-desktop
-    #bitwarden-desktop
-    #fuse
-    docker
-    codex
-    #podman
-    #podman-compose
-    #freerdp
-    #docker-compose
-    #ghidra
-    hugo
-    nodejs
-    #python3
-    (python3.withPackages (ps: with ps; [
-      #requests
-      #numpy
-      #pandas
-      python-dotenv
-      pip
-    ]))
+    emacs
+    obsidian
+    anki
+    # bitwarden-desktop
+    # teams-for-linux
+    # zoom-us
+    # notion-app-enhanced
+    # koreader
 
-    # video player
-    mpv
-    #ytfzf
-    #youtube-tui
-    #yt-dlp-light
-
-    # image viewer
-    feh
-    #betterlockscreen
-
-    # screenshot
-    flameshot
-    #maim
-    #satty
-    #kdePackages.spectacle
-
-    # theme
-    pkgs.adwaita-icon-theme
-     
-    # key binding
-    setxkbmap
-    xcape
-    xclip
-
-    # network
-    wirelesstools
-    libimobiledevice
-    ifuse
-
-    # backlight
-    acpilight
-
-    # store password
-
-
-    # emulator/non-emulator
-    wine
-    #zellij #tmux alt
+    # File management
     yazi
     ueberzugpp
-    #wine-staging
-    #wine64
-    #flatpak
-    gnome-software
-    qemu
-    #waydroid
-    #spice-gtk
-    usbmuxd2
-    #quickemu
-    virt-manager
-    #nautilus
-    #kdePackages.dolphin
-    #koreader
-    prismlauncher
+    # zellij # tmux alternative
+    # nautilus
+    # kdePackages.dolphin
 
-    # fonts 
-    nanum
-    #(nerdfonts.override { fonts = [ "FiraCode" ]; })
-
-    # others
-    emacs
-    #aseprite
-    acpi
-    pkgs.gnome-keyring
-    filezilla
-    arandr
-    obsidian
-    #teams-for-linux
-    #zoom-us
+    # Storage and filesystems
     exfat
     parted
     gptfdisk
-    alsa-utils
-    #doas-sudo-shim
-    anki
-    blueman
-    #notion-app-enhanced
-    syncthing
-    #vscode-fhs
-    #vscode
-    libgcc
-    gdb
-    simplescreenrecorder
-    scrcpy
-    android-tools
-    #networkmanager_dmenu
-    #connman_dmenu
-    networkmanagerapplet
-    #bottles
-    #nur.repos.mic92.hello-nur
-    #shattered-pixel-dungeon
-    #crawlTiles
-    #nextdns
-    #git-remote-gcrypt
-    #gnupg
-    #pinentry-gtk2
-    distrobox
-    #winboat
-    #eza
-    #opensnitch-ui
 
+    # Gaming
+    prismlauncher
+    # factorio-demo
+    # tetrio-desktop
+    # shattered-pixel-dungeon
+    # crawlTiles
+    # aseprite
+
+    # Fonts
+    nanum
+    # (nerdfonts.override { fonts = [ "FiraCode" ]; })
+
+    # Security and credentials
+    pkgs.gnome-keyring
+    # gnupg
+    # pinentry-gtk2
+
+    # Nix ecosystem
+    # nur.repos.mic92.hello-nur
   ];
-
-  programs.tmux = {
-    enable = true;
-    prefix = "C-a";
-    terminal = "tmux-256color";
-
-    extraConfig = ''
-      unbind C-b
-      bind C-a send-prefix
-      set -as terminal-features ",st-256color:RGB"
-    '';
-  };
 
   programs.git = {
     enable = true;
     settings = {
-      user.name = "seanoh1014"; 
+      user.name = "seanoh1014";
       user.email = "ohsean1014@gmail.com";
-      credential.helper = "${
-          pkgs.git.override { withLibsecret = true; }
-        }/bin/git-credential-libsecret";
+      credential = {
+        helper = "${
+            pkgs.git.override { withLibsecret = true; }
+          }/bin/git-credential-libsecret";
+        "https://github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
+        "https://gist.github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
+      };
       safe = { directory = "*"; };
     };
     signing.format = null;
-    #userName  = "seanoh1014";
-    #userEmail = "ohsean1014@gmail.com";
-    #extraConfig = {
-    #  credential.helper = "${
+    # userName = "seanoh1014";
+    # userEmail = "ohsean1014@gmail.com";
+    # extraConfig = {
+    #   credential.helper = "${
     #      pkgs.git.override { withLibsecret = true; }
     #    }/bin/git-credential-libsecret";
-    #  safe = { directory = "*"; };
-    #};
+    #   safe = { directory = "*"; };
+    # };
   };
 
   programs.vscode = {
     enable = true;
-    #package = pkgs.vscode.fhs;
+    # package = pkgs.vscode.fhs;
   };
 
   programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gdb ]);
@@ -229,47 +220,33 @@
   programs.neovim.withRuby = true;
   programs.neovim.withPython3 = true;
 
-  #services.kdeconnect.enable = false;
+  # services.kdeconnect.enable = false;
 
   services.picom.enable = true;
   services.dunst.enable = true;
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
   home.file = {
-    # dwm
+    # DWM
     ".xinitrc".source = dotfiles/.xinitrc;
     ".Xresources".source = dotfiles/.Xresources;
     ".config/sxiv".source = dotfiles/sxiv;
     ".config/picom.conf".source = dotfiles/picom.conf;
     ".config/dunst".source = dotfiles/dunst;
-    # common
+    # Common
     "./wallpaper".source = ./wallpaper;
     ".config/flameshot".source = dotfiles/flameshot;
     ".p10k.zsh".source = dotfiles/.p10k.zsh;
     ".config/mpv/scripts/modern.lua".source = dotfiles/mpv/modern.lua;
     ".config/mpv/fonts/Material-Design-Iconic-Font.ttf".source = dotfiles/mpv/Material-Design-Iconic-Font.ttf;
     ".config/mpv/mpv.conf".source = dotfiles/mpv/mpv.conf;
-    #"/etc/udev/rules.d/99-local.rules".source = dotfiles/99-batify.rules;
+    # "/etc/udev/rules.d/99-local.rules".source = dotfiles/99-batify.rules;
 
-    #"/etc/static/systemd/resolved.conf".source = dotfiles/resolved.conf;
-    # # You can also set the file content immediately.
+    # "/etc/static/systemd/resolved.conf".source = dotfiles/resolved.conf;
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
 
-  # You can also manage environment variables but you will have to manually
-  # source
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/ohsean/etc/profile.d/hm-session-vars.sh
-  #
-
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }

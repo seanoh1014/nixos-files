@@ -2,6 +2,10 @@
 #~/.fehbg &
 feh --no-fehbg --bg-fill 'wallpaper/astolfo.png' &
 
+# Start the Korean input-method daemon. DWM/startx does not launch XDG
+# autostart entries, so Kime must be started explicitly for XIM terminals.
+kime &
+
 # unmute volume
 #amixer set Master unmute & 
 

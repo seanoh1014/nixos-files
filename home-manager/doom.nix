@@ -8,7 +8,11 @@
     ripgrep
   ];
 
-  home.sessionVariables.DOOMDIR = "${config.xdg.configHome}/doom";
+  home.sessionVariables = {
+    DOOMDIR = "${config.xdg.configHome}/doom";
+    GSETTINGS_SCHEMA_DIR =
+      pkgs.glib.getSchemaPath pkgs.gsettings-desktop-schemas;
+  };
 
   home.sessionPath = [
     "${config.xdg.configHome}/emacs/bin"

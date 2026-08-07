@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tmux-which-key = {
+      url = "github:alexwforsythe/tmux-which-key";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # hyprland.url = "github:hyprwm/Hyprland";
     #tws.url = "./tws";
   };
@@ -14,7 +18,11 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
     let
       system = "x86_64-linux";
-      pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        overlays = [ inputs.tmux-which-key.overlays.default ];
+      };
       #pkgs = nixpkgs.legacyPackages.${system};
     in {
       nixosConfigurations = {
@@ -30,6 +38,7 @@
       homeConfigurations = {
         ohsean = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
           modules = [
             ./home-manager/home.nix
             #./tws/flake.nix

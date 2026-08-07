@@ -39,7 +39,28 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "tmux-which-key": "tmux-which-key"
+      }
+    },
+    "tmux-which-key": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778948988,
+        "narHash": "sha256-eEFe85W/byPtxiRhdAaT22fEFNKsi5AEKsYAuDYcTCo=",
+        "owner": "alexwforsythe",
+        "repo": "tmux-which-key",
+        "rev": "85fb9756447b989f3b94e515d1e6ee7fec76cba2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alexwforsythe",
+        "repo": "tmux-which-key",
+        "type": "github"
       }
     }
   },
