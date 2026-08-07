@@ -8,6 +8,7 @@
     ./suckless.nix
     ./dotfiles/neovim.nix
     ./sxiv.nix
+    ./niri # Comment out this line to remove all Niri user configuration.
     # ./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix
