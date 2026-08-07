@@ -1,7 +1,6 @@
 # Sean's NixOS Configuration
 
-Personal NixOS configuration built with flakes and Home Manager. It includes
-DWM, Zsh, Neovim, Doom Emacs, tmux, and Kime.
+Personal NixOS configuration built with flakes and Home Manager.
 
 > [!WARNING]
 > This repository contains settings specific to my user account, hardware, and
