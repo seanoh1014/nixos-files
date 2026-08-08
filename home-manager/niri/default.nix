@@ -133,6 +133,8 @@ in
           Mod+K { focus-column-right; }
           Mod+H { set-column-width "-5%"; }
           Mod+L { set-column-width "+5%"; }
+          Mod+N { consume-or-expel-window-left; }
+          Mod+M { consume-or-expel-window-right; }
           Mod+Return { move-column-to-first; }
           Mod+Shift+C { close-window; }
           Mod+Tab { focus-workspace-previous; }
