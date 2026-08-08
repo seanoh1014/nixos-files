@@ -126,7 +126,6 @@ in
       }
 
       binds {
-          F13 repeat=false { toggle-overview; }
           Mod+P { spawn "fuzzel"; }
           Mod+Shift+Return { spawn "foot"; }
           Mod+F { maximize-window-to-edges; }
