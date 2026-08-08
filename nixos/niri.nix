@@ -14,7 +14,10 @@
     enable = true;
     keyboards.default = {
       ids = [ "*" ];
-      settings.main.capslock = "overload(control, esc)";
+      settings.main = {
+        capslock = "overload(control, esc)";
+        leftmeta = "overload(meta, f13)";
+      };
     };
   };
 }
