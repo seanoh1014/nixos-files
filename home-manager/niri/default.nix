@@ -375,7 +375,7 @@ in
         background: transparent;
         color: #f8f8f2;
         box-shadow: none;
-        transition: min-width 180ms ease-in-out, background-color 180ms ease-in-out;
+        transition: min-width 180ms ease-in-out;
       }
 
       #workspaces button.active {
