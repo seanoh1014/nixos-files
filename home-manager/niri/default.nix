@@ -131,8 +131,8 @@ in
           Mod+F { maximize-window-to-edges; }
           Mod+B { fullscreen-window; }
 
-          Mod+J { focus-window-or-workspace-down; }
-          Mod+K { focus-window-or-workspace-up; }
+          Mod+J { focus-column-left; }
+          Mod+K { focus-column-right; }
           Mod+H { set-column-width "-5%"; }
           Mod+L { set-column-width "+5%"; }
           Mod+N { consume-or-expel-window-left; }
@@ -142,8 +142,8 @@ in
           Mod+Tab { focus-workspace-previous; }
           Mod+Shift+Space { toggle-window-floating; }
 
-          Mod+I { focus-workspace-up; }
-          Mod+O { focus-workspace-down; }
+          Mod+I { focus-window-or-workspace-up; }
+          Mod+O { focus-window-or-workspace-down; }
           Mod+Shift+I { move-column-to-workspace-up; }
           Mod+Shift+O { move-column-to-workspace-down; }
 
