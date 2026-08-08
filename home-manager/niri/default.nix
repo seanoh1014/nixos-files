@@ -296,7 +296,11 @@ in
       modules-right = [ "network" "pulseaudio" "backlight" "battery" "clock" ];
 
       "niri/workspaces" = {
-        format = "●";
+        format = "{icon}";
+        format-icons = {
+          default = "●";
+          active = ''<span size="1"> </span>'';
+        };
         on-click = "activate";
       };
 
@@ -373,8 +377,13 @@ in
       }
 
       #workspaces button.active {
-        background: transparent;
-        color: #8be9fd;
+        min-width: 22px;
+        min-height: 7px;
+        margin: 7px 4px;
+        padding: 0;
+        border-radius: 4px;
+        background: #8be9fd;
+        color: transparent;
       }
 
       #workspaces button:hover {
@@ -384,8 +393,8 @@ in
       }
 
       #workspaces button.active:hover {
-        background: transparent;
-        color: #8be9fd;
+        background: #8be9fd;
+        color: transparent;
       }
 
       #network,
