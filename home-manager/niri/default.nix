@@ -17,6 +17,7 @@ in
     nerd-fonts.fira-code
     swaybg
     swaylock
+    vanilla-dmz
     waybar
     wl-clipboard
     xwayland-satellite
@@ -47,7 +48,7 @@ in
 
       // Match the compact classic cursor used by the X11/DWM session.
       cursor {
-          xcursor-theme "default"
+          xcursor-theme "DMZ-White"
           xcursor-size 16
       }
 
