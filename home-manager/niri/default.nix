@@ -14,6 +14,7 @@ in
     fuzzel
     imv
     mako
+    nerd-fonts.fira-code
     swaybg
     swaylock
     waybar
@@ -124,7 +125,7 @@ in
 
     "foot/foot.ini".text = ''
       [main]
-      font=FiraCode Nerd Font:size=10
+      font=FiraCode Nerd Font Mono:style=Bold:size=10
       pad=8x8
 
       [colors-dark]
@@ -246,7 +247,8 @@ in
         min-height: 0;
         font-family: "FiraCode Nerd Font";
         font-size: 10px;
-        font-weight: bold;
+        font-style: normal;
+        font-weight: 700;
       }
 
       window#waybar {
