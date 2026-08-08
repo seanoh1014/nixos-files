@@ -257,7 +257,6 @@ in
         font-size: 10pt;
         font-style: normal;
         font-weight: bold;
-        text-shadow: 1px 0 currentColor;
       }
 
       window#waybar {
