@@ -134,6 +134,8 @@ in
 
           Mod+J { focus-column-left; }
           Mod+K { focus-column-right; }
+          Mod+Shift+J { move-column-left; }
+          Mod+Shift+K { move-column-right; }
           Mod+H { set-column-width "-5%"; }
           Mod+L { set-column-width "+5%"; }
           Mod+N { consume-or-expel-window-left; }
