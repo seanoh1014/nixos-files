@@ -182,16 +182,25 @@ in
       clipboard-paste=Control+Shift+v XF86Paste Mod1+v
 
       [colors-dark]
-      foreground=f8f8f2
-      background=282a36
-      regular0=21222c
-      regular1=ff5555
-      regular2=50fa7b
-      regular3=f1fa8c
-      regular4=bd93f9
-      regular5=ff79c6
-      regular6=8be9fd
-      regular7=f8f8f2
+      foreground=cad3f5
+      background=24273a
+      cursor=24273a f4dbd6
+      regular0=494d64
+      regular1=ed8796
+      regular2=a6da95
+      regular3=eed49f
+      regular4=8aadf4
+      regular5=f5bde6
+      regular6=8bd5ca
+      regular7=b8c0e0
+      bright0=5b6078
+      bright1=ed8796
+      bright2=a6da95
+      bright3=eed49f
+      bright4=8aadf4
+      bright5=f5bde6
+      bright6=8bd5ca
+      bright7=a5adcb
     '';
 
     "fuzzel/fuzzel.ini".text = ''
