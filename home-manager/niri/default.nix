@@ -84,9 +84,8 @@ in
       binds {
           Mod+P { spawn "fuzzel"; }
           Mod+Shift+Return { spawn "foot"; }
-          // Waybar handles SIGUSR1 as a native visibility toggle. Match its
-          // Nix-wrapped command line instead of starting or killing copies.
-          Mod+B { spawn-sh "pkill -USR1 -f '[w]aybar'"; }
+          Mod+F { maximize-column; }
+          Mod+B { fullscreen-window; }
 
           Mod+J { focus-column-left; }
           Mod+K { focus-column-right; }
