@@ -296,7 +296,7 @@ in
       modules-right = [ "network" "pulseaudio" "backlight" "battery" "clock" ];
 
       "niri/workspaces" = {
-        format = "{value}";
+        format = "●";
         on-click = "activate";
       };
 
@@ -372,8 +372,8 @@ in
       }
 
       #workspaces button.active {
-        background: #8be9fd;
-        color: #282a36;
+        background: transparent;
+        color: #8be9fd;
       }
 
       #network,
