@@ -15,6 +15,7 @@ in
     imv
     mako
     nerd-fonts.fira-code
+    nerd-fonts.symbols-only
     swaybg
     swaylock
     vanilla-dmz
@@ -251,10 +252,10 @@ in
         border: none;
         border-radius: 0;
         min-height: 0;
-        font-family: "FiraCode Nerd Font";
-        font-size: 13px;
+        font-family: "FiraCode Nerd Font", "Symbols Nerd Font";
+        font-size: 10pt;
         font-style: normal;
-        font-weight: 700;
+        font-weight: bold;
       }
 
       window#waybar {
