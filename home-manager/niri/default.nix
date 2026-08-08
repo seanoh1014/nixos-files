@@ -54,6 +54,8 @@ in
       }
 
       layout {
+          // Keep the wallpaper stationary behind the workspaces in Overview.
+          background-color "transparent"
           gaps 10
           center-focused-column "never"
 
@@ -82,6 +84,12 @@ in
       spawn-at-startup "waybar"
       spawn-at-startup "mako"
       spawn-at-startup "swaybg" "-i" "/home/ohsean/wallpaper/astolfo.png" "-m" "fill"
+
+      // Move Swaybg into Niri's full-screen Overview backdrop.
+      layer-rule {
+          match namespace="^wallpaper$"
+          place-within-backdrop true
+      }
 
       binds {
           Mod+P { spawn "fuzzel"; }
