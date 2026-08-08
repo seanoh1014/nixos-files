@@ -12,11 +12,11 @@ in
   home.packages = with pkgs; [
     foot
     fuzzel
-    imv
     mako
     nerd-fonts.fira-code
     nerd-fonts.symbols-only
     swaybg
+    swayimg
     swaylock
     vanilla-dmz
     waybar
@@ -126,7 +126,7 @@ in
           Mod+Ctrl+Down { move-window-down; }
 
           Mod+Shift+S { screenshot; }
-          Mod+Shift+W { spawn "imv" "/home/ohsean/wallpaper"; }
+          Mod+Shift+W { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
           Mod+X { spawn-sh "swaylock -f -c 282a36 & sleep 0.2; niri msg action power-off-monitors"; }
           Mod+Shift+E { quit; }
 
