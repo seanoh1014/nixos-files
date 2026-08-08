@@ -77,7 +77,9 @@ in
       binds {
           Mod+P { spawn "fuzzel"; }
           Mod+Shift+Return { spawn "foot"; }
-          Mod+B { spawn-sh "if pgrep -x waybar >/dev/null; then pkill -x waybar; else waybar >/dev/null 2>&1 & fi"; }
+          // Waybar handles SIGUSR1 as a native visibility toggle. Match its
+          // Nix-wrapped command line instead of starting or killing copies.
+          Mod+B { spawn-sh "pkill -USR1 -f '[w]aybar'"; }
 
           Mod+J { focus-column-right; }
           Mod+K { focus-column-left; }
