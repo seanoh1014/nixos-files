@@ -131,8 +131,8 @@ in
           Mod+F { maximize-window-to-edges; }
           Mod+B { fullscreen-window; }
 
-          Mod+J { focus-column-left; }
-          Mod+K { focus-column-right; }
+          Mod+J { focus-window-or-workspace-down; }
+          Mod+K { focus-window-or-workspace-up; }
           Mod+H { set-column-width "-5%"; }
           Mod+L { set-column-width "+5%"; }
           Mod+N { consume-or-expel-window-left; }
