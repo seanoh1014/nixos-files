@@ -174,7 +174,7 @@ in
 
     "foot/foot.ini".text = ''
       [main]
-      font=FiraCode Nerd Font Mono:style=Bold:size=10
+      font=FiraCode Nerd Font Mono:style=Bold:fontfeatures=calt:size=10
       pad=8x8
 
       [key-bindings]
