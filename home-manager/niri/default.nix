@@ -54,6 +54,8 @@ in
       }
 
       layout {
+          // Keep the wallpaper stationary behind the workspaces in Overview.
+          background-color "transparent"
           gaps 10
           center-focused-column "never"
 
