@@ -116,6 +116,8 @@ in
       spawn-at-startup "waybar"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
+      // Replace a Kime daemon left attached to X11 with one attached to Niri.
+      spawn-at-startup "${pkgs.runtimeShell}" "-c" "${pkgs.procps}/bin/pkill -x kime 2>/dev/null; while ${pkgs.procps}/bin/pgrep -x kime >/dev/null; do ${pkgs.coreutils}/bin/sleep 0.05; done; exec ${pkgs.kime}/bin/kime"
 
       // Move Swaybg into Niri's full-screen Overview backdrop.
       layer-rule {
