@@ -319,7 +319,7 @@ in
           critical = 25;
         };
         format = "{icon} {capacity}%";
-        format-charging = " {icon} {capacity}%";
+        format-charging = "<span color=\"#50fa7b\"></span> {icon} {capacity}%";
         format-full = "󱐋 {capacity}%";
         format-icons = [ " " " " " " " " " " ];
       };
