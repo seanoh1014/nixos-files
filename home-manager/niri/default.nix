@@ -45,6 +45,12 @@ in
           scale 1
       }
 
+      // Match the compact classic cursor used by the X11/DWM session.
+      cursor {
+          xcursor-theme "default"
+          xcursor-size 16
+      }
+
       layout {
           gaps 10
           center-focused-column "never"
@@ -82,8 +88,8 @@ in
           // Nix-wrapped command line instead of starting or killing copies.
           Mod+B { spawn-sh "pkill -USR1 -f '[w]aybar'"; }
 
-          Mod+J { focus-column-right; }
-          Mod+K { focus-column-left; }
+          Mod+J { focus-column-left; }
+          Mod+K { focus-column-right; }
           Mod+H { set-column-width "-5%"; }
           Mod+L { set-column-width "+5%"; }
           Mod+Return { move-column-to-first; }
