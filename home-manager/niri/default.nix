@@ -7,6 +7,25 @@ let
     [Unit]
     ConditionEnvironment=XDG_SESSION_TYPE=x11
   '';
+
+  niriWallpaper = pkgs.writeShellScriptBin "niri-wallpaper" ''
+    set -eu
+
+    state_file="''${XDG_STATE_HOME:-$HOME/.local/state}/niri/wallpaper"
+    wallpaper="/home/ohsean/wallpaper/astolfo.png"
+
+    if [ -r "$state_file" ] && IFS= read -r saved < "$state_file" && [ -f "$saved" ]; then
+      wallpaper="$saved"
+    fi
+
+    if [ "''${1:-}" = "--reload" ]; then
+      ${pkgs.toybox}/bin/pkill swaybg || true
+      exec ${pkgs.niri}/bin/niri msg action spawn -- \
+        ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
+    fi
+
+    exec ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
+  '';
 in
 {
   home.packages = with pkgs; [
@@ -22,6 +41,7 @@ in
     waybar
     wl-clipboard
     xwayland-satellite
+    niriWallpaper
   ];
 
   xdg.configFile = {
@@ -81,9 +101,21 @@ in
           skip-at-startup
       }
 
+      // Keep transparent workspace backgrounds free of Overview shadows.
+      overview {
+          workspace-shadow {
+              off
+          }
+      }
+
+      // Draw focus rings around windows instead of behind their contents.
+      window-rule {
+          draw-border-with-background false
+      }
+
       spawn-at-startup "waybar"
       spawn-at-startup "mako"
-      spawn-at-startup "swaybg" "-i" "/home/ohsean/wallpaper/astolfo.png" "-m" "fill"
+      spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
 
       // Move Swaybg into Niri's full-screen Overview backdrop.
       layer-rule {
@@ -181,6 +213,47 @@ in
       [border]
       width=2
       radius=0
+    '';
+
+    "swayimg/init.lua".text = ''
+      local state_dir = "/home/ohsean/.local/state/niri"
+      local state_file = state_dir .. "/wallpaper"
+
+      local function set_wallpaper(image)
+        if not image then
+          return
+        end
+
+        os.execute("${pkgs.coreutils}/bin/mkdir -p " .. state_dir)
+
+        local file, err = io.open(state_file, "w")
+        if not file then
+          swayimg.text.status = "Could not save wallpaper: " .. tostring(err)
+          return
+        end
+
+        file:write(image.path, "\n")
+        file:close()
+
+        local success = os.execute("${niriWallpaper}/bin/niri-wallpaper --reload")
+        if success then
+          swayimg.exit()
+        else
+          swayimg.text.status = "Could not change wallpaper"
+        end
+      end
+
+      swayimg.gallery.on_key("Return", function()
+        set_wallpaper(swayimg.gallery.get_image())
+      end)
+
+      swayimg.gallery.on_key("w", function()
+        set_wallpaper(swayimg.gallery.get_image())
+      end)
+
+      swayimg.viewer.on_key("w", function()
+        set_wallpaper(swayimg.viewer.get_image())
+      end)
     '';
 
     "mako/config".text = ''
