@@ -189,7 +189,7 @@ in
     "waybar/config.jsonc".text = builtins.toJSON {
       layer = "top";
       position = "top";
-      height = 24;
+      height = 22;
       spacing = 0;
       modules-left = [ "niri/workspaces" ];
       modules-right = [ "network" "pulseaudio" "backlight" "battery" "clock" ];
@@ -200,10 +200,10 @@ in
       };
 
       network = {
-        interval = 10;
-        format-wifi = "󰤨  {signalStrength}%";
-        format-ethernet = "󰈀";
-        format-disconnected = "󰤭";
+        interval = 5;
+        format-wifi = "󰖩 {essid}";
+        format-ethernet = " {ifname}";
+        format-disconnected = "睊";
         tooltip-format = "{ifname}: {ipaddr}/{cidr}";
         tooltip-format-wifi = "{essid}: {signalStrength}%";
         on-click = "foot -e nmtui";
@@ -212,33 +212,34 @@ in
       pulseaudio = {
         scroll-step = 5;
         format = "{icon} {volume}%";
-        format-muted = "󰝟 muted";
+        format-muted = "󰖁";
         format-icons.default = [ "󰕿" "󰖀" "󰕾" ];
         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
 
       backlight = {
         interval = 10;
-        format = "󰃠 {percent}%";
+        format = "󰌵 {percent}%";
         on-scroll-up = "brightnessctl set +5%";
         on-scroll-down = "brightnessctl set 5%-";
       };
 
       battery = {
         bat = "CMB0";
-        interval = 30;
+        interval = 5;
         states = {
-          warning = 30;
-          critical = 15;
+          warning = 50;
+          critical = 25;
         };
         format = "{icon} {capacity}%";
-        format-charging = "󰂄 {capacity}%";
-        format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+        format-charging = " {capacity}%";
+        format-full = "󱐋 {capacity}%";
+        format-icons = [ "" "" "" "" "" ];
       };
 
       clock = {
         interval = 60;
-        format = "{:%a %b %d  %I:%M %p}";
+        format = "󰃵 {:%a, %b %d   %H:%M}";
         tooltip-format = "<tt>{calendar}</tt>";
         calendar = {
           mode = "month";
@@ -279,7 +280,7 @@ in
       #backlight,
       #battery,
       #clock {
-        padding: 0 10px;
+        padding: 0 4px;
         background: transparent;
       }
 
