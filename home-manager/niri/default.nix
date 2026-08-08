@@ -377,7 +377,6 @@ in
       #battery { color: #50fa7b; }
       #clock { color: #8be9fd; }
 
-      #battery.charging { color: #f8f8f2; }
       #battery.warning { color: #ffb86c; }
       #battery.critical { color: #ff5555; }
     '';
