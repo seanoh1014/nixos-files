@@ -246,7 +246,7 @@ in
         border-radius: 0;
         min-height: 0;
         font-family: "FiraCode Nerd Font";
-        font-size: 10px;
+        font-size: 13px;
         font-style: normal;
         font-weight: 700;
       }
@@ -273,17 +273,18 @@ in
       #battery,
       #clock {
         padding: 0 10px;
-        color: #282a36;
+        background: transparent;
       }
 
-      #network { background: #ff79c9; }
-      #pulseaudio { background: #8be9fd; }
-      #backlight { background: #f1fa8c; }
-      #battery { background: #50fa7b; }
-      #clock { background: #8be9fd; }
+      #network { color: #ff79c9; }
+      #pulseaudio { color: #8be9fd; }
+      #backlight { color: #f1fa8c; }
+      #battery { color: #50fa7b; }
+      #clock { color: #8be9fd; }
 
-      #battery.warning { color: #282a36; }
-      #battery.critical { background: #ff5555; }
+      #battery.charging { color: #f8f8f2; }
+      #battery.warning { color: #ffb86c; }
+      #battery.critical { color: #ff5555; }
     '';
 
     "systemd/user/dunst.service.d/niri.conf".text = x11Only;
