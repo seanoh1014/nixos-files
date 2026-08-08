@@ -232,14 +232,14 @@ in
           critical = 25;
         };
         format = "{icon} {capacity}%";
-        format-charging = " {capacity}%";
+        format-charging = " {icon} {capacity}%";
         format-full = "󱐋 {capacity}%";
-        format-icons = [ "" "" "" "" "" ];
+        format-icons = [ " " " " " " " " " " ];
       };
 
       clock = {
         interval = 60;
-        format = "󰃵 {:%a, %b %d   %H:%M}";
+        format = "󰃵 {:%a, %b %d  %H:%M}";
         tooltip-format = "<tt>{calendar}</tt>";
         calendar = {
           mode = "month";
