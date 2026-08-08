@@ -143,6 +143,10 @@ in
       font=FiraCode Nerd Font Mono:style=Bold:size=10
       pad=8x8
 
+      [key-bindings]
+      clipboard-copy=Control+Shift+c XF86Copy Mod1+c
+      clipboard-paste=Control+Shift+v XF86Paste Mod1+v
+
       [colors-dark]
       foreground=f8f8f2
       background=282a36
