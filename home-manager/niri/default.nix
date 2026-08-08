@@ -48,7 +48,7 @@ in
 
       // Match the compact classic cursor used by the X11/DWM session.
       cursor {
-          xcursor-theme "DMZ-White"
+          xcursor-theme "DMZ-Black"
           xcursor-size 16
       }
 
