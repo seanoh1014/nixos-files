@@ -126,7 +126,7 @@ in
       binds {
           Mod+P { spawn "fuzzel"; }
           Mod+Shift+Return { spawn "foot"; }
-          Mod+F { maximize-column; }
+          Mod+F { maximize-window-to-edges; }
           Mod+B { fullscreen-window; }
 
           Mod+J { focus-column-left; }
