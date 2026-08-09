@@ -26,6 +26,8 @@ let
 
     exec ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
   '';
+
+  waybarNiriWindows = pkgs.callPackage ./waybar-niri-windows.nix { };
 in
 {
   home.packages = with pkgs; [
@@ -298,7 +300,7 @@ in
       position = "top";
       height = 22;
       spacing = 0;
-      modules-left = [ "niri/workspaces" ];
+      modules-left = [ "niri/workspaces" "cffi/niri-windows" ];
       modules-right = [ "network" "pulseaudio" "backlight" "battery" "clock" ];
 
       "niri/workspaces" = {
@@ -308,6 +310,24 @@ in
           active = ''<span size="1"> </span>'';
         };
         on-click = "activate";
+      };
+
+      "cffi/niri-windows" = {
+        module_path = "${waybarNiriWindows}/lib/waybar-niri-windows.so";
+        options = {
+          mode = "text";
+          symbols = {
+            unfocused = "·";
+            focused = "●";
+            unfocused-floating = "∗";
+            focused-floating = "⊛";
+            empty = "";
+          };
+        };
+        actions = {
+          on-scroll-up = "FocusColumnLeft";
+          on-scroll-down = "FocusColumnRight";
+        };
       };
 
       network = {
@@ -403,6 +423,11 @@ in
 
       #workspaces button.active:hover {
         background: #8be9fd;
+      }
+
+      .cffi-niri-windows label {
+        padding: 0 4px;
+        color: #8be9fd;
       }
 
       #network,
