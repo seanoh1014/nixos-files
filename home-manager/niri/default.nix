@@ -425,8 +425,14 @@ in
         background: #8be9fd;
       }
 
+      .cffi-niri-windows {
+        margin-left: 5px;
+        padding-left: 6px;
+        border-left: 1px solid #6272a4;
+      }
+
       .cffi-niri-windows label {
-        padding: 0 4px;
+        padding-right: 4px;
         color: #8be9fd;
       }
 
