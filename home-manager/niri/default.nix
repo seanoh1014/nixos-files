@@ -125,6 +125,13 @@ in
           place-within-backdrop true
       }
 
+      recent-windows {
+          binds {
+              Mod+Tab { next-window; }
+              Super+Tab { previous-window; }
+          }
+      }
+
       binds {
           Mod+Space repeat=false { toggle-overview; }
           Mod+P { spawn "fuzzel"; }
@@ -142,7 +149,7 @@ in
           Mod+M { consume-or-expel-window-right; }
           Mod+Return { move-column-to-first; }
           Mod+Shift+C { close-window; }
-          Mod+Tab { focus-workspace-previous; }
+          Mod+Ctrl+Tab { focus-workspace-previous; }
           Mod+Shift+Space { toggle-window-floating; }
 
           Mod+I { focus-window-or-workspace-up; }
