@@ -82,7 +82,7 @@ in
           center-focused-column "never"
 
           default-column-width {
-              proportion 0.55
+              proportion 0.5
           }
 
           focus-ring {
