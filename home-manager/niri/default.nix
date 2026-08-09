@@ -127,8 +127,6 @@ in
 
       recent-windows {
           binds {
-              Mod+Tab { next-window; }
-              // Super+Tab { previous-window; }
           }
       }
 
