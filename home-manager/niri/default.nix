@@ -300,8 +300,8 @@ in
       position = "top";
       height = 22;
       spacing = 0;
-      modules-left = [ "niri/workspaces" "cffi/niri-windows" ];
-      modules-right = [ "network" "pulseaudio" "backlight" "battery" "clock" ];
+      modules-left = [ "niri/workspaces" ];
+      modules-right = [ "cffi/niri-windows" "network" "pulseaudio" "backlight" "battery" "clock" ];
 
       "niri/workspaces" = {
         format = "{icon}";
@@ -427,6 +427,7 @@ in
 
       .cffi-niri-windows label {
         padding: 0 4px;
+        margin-top: -1px;
         color: #8be9fd;
       }
 
