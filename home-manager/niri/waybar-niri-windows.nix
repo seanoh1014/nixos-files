@@ -19,6 +19,11 @@ buildGoModule {
 
   vendorHash = "sha256-jK87vZYfUe8znk65SmJ1mN8qP5K3dtt950hKGWTYXs4=";
 
+  postPatch = ''
+    substituteInPlace module/module.go \
+      --replace-fail 'i.label.SetText(text)' 'i.label.SetMarkup(text)'
+  '';
+
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ gtk3 ];
 
