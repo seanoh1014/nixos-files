@@ -317,10 +317,10 @@ in
         options = {
           mode = "text";
           symbols = {
-            unfocused = ''<span foreground="#f8f8f2" size="9pt">▪</span>&#x2009;'';
-            focused = ''<span foreground="#a6a6a6" size="9pt">▪</span>&#x2009;'';
-            unfocused-floating = ''<span foreground="#f8f8f2" size="9pt">▪</span>&#x2009;'';
-            focused-floating = ''<span foreground="#a6a6a6" size="9pt">▪</span>&#x2009;'';
+            unfocused = ''<span foreground="#a6a6a6" size="10pt">▪</span>&#x2009;'';
+            focused = ''<span foreground="#f8f8f2" size="10pt">▪</span>&#x2009;'';
+            unfocused-floating = ''<span foreground="#a6a6a6" size="10pt">▪</span>&#x2009;'';
+            focused-floating = ''<span foreground="#f8f8f2" size="10pt">▪</span>&#x2009;'';
             empty = "";
           };
         };
