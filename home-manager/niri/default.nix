@@ -148,7 +148,7 @@ in
           Mod+M { consume-or-expel-window-right; }
           Mod+Return { move-column-to-first; }
           Mod+Shift+C { close-window; }
-          Mod+Ctrl+Tab { focus-workspace-previous; }
+          Super+Tab { focus-workspace-previous; }
           Mod+Shift+Space { toggle-window-floating; }
 
           Mod+I { focus-window-or-workspace-up; }
