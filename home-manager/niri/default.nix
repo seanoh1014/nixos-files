@@ -87,8 +87,8 @@ in
 
           focus-ring {
               width 3
-              active-color "#8be9fd"
-              inactive-color "#44475a"
+              active-color "#8be9fd80"
+              inactive-color "#44475a80"
           }
 
           border {
