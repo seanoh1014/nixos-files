@@ -140,8 +140,8 @@ in
           Mod+F { maximize-window-to-edges; }
           Mod+B { fullscreen-window; }
 
-          Mod+J { focus-column-left; }
-          Mod+K { focus-column-right; }
+          Mod+J { focus-column-left-or-last; }
+          Mod+K { focus-column-right-or-first; }
           Mod+Shift+J { move-column-left; }
           Mod+Shift+K { move-column-right; }
           Mod+H { set-column-width "-5%"; }
