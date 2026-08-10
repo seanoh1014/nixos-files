@@ -148,6 +148,7 @@ in
           Mod+L { set-column-width "+5%"; }
           Mod+N { consume-or-expel-window-left; }
           Mod+M { consume-or-expel-window-right; }
+          Mod+W { toggle-column-tabbed-display; }
           Mod+Return { move-column-to-first; }
           Mod+Shift+C { close-window; }
           Super+Tab { focus-workspace-previous; }
