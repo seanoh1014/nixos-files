@@ -92,8 +92,8 @@ in
           }
 
           tab-indicator {
-              active-color "#8be9fdB3"
-              inactive-color "#44475aB3"
+              active-color "#9F9F9FFF"
+              inactive-color "#656565FF"
           }
 
           border {
