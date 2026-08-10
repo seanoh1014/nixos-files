@@ -91,6 +91,11 @@ in
               inactive-color "#44475a80"
           }
 
+          tab-indicator {
+              active-color "#8be9fd33"
+              inactive-color "#44475a33"
+          }
+
           border {
               off
           }
