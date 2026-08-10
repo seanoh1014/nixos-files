@@ -8,13 +8,20 @@
     useNautilus = false;
   };
 
-  # Match the DWM session's Caps Lock behavior without relying on X11 tools:
-  # tap for Escape, hold for Control.
+  # Match the DWM session's setxkbmap + xcape behavior without X11 tools:
+  # Caps Lock and Left Ctrl act as Control immediately, emit Escape when
+  # tapped alone within 500 ms, and emit nothing after a longer solo hold.
   services.keyd = {
     enable = true;
     keyboards.default = {
       ids = [ "*" ];
-      settings.main.capslock = "overloadt(control, esc, 200)";
+      settings = {
+        global.overload_tap_timeout = 500;
+        main = {
+          capslock = "overload(control, esc)";
+          leftcontrol = "overload(control, esc)";
+        };
+      };
     };
   };
 }
