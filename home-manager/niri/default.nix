@@ -246,6 +246,8 @@ in
     '';
 
     "swayimg/init.lua".text = ''
+      swayimg.gallery.set_text("topleft", {})
+
       local state_dir = "/home/ohsean/.local/state/niri"
       local state_file = state_dir .. "/wallpaper"
 
