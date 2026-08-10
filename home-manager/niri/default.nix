@@ -180,8 +180,8 @@ in
           Mod+F11 { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
           Mod+F10 { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
           Mod+F12 { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-          Mod+F2 { spawn "brightnessctl" "set" "5%-"; }
-          Mod+F3 { spawn "brightnessctl" "set" "+5%"; }
+          F2 { spawn "brightnessctl" "set" "5%-"; }
+          F3 { spawn "brightnessctl" "set" "+5%"; }
       }
     '';
 
