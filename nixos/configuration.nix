@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./niri.nix # Comment out this line to remove Niri system integration.
+      # ./dwm.nix # Uncomment this line to restore X11/DWM system integration.
     ];
 
   # Bootloader.
@@ -44,29 +45,6 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
-
-  # Configure X11
-  services = {
-    # Enable touchpad
-    libinput = {
-      enable = true;
-      touchpad = {
-        tapping = true;
-        middleEmulation = true;
-        naturalScrolling = true;
-        disableWhileTyping = true;
-      };
-    };
-    xserver = {
-      enable = true;
-      xkb = {  
-        layout = "us";
-        variant = "";
-      }; 
-      displayManager.startx.enable = true;
-      windowManager.dwm.enable = true;
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

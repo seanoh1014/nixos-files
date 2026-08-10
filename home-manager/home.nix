@@ -4,11 +4,9 @@
   imports = [
     ./doom.nix
     ./tmux.nix
-    ./dwm.nix
-    ./suckless.nix
     ./dotfiles/neovim.nix
-    ./sxiv.nix
     ./niri # Comment out this line to remove all Niri user configuration.
+    # ./dwm-session.nix # Uncomment this line to restore all DWM user configuration.
     # ./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix
@@ -58,9 +56,6 @@
 
     # Media
     mpv
-    feh
-    flameshot
-    simplescreenrecorder
     # ytfzf
     # youtube-tui
     # yt-dlp-light
@@ -70,10 +65,6 @@
 
     # Desktop and X11
     pkgs.adwaita-icon-theme
-    setxkbmap
-    xcape
-    xclip
-    arandr
     networkmanagerapplet
     # betterlockscreen
     # networkmanager_dmenu
@@ -92,7 +83,6 @@
     # opensnitch-ui
 
     # Power and hardware
-    acpilight
     alsa-utils
     blueman
 
@@ -223,19 +213,9 @@
 
   # services.kdeconnect.enable = false;
 
-  services.picom.enable = true;
-  services.dunst.enable = true;
-
   home.file = {
-    # DWM
-    ".xinitrc".source = dotfiles/.xinitrc;
-    ".Xresources".source = dotfiles/.Xresources;
-    ".config/sxiv".source = dotfiles/sxiv;
-    ".config/picom.conf".source = dotfiles/picom.conf;
-    ".config/dunst".source = dotfiles/dunst;
     # Common
     "./wallpaper".source = ./wallpaper;
-    ".config/flameshot".source = dotfiles/flameshot;
     ".p10k.zsh".source = dotfiles/.p10k.zsh;
     ".config/mpv/scripts/modern.lua".source = dotfiles/mpv/modern.lua;
     ".config/mpv/fonts/Material-Design-Iconic-Font.ttf".source = dotfiles/mpv/Material-Design-Iconic-Font.ttf;
