@@ -118,8 +118,8 @@ in
       spawn-at-startup "waybar"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
-      // Replace a Kime daemon left attached to X11 with one attached to Niri.
-      spawn-at-startup "${pkgs.runtimeShell}" "-c" "${pkgs.procps}/bin/pkill -x kime 2>/dev/null; while ${pkgs.procps}/bin/pgrep -x kime >/dev/null; do ${pkgs.coreutils}/bin/sleep 0.05; done; exec ${pkgs.kime}/bin/kime"
+      // Kime is temporarily disabled in Niri. Uncomment to restore Wayland input.
+      // spawn-at-startup "${pkgs.kime}/bin/kime"
 
       // Move Swaybg into Niri's full-screen Overview backdrop.
       layer-rule {
@@ -453,5 +453,7 @@ in
     "systemd/user/app-picom@autostart.service.d/niri.conf".text = x11Only;
     "systemd/user/app-blueman@autostart.service.d/niri.conf".text = x11Only;
     "systemd/user/app-bitwarden@autostart.service.d/niri.conf".text = x11Only;
+    # Niri starts its own Wayland-aware Kime instance when the line above is enabled.
+    "systemd/user/app-kime@autostart.service.d/niri.conf".text = x11Only;
   };
 }
