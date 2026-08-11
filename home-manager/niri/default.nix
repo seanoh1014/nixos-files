@@ -323,7 +323,7 @@ in
       height = 22;
       spacing = 0;
       modules-left = [ "niri/workspaces" ];
-      modules-right = [ "cffi/niri-windows" "network" "pulseaudio" "backlight" "battery" "clock" ];
+      modules-right = [ "cffi/niri-windows" "network" "group/audio" "group/brightness" "battery" "clock" ];
 
       "niri/workspaces" = {
         format = "{icon}";
@@ -370,11 +370,43 @@ in
         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
       };
 
+      "group/audio" = {
+        orientation = "inherit";
+        drawer = {
+          transition-duration = 150;
+          transition-left-to-right = false;
+          children-class = "audio-slider";
+        };
+        modules = [ "pulseaudio" "pulseaudio/slider" ];
+      };
+
+      "pulseaudio/slider" = {
+        min = 0;
+        max = 100;
+        orientation = "horizontal";
+      };
+
       backlight = {
         interval = 10;
         format = "󰌵 {percent}%";
         on-scroll-up = "brightnessctl set +5%";
         on-scroll-down = "brightnessctl set 5%-";
+      };
+
+      "group/brightness" = {
+        orientation = "inherit";
+        drawer = {
+          transition-duration = 150;
+          transition-left-to-right = false;
+          children-class = "brightness-slider";
+        };
+        modules = [ "backlight" "backlight/slider" ];
+      };
+
+      "backlight/slider" = {
+        min = 1;
+        max = 100;
+        orientation = "horizontal";
       };
 
       battery = {
@@ -469,6 +501,37 @@ in
 
       #battery.warning { color: #ffb86c; }
       #battery.critical { color: #ff5555; }
+
+      #pulseaudio-slider,
+      #backlight-slider {
+        padding: 0 5px;
+      }
+
+      #pulseaudio-slider trough,
+      #backlight-slider trough {
+        min-width: 64px;
+        min-height: 4px;
+        border-radius: 2px;
+        background: #282a36;
+      }
+
+      #pulseaudio-slider highlight,
+      #backlight-slider highlight {
+        min-height: 4px;
+        border-radius: 2px;
+      }
+
+      #pulseaudio-slider highlight { background: #8be9fd; }
+      #backlight-slider highlight { background: #f1fa8c; }
+
+      #pulseaudio-slider slider,
+      #backlight-slider slider {
+        min-width: 8px;
+        min-height: 8px;
+        border-radius: 4px;
+        background: #f8f8f2;
+        box-shadow: none;
+      }
     '';
 
     "systemd/user/dunst.service.d/niri.conf".text = x11Only;
