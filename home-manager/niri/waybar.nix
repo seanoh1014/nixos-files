@@ -78,11 +78,12 @@ in
 
       clock = {
         interval = 60;
-        format = "󰃵 {:%a, %b %d  %H:%M}";
-        tooltip-format = "<tt>{calendar}</tt>";
+        format = "󰃵 {:%b %d %H:%M}";
+        tooltip-format = "{:%A}\n<tt>{calendar}</tt>";
         calendar = {
           mode = "month";
           weeks-pos = "right";
+          format.today = ''<span foreground="#44475a" background="#f8f8f2"><b>{}</b></span>'';
         };
       };
     };
