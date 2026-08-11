@@ -11,7 +11,7 @@ in
       layer = "top";
       position = "top";
       height = 22;
-      spacing = 0;
+      spacing = 6;
       modules-left = [ "niri/workspaces" ];
       modules-right = [ "cffi/niri-windows" "network" "pulseaudio" "battery" "clock" ];
 
@@ -103,6 +103,10 @@ in
         color: #f8f8f2;
       }
 
+      .modules-right {
+        margin-right: 4px;
+      }
+
       #workspaces button {
         min-width: 7px;
         padding: 0 4px;
@@ -142,7 +146,7 @@ in
       #pulseaudio,
       #battery,
       #clock {
-        padding: 0 4px;
+        padding: 0;
         background: transparent;
         color: #f8f8f2;
       }
