@@ -124,6 +124,7 @@ in
       window-rule {
           match app-id="^floating-terminal$"
           open-floating true
+          default-floating-position x=10 y=10 relative-to="bottom-right"
           default-column-width { proportion 0.33; }
           default-window-height { proportion 0.5; }
       }
