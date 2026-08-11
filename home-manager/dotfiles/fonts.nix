@@ -1,5 +1,7 @@
-{ pkgs, config, lib, callPackage, ... }:
+{ pkgs, ... }:
 
 {
-  home.packages = [ (pkgs.callPackage ./fonts/symbols.nix { }) ];
+  # Use the maintained Nixpkgs package instead of storing another font copy in
+  # this repository.
+  home.packages = [ pkgs.nerd-fonts.symbols-only ];
 }

@@ -33,7 +33,12 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  i18n.supportedLocales = ["all"];
+  # Unicode display does not require every glibc locale. Keep only the two
+  # locales used by this English/Korean setup.
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "ko_KR.UTF-8/UTF-8"
+  ];
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";

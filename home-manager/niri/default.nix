@@ -357,6 +357,9 @@ in
 
     "systemd/user/dunst.service.d/niri.conf".text = x11Only;
     "systemd/user/app-picom@autostart.service.d/niri.conf".text = x11Only;
+    # Waybar already exposes NetworkManager through its network module; without
+    # a tray, nm-applet is invisible and only consumes memory in Niri.
+    "systemd/user/app-nm\\x2dapplet@autostart.service.d/niri.conf".text = x11Only;
     "systemd/user/app-blueman@autostart.service.d/niri.conf".text = x11Only;
     "systemd/user/app-bitwarden@autostart.service.d/niri.conf".text = x11Only;
     # Niri starts its own Wayland-aware Kime instance when the line above is enabled.

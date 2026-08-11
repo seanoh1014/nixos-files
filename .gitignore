@@ -1,1 +1,8 @@
 .codex
+
+# Local outputs from building the vendored suckless sources.
+home-manager/pkgs/dmenu*/dmenu
+home-manager/pkgs/dmenu*/stest
+home-manager/pkgs/dmenu*/*.o
+home-manager/pkgs/dwm/dwm
+home-manager/pkgs/dwm/*.o
