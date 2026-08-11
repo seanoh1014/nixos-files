@@ -47,8 +47,8 @@ in
     border_size = 2
     bar_padding = 2
     anchor = top right
-    margin = 26 16 0 0
-    border_color = 44475AFF
+    margin = 23 16 0 0
+    border_color = F8F8F2FF
     background_color = 44475AFF
     bar_color = F8F8F2FF
     overflow_mode = nowrap
