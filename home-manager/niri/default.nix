@@ -60,6 +60,9 @@ let
 in
 {
   imports = [
+    # Remove this one line to detach live theme switching and use the static
+    # colors below again.
+    ./theme-switcher.nix
     ./waybar.nix
     ./wob.nix
   ];
