@@ -28,7 +28,10 @@ let
   '';
 in
 {
-  imports = [ ./waybar.nix ];
+  imports = [
+    ./waybar.nix
+    ./wob.nix
+  ];
 
   home.packages = with pkgs; [
     foot
@@ -196,9 +199,10 @@ in
           Mod+X { spawn-sh "swaylock -f -c 282a36 & sleep 0.2; niri msg action power-off-monitors"; }
           Mod+Shift+E { quit; }
 
-          Mod+F11 { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-          Mod+F10 { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-          Mod+F12 { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+          // Wob displays the result; Wiremix is the interactive mixer alternative.
+          Mod+F11 { spawn "niri-volume-wob" "down"; }
+          Mod+F10 { spawn "niri-volume-wob" "mute"; }
+          Mod+F12 { spawn "niri-volume-wob" "up"; }
           F2 { spawn "brightnessctl" "set" "5%-"; }
           F3 { spawn "brightnessctl" "set" "+5%"; }
       }
