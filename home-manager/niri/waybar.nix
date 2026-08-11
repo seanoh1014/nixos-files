@@ -71,8 +71,8 @@ in
         };
         format = "{icon}";
         format-charging = "<span color=\"#50fa7b\"></span> {icon}";
-        format-full = "󱐋";
-        format-icons = [ "" "" "" "" "" ];
+        format-full = "󱐋 ";
+        format-icons = [ " " " " " " " " " " ];
         tooltip-format = "Battery: {capacity}%";
       };
 
