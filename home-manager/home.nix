@@ -5,6 +5,7 @@
     ./doom.nix
     ./tmux.nix
     ./dotfiles/neovim.nix
+    ./vscode.nix
     ./niri # Comment out this line to remove all Niri user configuration.
     # ./dwm-session.nix # Uncomment this line to restore all DWM user configuration.
     # ./dotfiles/fonts.nix
@@ -134,7 +135,6 @@
     texstudio
     sioyek
     tradingview
-    emacs
     obsidian
     anki
     # bitwarden-desktop
@@ -200,13 +200,6 @@
     #   safe = { directory = "*"; };
     # };
   };
-
-  programs.vscode = {
-    enable = true;
-    # package = pkgs.vscode.fhs;
-  };
-
-  programs.vscode.package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gdb ]);
 
   programs.neovim.withRuby = true;
   programs.neovim.withPython3 = true;

@@ -32,7 +32,7 @@ index ded717c..78fdeb5 100644
  int getstatus(char *str, char *last);
  void statusloop();
  void termhandler();
-+void chldhandler();
++void chldhandler(int signum);
  void pstdout();
  #ifndef NO_X
  void setroot();
@@ -106,7 +106,7 @@ index ded717c..78fdeb5 100644
  	statusContinue = 0;
  }
  
-+void chldhandler()
++void chldhandler(int signum)
 +{
 +	while (0 < waitpid(-1, NULL, WNOHANG));
 +}
@@ -124,4 +124,3 @@ index ded717c..78fdeb5 100644
  	XCloseDisplay(dpy);
 -- 
 2.31.0
-

@@ -1,15 +1,22 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, inputs, ... }:
 
 let
-  pinnedPkgs = import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-21.05.tar.gz";
-  }) {};
+  dwm = pkgs.dwm.overrideAttrs (oldAttrs: {
+    src = ./pkgs/dwm;
+    buildInputs = (oldAttrs.buildInputs or [ ]) ++ [
+      pkgs.imlib2
+      pkgs.libxcb
+    ];
+  });
 
-  callPinned = path: import path { inherit pinnedPkgs; };
+  dwmblocks = pkgs.dwmblocks.overrideAttrs (oldAttrs: {
+    src = inputs.dwmblocks-src;
+    patches = (oldAttrs.patches or [ ]) ++ [ ./patches/dwmblocks-statuscmd.diff ];
+  });
 
 in {
   home.packages = [
-    (callPinned ./dwmblocks.nix)
-    (callPinned ./dwm1.nix)
+    dwm
+    dwmblocks
   ];
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
 #  dwm = pkgs.dwm.overrideAttrs (old: {
 #    src = pkgs/dwm;
@@ -16,10 +16,7 @@ let
 
   st = pkgs.st.overrideAttrs (oldAttrs: rec {
      buildInputs = oldAttrs.buildInputs ++ [ pkgs.harfbuzz ];
-     src = builtins.fetchTarball {
-     url = "https://github.com/seanoh1014/st/tarball/master";
-     sha256 = "04vwhc9sld8pi80g6pqinrqqc234g60d0c1grqqjay0l24cz0kgx";
-  };
+     src = inputs.st-src;
   });
 
 #  dwmblocks = pkgs.dwmblocks.overrideAttrs (oldAttrs: rec {
@@ -36,4 +33,3 @@ in
 {
   home.packages = [ dmenu st ];
 }
-
