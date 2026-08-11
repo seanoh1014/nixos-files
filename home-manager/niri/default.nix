@@ -26,6 +26,37 @@ let
 
     exec ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
   '';
+
+  niriPowerMenu = pkgs.writeShellScriptBin "niri-power-menu" ''
+    set -eu
+
+    choice="$(printf '%s\n' \
+      "Lock" \
+      "Suspend" \
+      "Log out" \
+      "Reboot" \
+      "Power off" | \
+      ${pkgs.fuzzel}/bin/fuzzel --dmenu --prompt="Session: " --lines=5 --minimal-lines)"
+
+    case "$choice" in
+      "Lock")
+        ${pkgs.swaylock}/bin/swaylock -f -c 282a36
+        ;;
+      "Suspend")
+        ${pkgs.swaylock}/bin/swaylock -f -c 282a36
+        ${pkgs.systemd}/bin/systemctl suspend
+        ;;
+      "Log out")
+        ${pkgs.niri}/bin/niri msg action quit --skip-confirmation
+        ;;
+      "Reboot")
+        ${pkgs.systemd}/bin/systemctl reboot
+        ;;
+      "Power off")
+        ${pkgs.systemd}/bin/systemctl poweroff
+        ;;
+    esac
+  '';
 in
 {
   imports = [
@@ -46,6 +77,7 @@ in
     wl-clipboard
     xwayland-satellite
     niriWallpaper
+    niriPowerMenu
   ];
 
   xdg.configFile = {
@@ -197,7 +229,7 @@ in
           Mod+Shift+S { screenshot; }
           Mod+Shift+W { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
           Mod+X { spawn-sh "swaylock -f -c 282a36 & sleep 0.2; niri msg action power-off-monitors"; }
-          Mod+Shift+E { quit; }
+          Mod+Shift+E { spawn "niri-power-menu"; }
 
           // Wob displays the result; Wiremix is the interactive mixer alternative.
           Mod+F11 { spawn "niri-volume-wob" "down"; }
