@@ -371,10 +371,10 @@ in
       };
 
       "group/audio" = {
-        orientation = "inherit";
+        orientation = "vertical";
         drawer = {
           transition-duration = 150;
-          transition-left-to-right = false;
+          transition-left-to-right = true;
           children-class = "audio-slider";
         };
         modules = [ "pulseaudio" "pulseaudio/slider" ];
@@ -383,7 +383,7 @@ in
       "pulseaudio/slider" = {
         min = 0;
         max = 100;
-        orientation = "horizontal";
+        orientation = "vertical";
       };
 
       backlight = {
@@ -394,10 +394,10 @@ in
       };
 
       "group/brightness" = {
-        orientation = "inherit";
+        orientation = "vertical";
         drawer = {
           transition-duration = 150;
-          transition-left-to-right = false;
+          transition-left-to-right = true;
           children-class = "brightness-slider";
         };
         modules = [ "backlight" "backlight/slider" ];
@@ -406,7 +406,7 @@ in
       "backlight/slider" = {
         min = 1;
         max = 100;
-        orientation = "horizontal";
+        orientation = "vertical";
       };
 
       battery = {
@@ -504,13 +504,13 @@ in
 
       #pulseaudio-slider,
       #backlight-slider {
-        padding: 0 5px;
+        padding: 5px 0;
       }
 
       #pulseaudio-slider trough,
       #backlight-slider trough {
-        min-width: 64px;
-        min-height: 4px;
+        min-width: 4px;
+        min-height: 64px;
         border-radius: 2px;
         background: #282a36;
       }
