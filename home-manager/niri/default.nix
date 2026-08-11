@@ -120,6 +120,14 @@ in
           draw-border-with-background false
       }
 
+      // Float only terminals opened with Mod+Enter.
+      window-rule {
+          match app-id="^floating-terminal$"
+          open-floating true
+          default-column-width { proportion 0.33; }
+          default-window-height { proportion 0.5; }
+      }
+
       spawn-at-startup "waybar"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
@@ -150,6 +158,8 @@ in
           Mod+K { focus-column-right-or-first; }
           Mod+Shift+J { move-column-left; }
           Mod+Shift+K { move-column-right; }
+          Mod+Shift+H hotkey-overlay-title="Move column to first" { move-column-to-first; }
+          Mod+Shift+L hotkey-overlay-title="Move column to last" { move-column-to-last; }
           Mod+H { set-column-width "-5%"; }
           Mod+L { set-column-width "+5%"; }
           Mod+N { consume-or-expel-window-left; }
@@ -157,7 +167,7 @@ in
           Mod+Shift+N { consume-window-into-column; }
           Mod+Shift+M { expel-window-from-column; }
           Mod+W { toggle-column-tabbed-display; }
-          Mod+Return { move-column-to-first; }
+          Mod+Return hotkey-overlay-title="Open floating terminal" { spawn "foot" "--app-id=floating-terminal"; }
           Mod+Shift+C { close-window; }
           Super+Tab { focus-workspace-previous; }
           Mod+Shift+Space { toggle-window-floating; }
