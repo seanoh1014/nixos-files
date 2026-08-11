@@ -3,10 +3,11 @@
 let
   stateDir = "${config.xdg.stateHome}/niri-theme";
 
-  # Add another named palette here when you want a second theme. The command
+  # Add another named palette here when you want another theme. The command
   # and generated application fragments do not need to change.
   themes = {
     default = import ./themes/default.nix;
+    gruvbox = import ./themes/gruvbox.nix;
     storm = import ./themes/storm.nix;
   };
 
