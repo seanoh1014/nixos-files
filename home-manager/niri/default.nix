@@ -139,6 +139,7 @@ in
       }
 
       binds {
+          Mod+Shift+Slash { show-hotkey-overlay; }
           Mod+Space repeat=false { toggle-overview; }
           Mod+P { spawn "fuzzel"; }
           Mod+Shift+Return { spawn "foot"; }
