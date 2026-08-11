@@ -11,7 +11,7 @@ in
       layer = "top";
       position = "top";
       height = 22;
-      spacing = 6;
+      spacing = 8;
       modules-left = [ "niri/workspaces" ];
       modules-right = [ "cffi/niri-windows" "network" "pulseaudio" "battery" "clock" ];
 
@@ -70,7 +70,7 @@ in
           critical = 25;
         };
         format = "{icon}";
-        format-charging = "<span color=\"#50fa7b\"></span> {icon}";
+        format-charging = " {icon}";
         format-full = "󱐋 ";
         format-icons = [ " " " " " " " " " " ];
         tooltip-format = "Battery: {capacity}%";
