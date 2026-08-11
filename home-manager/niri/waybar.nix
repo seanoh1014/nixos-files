@@ -145,8 +145,7 @@ in
       #network,
       #pulseaudio,
       #battery {
-        min-width: 14px;
-        padding: 0 2px;
+        padding: 0 3px;
         background: transparent;
         color: #f8f8f2;
       }
