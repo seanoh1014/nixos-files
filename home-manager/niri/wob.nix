@@ -47,7 +47,7 @@ in
     border_size = 2
     bar_padding = 2
     anchor = top right
-    margin = 23 16 0 0
+    margin = 20 16 0 0
     border_color = F8F8F2FF
     background_color = 44475AFF
     bar_color = F8F8F2FF
