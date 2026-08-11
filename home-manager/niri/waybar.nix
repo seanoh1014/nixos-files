@@ -84,7 +84,7 @@ in
           mode = "month";
           weeks-pos = "right";
           format = {
-            months = "{:<14}{{:>9%A}}";
+            months = "{{0:<20%b %Y}}{{0:>3%a}}";
             today = ''<span foreground="#44475a" background="#f8f8f2"><b>{}</b></span>'';
           };
         };
