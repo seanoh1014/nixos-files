@@ -79,11 +79,14 @@ in
       clock = {
         interval = 60;
         format = "󰃵 {:%b %d %H:%M}";
-        tooltip-format = "{:%A}\n<tt>{calendar}</tt>";
+        tooltip-format = "<tt>{calendar}</tt>";
         calendar = {
           mode = "month";
           weeks-pos = "right";
-          format.today = ''<span foreground="#44475a" background="#f8f8f2"><b>{}</b></span>'';
+          format = {
+            months = "{:<14}{{:>9%A}}";
+            today = ''<span foreground="#44475a" background="#f8f8f2"><b>{}</b></span>'';
+          };
         };
       };
     };
