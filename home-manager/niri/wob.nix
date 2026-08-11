@@ -51,6 +51,7 @@ in
     border_color = F8F8F2FF
     background_color = 44475AFF
     bar_color = F8F8F2FF
+    overflow_bar_color = B8B8B4FF
     overflow_mode = nowrap
 
     [style.muted]
