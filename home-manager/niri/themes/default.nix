@@ -1,6 +1,7 @@
 {
   panel = "44475a";
   background = "282a36";
+  selection = "44475a";
   foreground = "f8f8f2";
   accent = "8be9fd";
   pink = "ff79c6";

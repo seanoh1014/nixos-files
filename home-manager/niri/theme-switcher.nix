@@ -7,6 +7,7 @@ let
   # and generated application fragments do not need to change.
   themes = {
     default = import ./themes/default.nix;
+    storm = import ./themes/storm.nix;
   };
 
   renderTheme = name: theme:
@@ -34,29 +35,29 @@ let
       {
         name = "waybar.css";
         path = pkgs.writeText "waybar-${name}.css" ''
-          window#waybar {
-            background: #${theme.panel} !important;
-            color: #${theme.foreground} !important;
+          window#waybar#waybar {
+            background: #${theme.panel};
+            color: #${theme.foreground};
           }
 
-          #workspaces button {
-            color: #${theme.foreground} !important;
+          window#waybar #workspaces button {
+            color: #${theme.foreground};
           }
 
-          #workspaces button.active,
-          #workspaces button.active:hover {
-            background: #${theme.accent} !important;
+          window#waybar #workspaces button.active,
+          window#waybar #workspaces button.active:hover {
+            background: #${theme.accent};
           }
 
-          .cffi-niri-windows label {
-            color: #${theme.accent} !important;
+          window#waybar .cffi-niri-windows label {
+            color: #${theme.accent};
           }
 
-          #network,
-          #pulseaudio,
-          #battery,
-          #clock {
-            color: #${theme.foreground} !important;
+          window#waybar #network,
+          window#waybar #pulseaudio,
+          window#waybar #battery,
+          window#waybar #clock {
+            color: #${theme.foreground};
           }
         '';
       }
@@ -78,7 +79,7 @@ let
           background=${theme.background}ff
           text=${theme.foreground}ff
           match=${theme.pink}ff
-          selection=${theme.panel}ff
+          selection=${theme.selection}ff
           selection-text=${theme.foreground}ff
           selection-match=${theme.accent}ff
           border=${theme.accent}ff
