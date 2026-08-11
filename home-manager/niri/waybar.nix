@@ -13,7 +13,7 @@ in
       height = 22;
       spacing = 0;
       modules-left = [ "niri/workspaces" ];
-      modules-right = [ "cffi/niri-windows" "network" "pulseaudio" "backlight" "battery" "clock" ];
+      modules-right = [ "cffi/niri-windows" "network" "pulseaudio" "battery" "clock" ];
 
       "niri/workspaces" = {
         format = "{icon}";
@@ -44,27 +44,22 @@ in
 
       network = {
         interval = 5;
-        format-wifi = "󰖩 {essid}";
-        format-ethernet = " {ifname}";
-        format-disconnected = "睊";
+        format-wifi = "󰖩";
+        format-ethernet = "";
+        format-disconnected = "󰖪";
         tooltip-format = "{ifname}: {ipaddr}/{cidr}";
         tooltip-format-wifi = "{essid}: {signalStrength}%";
+        tooltip-format-disconnected = "Disconnected";
         on-click = "foot -e nmtui";
       };
 
       pulseaudio = {
         scroll-step = 5;
-        format = "{icon} {volume}%";
+        format = "{icon}";
         format-muted = "󰖁";
         format-icons.default = [ "󰕿" "󰖀" "󰕾" ];
+        tooltip-format = "{desc}: {volume}%";
         on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-      };
-
-      backlight = {
-        interval = 10;
-        format = "󰌵 {percent}%";
-        on-scroll-up = "brightnessctl set +5%";
-        on-scroll-down = "brightnessctl set 5%-";
       };
 
       battery = {
@@ -74,10 +69,11 @@ in
           warning = 50;
           critical = 25;
         };
-        format = "{icon} {capacity}%";
-        format-charging = "<span color=\"#50fa7b\"></span> {icon} {capacity}%";
-        format-full = "󱐋 {capacity}%";
-        format-icons = [ " " " " " " " " " " ];
+        format = "{icon}";
+        format-charging = "<span color=\"#50fa7b\"></span> {icon}";
+        format-full = "󱐋";
+        format-icons = [ "" "" "" "" "" ];
+        tooltip-format = "Battery: {capacity}%";
       };
 
       clock = {
@@ -144,21 +140,12 @@ in
 
       #network,
       #pulseaudio,
-      #backlight,
       #battery,
       #clock {
         padding: 0 4px;
         background: transparent;
+        color: #f8f8f2;
       }
-
-      #network { color: #ff79c9; }
-      #pulseaudio { color: #8be9fd; }
-      #backlight { color: #f1fa8c; }
-      #battery { color: #50fa7b; }
-      #clock { color: #8be9fd; }
-
-      #battery.warning { color: #ffb86c; }
-      #battery.critical { color: #ff5555; }
 
     '';
   };
