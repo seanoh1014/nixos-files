@@ -177,7 +177,6 @@
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs",
         "st-src": "st-src",
-        "sxiv-src": "sxiv-src",
         "tmux-which-key": "tmux-which-key"
       }
     },
@@ -194,22 +193,6 @@
       "original": {
         "owner": "seanoh1014",
         "repo": "st",
-        "type": "github"
-      }
-    },
-    "sxiv-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673876857,
-        "narHash": "sha256-J0YAJ+0Ul+s/+T5AoFaF7s9QXetUnN2NL6BQfGkXT6Y=",
-        "owner": "xyb3rt",
-        "repo": "sxiv",
-        "rev": "b1e742e36572621655f65c7f90533fa3f357fdda",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xyb3rt",
-        "repo": "sxiv",
         "type": "github"
       }
     },

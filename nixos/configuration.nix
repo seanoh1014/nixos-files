@@ -122,7 +122,7 @@
 
   services.blueman.enable = true;
 
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   #programs.light.enable = true;
   programs.zsh.enable = true;

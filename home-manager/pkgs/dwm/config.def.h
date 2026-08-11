@@ -127,7 +127,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,  		    XK_s,      spawn,          SHCMD("flameshot gui") },
 	{ MODKEY,              		    XK_i,      shiftview,      { .i = -1 } },
 	{ MODKEY,             	     	XK_o,      shiftview,      { .i = +1 } },
-	{ MODKEY|ShiftMask, 		    XK_w,      spawn,	       SHCMD("sxiv -t -b ~/wallpaper")}, 
+	// { MODKEY|ShiftMask, 		    XK_w,      spawn,	       SHCMD("sxiv -t -b ~/wallpaper")},
 	{ MODKEY, 		                XK_x,      spawn,	       SHCMD("betterlockscreen -l & sleep .5; xset dpms force off")}, 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
@@ -178,4 +178,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-

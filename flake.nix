@@ -22,7 +22,7 @@
 
     # These source trees are locked to exact revisions in flake.lock. This
     # keeps the detachable DWM environment reproducible without vendoring
-    # three additional upstream repositories here.
+    # additional upstream repositories here.
     st-src = {
       url = "github:seanoh1014/st";
       flake = false;
@@ -31,10 +31,10 @@
       url = "github:seanoh1014/dwmblocks-torrinfail";
       flake = false;
     };
-    sxiv-src = {
-      url = "github:xyb3rt/sxiv";
-      flake = false;
-    };
+    # sxiv-src = {
+    #   url = "github:xyb3rt/sxiv";
+    #   flake = false;
+    # };
     # hyprland.url = "github:hyprwm/Hyprland";
     #tws.url = "./tws";
   };

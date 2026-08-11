@@ -6,7 +6,7 @@
   imports = [
     ./dwm.nix
     ./suckless.nix
-    ./sxiv.nix
+    # ./sxiv.nix
   ];
 
   home.packages = with pkgs; [
@@ -26,7 +26,7 @@
   home.file = {
     ".xinitrc".source = dotfiles/.xinitrc;
     ".Xresources".source = dotfiles/.Xresources;
-    ".config/sxiv".source = dotfiles/sxiv;
+    # ".config/sxiv".source = dotfiles/sxiv;
     ".config/picom.conf".source = dotfiles/picom.conf;
     ".config/dunst".source = dotfiles/dunst;
     ".config/flameshot".source = dotfiles/flameshot;
