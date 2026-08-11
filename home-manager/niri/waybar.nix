@@ -144,9 +144,15 @@ in
 
       #network,
       #pulseaudio,
-      #battery,
+      #battery {
+        min-width: 14px;
+        padding: 0 2px;
+        background: transparent;
+        color: #f8f8f2;
+      }
+
       #clock {
-        padding: 0;
+        padding: 0 2px;
         background: transparent;
         color: #f8f8f2;
       }
