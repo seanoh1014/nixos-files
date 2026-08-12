@@ -8,6 +8,7 @@ let
   themes = {
     default = import ./themes/default.nix;
     gruvbox = import ./themes/gruvbox.nix;
+    latte = import ./themes/latte.nix;
     storm = import ./themes/storm.nix;
   };
 
