@@ -143,6 +143,7 @@ in
 
       hotkey-overlay {
           skip-at-startup
+          // Keep hide-not-bound unset so Niri lists unused important actions.
       }
 
       // Keep transparent workspace backgrounds free of Overview shadows.
@@ -180,66 +181,66 @@ in
 
       recent-windows {
           binds {
-              Mod+Tab { next-window; }
+              Mod+Tab hotkey-overlay-title="Switch recent windows" { next-window; }
           }
       }
 
       binds {
-          Mod+Shift+Slash { show-hotkey-overlay; }
-          Mod+Space repeat=false { toggle-overview; }
-          Mod+P { spawn "fuzzel"; }
-          Mod+Shift+Return { spawn "foot"; }
-          Mod+F { maximize-window-to-edges; }
-          Mod+B { fullscreen-window; }
+          Mod+Shift+Slash hotkey-overlay-title="Show important hotkeys" { show-hotkey-overlay; }
+          Mod+Space repeat=false hotkey-overlay-title="Toggle overview" { toggle-overview; }
+          Mod+P hotkey-overlay-title="Open application launcher" { spawn "fuzzel"; }
+          Mod+Shift+Return hotkey-overlay-title="Open terminal" { spawn "foot"; }
+          Mod+F hotkey-overlay-title="Maximize window" { maximize-window-to-edges; }
+          Mod+B hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
 
-          Mod+J { focus-column-left-or-last; }
-          Mod+K { focus-column-right-or-first; }
-          Mod+Shift+J { move-column-left; }
-          Mod+Shift+K { move-column-right; }
+          Mod+J hotkey-overlay-title="Focus column left (wrap)" { focus-column-left-or-last; }
+          Mod+K hotkey-overlay-title="Focus column right (wrap)" { focus-column-right-or-first; }
+          Mod+Shift+J hotkey-overlay-title="Move column left" { move-column-left; }
+          Mod+Shift+K hotkey-overlay-title="Move column right" { move-column-right; }
           Mod+Shift+H hotkey-overlay-title="Move column to first" { move-column-to-first; }
           Mod+Shift+L hotkey-overlay-title="Move column to last" { move-column-to-last; }
-          Mod+H { set-column-width "-5%"; }
-          Mod+L { set-column-width "+5%"; }
-          Mod+N { consume-or-expel-window-left; }
-          Mod+M { consume-or-expel-window-right; }
-          Mod+Shift+N { consume-window-into-column; }
-          Mod+Shift+M { expel-window-from-column; }
-          Mod+W { toggle-column-tabbed-display; }
+          Mod+H hotkey-overlay-title="Decrease column width" { set-column-width "-5%"; }
+          Mod+L hotkey-overlay-title="Increase column width" { set-column-width "+5%"; }
+          Mod+N hotkey-overlay-title="Consume or expel window left" { consume-or-expel-window-left; }
+          Mod+M hotkey-overlay-title="Consume or expel window right" { consume-or-expel-window-right; }
+          Mod+Shift+N hotkey-overlay-title="Consume window into column" { consume-window-into-column; }
+          Mod+Shift+M hotkey-overlay-title="Expel window from column" { expel-window-from-column; }
+          Mod+W hotkey-overlay-title="Toggle tabbed column" { toggle-column-tabbed-display; }
           Mod+Return hotkey-overlay-title="Open floating terminal" { spawn "foot" "--app-id=floating-terminal"; }
-          Mod+Shift+C { close-window; }
-          Super+Tab { focus-workspace-previous; }
-          Mod+Shift+Space { toggle-window-floating; }
+          Mod+Shift+C hotkey-overlay-title="Close window" { close-window; }
+          Super+Tab hotkey-overlay-title="Focus previous workspace" { focus-workspace-previous; }
+          Mod+Shift+Space hotkey-overlay-title="Toggle floating window" { toggle-window-floating; }
 
-          Mod+I { focus-window-or-workspace-up; }
-          Mod+O { focus-window-or-workspace-down; }
-          Mod+Shift+I { move-column-to-workspace-up; }
-          Mod+Shift+O { move-column-to-workspace-down; }
+          Mod+I hotkey-overlay-title="Focus window or workspace up" { focus-window-or-workspace-up; }
+          Mod+O hotkey-overlay-title="Focus window or workspace down" { focus-window-or-workspace-down; }
+          Mod+Shift+I hotkey-overlay-title="Move column to workspace up" { move-column-to-workspace-up; }
+          Mod+Shift+O hotkey-overlay-title="Move column to workspace down" { move-column-to-workspace-down; }
 
-          Mod+Comma { focus-monitor-left; }
-          Mod+Period { focus-monitor-right; }
-          Mod+Shift+Comma { move-column-to-monitor-left; }
-          Mod+Shift+Period { move-column-to-monitor-right; }
+          Mod+Comma hotkey-overlay-title="Focus monitor left" { focus-monitor-left; }
+          Mod+Period hotkey-overlay-title="Focus monitor right" { focus-monitor-right; }
+          Mod+Shift+Comma hotkey-overlay-title="Move column to monitor left" { move-column-to-monitor-left; }
+          Mod+Shift+Period hotkey-overlay-title="Move column to monitor right" { move-column-to-monitor-right; }
 
-          Mod+Left { focus-column-left; }
-          Mod+Right { focus-column-right; }
-          Mod+Up { focus-window-up; }
-          Mod+Down { focus-window-down; }
-          Mod+Ctrl+Left { move-column-left; }
-          Mod+Ctrl+Right { move-column-right; }
-          Mod+Ctrl+Up { move-window-up; }
-          Mod+Ctrl+Down { move-window-down; }
+          Mod+Left hotkey-overlay-title="Focus column left" { focus-column-left; }
+          Mod+Right hotkey-overlay-title="Focus column right" { focus-column-right; }
+          Mod+Up hotkey-overlay-title="Focus window up" { focus-window-up; }
+          Mod+Down hotkey-overlay-title="Focus window down" { focus-window-down; }
+          Mod+Ctrl+Left hotkey-overlay-title="Move column left (arrow)" { move-column-left; }
+          Mod+Ctrl+Right hotkey-overlay-title="Move column right (arrow)" { move-column-right; }
+          Mod+Ctrl+Up hotkey-overlay-title="Move window up" { move-window-up; }
+          Mod+Ctrl+Down hotkey-overlay-title="Move window down" { move-window-down; }
 
-          Mod+Shift+S { screenshot; }
-          Mod+Shift+W { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
-          Mod+X { spawn-sh "swaylock -f -c 282a36 & sleep 0.2; niri msg action power-off-monitors"; }
-          Mod+Shift+E { spawn "niri-power-menu"; }
+          Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
+          Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
+          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "swaylock -f -c 282a36 & sleep 0.2; niri msg action power-off-monitors"; }
+          Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
           // Wob displays the result; Wiremix is the interactive mixer alternative.
-          Mod+F11 { spawn "niri-volume-wob" "down"; }
-          Mod+F10 { spawn "niri-volume-wob" "mute"; }
-          Mod+F12 { spawn "niri-volume-wob" "up"; }
-          F2 { spawn "brightnessctl" "set" "5%-"; }
-          F3 { spawn "brightnessctl" "set" "+5%"; }
+          Mod+F11 hotkey-overlay-title="Volume down" { spawn "niri-volume-wob" "down"; }
+          Mod+F10 hotkey-overlay-title="Toggle mute" { spawn "niri-volume-wob" "mute"; }
+          Mod+F12 hotkey-overlay-title="Volume up" { spawn "niri-volume-wob" "up"; }
+          F2 hotkey-overlay-title="Brightness down" { spawn "brightnessctl" "set" "5%-"; }
+          F3 hotkey-overlay-title="Brightness up" { spawn "brightnessctl" "set" "+5%"; }
       }
     '';
 
