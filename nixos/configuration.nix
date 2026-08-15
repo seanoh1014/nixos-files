@@ -116,6 +116,9 @@
     pulse.enable = true;
   };
 
+  # Compress inactive memory in RAM to reduce out-of-memory pressure.
+  zramSwap.enable = true;
+
   hardware.bluetooth = {
     enable = true;
   };

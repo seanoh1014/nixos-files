@@ -78,7 +78,7 @@ in
     swaylock
     vanilla-dmz
     wl-clipboard
-    xwayland-satellite
+    # xwayland-satellite # Re-enable temporarily for X11-only apps under Niri.
     niriWallpaper
     niriPowerMenu
   ];
