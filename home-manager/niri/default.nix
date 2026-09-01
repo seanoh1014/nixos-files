@@ -96,6 +96,8 @@ in
               tap
               natural-scroll
               dwt
+              accel-profile "flat"
+              accel-speed 0.8
           }
 
           mod-key "Alt"
@@ -236,11 +238,11 @@ in
           Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
           // Wob displays the result; Wiremix is the interactive mixer alternative.
-          Mod+F11 hotkey-overlay-title="Volume down" { spawn "niri-volume-wob" "down"; }
-          Mod+F10 hotkey-overlay-title="Toggle mute" { spawn "niri-volume-wob" "mute"; }
-          Mod+F12 hotkey-overlay-title="Volume up" { spawn "niri-volume-wob" "up"; }
-          F2 hotkey-overlay-title="Brightness down" { spawn "brightnessctl" "set" "5%-"; }
-          F3 hotkey-overlay-title="Brightness up" { spawn "brightnessctl" "set" "+5%"; }
+          XF86AudioLowerVolume allow-when-locked=true hotkey-overlay-title="Volume down" { spawn "niri-volume-wob" "down"; }
+          XF86AudioMute allow-when-locked=true hotkey-overlay-title="Toggle mute" { spawn "niri-volume-wob" "mute"; }
+          XF86AudioRaiseVolume allow-when-locked=true hotkey-overlay-title="Volume up" { spawn "niri-volume-wob" "up"; }
+          XF86MonBrightnessDown allow-when-locked=true hotkey-overlay-title="Brightness down" { spawn "brightnessctl" "set" "5%-"; }
+          XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness up" { spawn "brightnessctl" "set" "+5%"; }
       }
     '';
 

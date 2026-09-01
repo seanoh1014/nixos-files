@@ -63,7 +63,7 @@ in
       };
 
       battery = {
-        bat = "CMB0";
+        bat = "BAT0";
         interval = 5;
         states = {
           warning = 50;
