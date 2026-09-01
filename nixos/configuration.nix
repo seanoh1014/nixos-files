@@ -6,18 +6,16 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./niri.nix # Comment out this line to remove Niri system integration.
+    [ ./niri.nix # Comment out this line to remove Niri system integration.
       # ./dwm.nix # Uncomment this line to restore X11/DWM system integration.
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.consoleLogLevel = 3;
+  boot.kernelParams = [ "quiet" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -125,7 +123,7 @@
 
   services.blueman.enable = true;
 
-  # services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
   #programs.light.enable = true;
   programs.zsh.enable = true;

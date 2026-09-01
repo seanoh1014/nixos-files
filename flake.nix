@@ -53,12 +53,20 @@
       #pkgs = nixpkgs.legacyPackages.${system};
     in {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        thinkpad-t14 = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
           modules = [
-            ./nixos/configuration.nix
+            ./hosts/thinkpad-t14
+          ];
+        };
+        gram = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+          };
+          modules = [
+            ./hosts/gram
           ];
         };
       };
