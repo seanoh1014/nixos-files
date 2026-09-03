@@ -6,7 +6,7 @@ in
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gdb ]);
+    package = pkgs.vscode.fhsWithPackages (ps: with ps; [ gcc gdb gnumake ]);
 
     # Keep extensions immutable so another machine receives the exact set
     # locked by flake.lock instead of whatever the Marketplace serves later.
@@ -27,12 +27,6 @@ in
         openai.chatgpt
         vscodevim.vim
       ];
-
-      userSettings = {
-        "workbench.colorTheme" = "Light+";
-        "explorer.sortOrder" = "type";
-        "redhat.telemetry.enabled" = false;
-      };
 
       keybindings = [
         {
