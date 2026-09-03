@@ -66,8 +66,8 @@ in
         bat = "BAT0";
         interval = 5;
         states = {
-          warning = 50;
-          critical = 25;
+          warning = 20;
+          critical = 10;
         };
         format = "{icon}";
         format-charging = " {icon}";
@@ -152,6 +152,11 @@ in
         padding: 0 3px;
         background: transparent;
         color: #f8f8f2;
+      }
+
+      #battery.warning,
+      #battery.critical {
+        color: #ff5555;
       }
 
       #clock {
