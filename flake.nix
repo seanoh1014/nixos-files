@@ -5,10 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     claude-code-nixpkgs.url = "github:NixOS/nixpkgs/master";
     codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
-    # Only the source is used; see packages/claude-desktop.nix.
-    claude-desktop-src = {
-      url = "github:k3d3/claude-desktop-linux-flake";
-      flake = false;
+    # Repackages Anthropic's official Linux .deb.
+    claude-desktop = {
+      url = "github:aaddrick/claude-desktop-debian";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";

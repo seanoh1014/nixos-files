@@ -124,7 +124,8 @@
     codex
     claude-code
     inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop-computer-use-ui
-    (callPackage ../packages/claude-desktop.nix { src = inputs.claude-desktop-src; })
+    # FHS variant so MCP servers launched via npx/uvx/docker can run.
+    inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-fhs
     hugo
     nodejs
     libgcc
