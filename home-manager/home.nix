@@ -57,6 +57,7 @@
 
     # Media
     mpv
+    discord
     # ytfzf
     # youtube-tui
     # yt-dlp-light
@@ -137,6 +138,7 @@
     tradingview
     obsidian
     anki
+    libreoffice
     # bitwarden-desktop
     # teams-for-linux
     # zoom-us
