@@ -184,6 +184,10 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   xdg.portal.config.common.default = "gtk";
+  # Allow WebHID access.
+  services.udev.extraRules = ''
+    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0521", MODE="0660", GROUP="users", TAG+="uaccess"
+  '';
   #services.udev.extraRules = builtins.readFile ../home-manager/dotfiles/99-batify.rules;
 
   
