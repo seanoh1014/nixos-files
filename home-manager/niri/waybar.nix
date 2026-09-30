@@ -2,6 +2,29 @@
 
 let
   waybarNiriWindows = pkgs.callPackage ./waybar-niri-windows.nix { };
+  batteryWarning = pkgs.writeShellScriptBin "waybar-battery-warning" ''
+    capacity_file=/sys/class/power_supply/BAT0/capacity
+    status_file=/sys/class/power_supply/BAT0/status
+    warning_flag="''${XDG_RUNTIME_DIR:-/tmp}/waybar-low-battery-warned"
+
+    [ -r "$capacity_file" ] && [ -r "$status_file" ] || exit 0
+
+    capacity=$(<"$capacity_file")
+    status=$(<"$status_file")
+
+    if [ "$capacity" -lt 20 ] && [ "$status" = "Discharging" ]; then
+      if [ ! -e "$warning_flag" ]; then
+        ${pkgs.libnotify}/bin/notify-send \
+          --urgency=critical \
+          --app-name=Waybar \
+          "Low battery" \
+          "Battery is at $capacity%. Connect the charger."
+        touch "$warning_flag"
+      fi
+    else
+      rm -f "$warning_flag"
+    fi
+  '';
 in
 {
   home.packages = [ pkgs.waybar ];
@@ -74,6 +97,7 @@ in
         format-full = "󱐋 ";
         format-icons = [ " " " " " " " " " " ];
         tooltip-format = "Battery: {capacity}%";
+        on-update = "${batteryWarning}/bin/waybar-battery-warning";
       };
 
       clock = {
@@ -152,11 +176,6 @@ in
         padding: 0 3px;
         background: transparent;
         color: #f8f8f2;
-      }
-
-      #battery.warning,
-      #battery.critical {
-        color: #ff5555;
       }
 
       #clock {
