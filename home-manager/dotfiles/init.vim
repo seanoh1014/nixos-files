@@ -12,10 +12,11 @@ set backspace=indent,eol,start
 
 set nostartofline
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <c-space> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"   
+" Completion popup: <Tab>/<S-Tab> cycle, <C-y> accepts, <C-Space> forces it open.
+set completeopt=menu,menuone,noinsert,fuzzy,popup
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <C-Space> <Cmd>lua vim.lsp.completion.get()<CR>
 
 colorscheme catppuccin-mocha
 
@@ -64,4 +65,17 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+END
+
+lua << END
+vim.lsp.config('clangd', {
+  cmd = { 'clangd', '--background-index', '--clang-tidy', '--header-insertion=never' },
+})
+vim.lsp.enable({ 'clangd', 'pyright', 'bashls' })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
+  end,
+})
 END
