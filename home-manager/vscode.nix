@@ -13,6 +13,7 @@ in
     mutableExtensionsDir = false;
     profiles.default = {
       extensions = with marketplace; [
+        anthropic.claude-code
         berrij.github-vscode-theme-dark-classic
         github.copilot-chat
         jeff-hykin.better-cpp-syntax
@@ -25,6 +26,7 @@ in
         ms-vscode.remote-server
         ngtystr.ppm-pgm-viewer-for-vscode
         openai.chatgpt
+        openai.codex-audio
         vscodevim.vim
       ];
 
