@@ -124,6 +124,7 @@
     codex
     claude-code
     inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop-computer-use-ui
+    (callPackage ../packages/claude-desktop.nix { src = inputs.claude-desktop-src; })
     hugo
     nodejs
     libgcc
