@@ -122,6 +122,7 @@
 
     # Development
     codex
+    claude-code
     inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop-computer-use-ui
     hugo
     nodejs

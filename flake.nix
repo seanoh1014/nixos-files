@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    claude-code-nixpkgs.url = "github:NixOS/nixpkgs/master";
     codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -43,10 +44,17 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
     let
       system = "x86_64-linux";
+      claudeCodePkgs = import inputs.claude-code-nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         overlays = [
+          (final: prev: {
+            claude-code = claudeCodePkgs.claude-code;
+          })
           inputs.tmux-which-key.overlays.default
           inputs.nix-vscode-extensions.overlays.default
         ];
