@@ -34,6 +34,8 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications."x-scheme-handler/codex" = [ "codex-desktop.desktop" ];
+    # Claude Desktop can't register itself: this file is read-only under HM.
+    defaultApplications."x-scheme-handler/claude" = [ "com.anthropic.Claude.desktop" ];
   };
 
   home.packages = with pkgs; [
