@@ -40,10 +40,10 @@ let
 
     case "$choice" in
       "Lock")
-        ${pkgs.swaylock}/bin/swaylock -f -c 282a36
+        ${pkgs.swaylock}/bin/swaylock -f -c 000000
         ;;
       "Suspend")
-        ${pkgs.swaylock}/bin/swaylock -f -c 282a36
+        ${pkgs.swaylock}/bin/swaylock -f -c 000000
         ${pkgs.systemd}/bin/systemctl suspend
         ;;
       "Log out")
@@ -56,6 +56,131 @@ let
         ${pkgs.systemd}/bin/systemctl poweroff
         ;;
     esac
+  '';
+
+  niriAutoSuspend = pkgs.writeShellScriptBin "niri-auto-suspend" ''
+    set -eu
+
+    connected_displays="$(${pkgs.gnugrep}/bin/grep -l '^connected$' /sys/class/drm/card*-*/status | ${pkgs.coreutils}/bin/wc -l)"
+    [ "$connected_displays" -le 1 ] || exit 0
+
+    ac_online="$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/AC/online)"
+    case "$1:$ac_online" in
+      ac:1|battery:0) ;;
+      *) exit 0 ;;
+    esac
+
+    ${pkgs.systemd}/bin/systemctl suspend
+  '';
+
+  # Pair newly opened tiled windows top/bottom in full-width columns on the
+  # portrait display. A lone window remains one half-screen-tall tile, while
+  # further pairs use Niri's normal horizontal scrolling.
+  # Existing windows are recorded before events are handled, so starting or
+  # restarting the helper does not rearrange them.
+  niriPortraitStack = pkgs.writeShellScriptBin "niri-portrait-stack" ''
+    set -u
+
+    seen_ids=" "
+
+    ${pkgs.niri}/bin/niri msg --json event-stream |
+      while IFS= read -r event; do
+        initial_ids="$(${pkgs.jq}/bin/jq -r '
+          .WindowsChanged.windows? // empty | map(.id | tostring) | join(" ")
+        ' <<< "$event")"
+        if [ -n "$initial_ids" ]; then
+          seen_ids="$seen_ids$initial_ids "
+
+          continue
+        fi
+
+        closed_id="$(${pkgs.jq}/bin/jq -r '.WindowClosed.id? // empty' <<< "$event")"
+        if [ -n "$closed_id" ]; then
+          workspaces="$(${pkgs.niri}/bin/niri msg --json workspaces)"
+          windows="$(${pkgs.niri}/bin/niri msg --json windows)"
+          top_only_ids="$(${pkgs.jq}/bin/jq -r --argjson workspaces "$workspaces" '
+            . as $windows |
+            $workspaces[] |
+            select(.output == "DP-2") |
+            .id as $workspace_id |
+            [$windows[] | select(
+              .workspace_id == $workspace_id and .is_floating == false
+            )] |
+            group_by(.layout.pos_in_scrolling_layout[0]) |
+            .[] |
+            select(length == 1) |
+            .[0].id
+          ' <<< "$windows")"
+
+          # Keep every unpaired top window half-height, including windows in
+          # later scrolling columns rather than only the workspace's first.
+          for top_id in $top_only_ids; do
+            ${pkgs.niri}/bin/niri msg action set-window-width --id "$top_id" "100%"
+            ${pkgs.niri}/bin/niri msg action set-window-height --id "$top_id" "50%"
+          done
+          continue
+        fi
+
+        window_id="$(${pkgs.jq}/bin/jq -r \
+          '.WindowOpenedOrChanged.window.id? // empty' <<< "$event")"
+        [ -n "$window_id" ] || continue
+
+        case "$seen_ids" in
+          *" $window_id "*) continue ;;
+        esac
+        seen_ids="$seen_ids$window_id "
+
+        workspace_id="$(${pkgs.jq}/bin/jq -r '
+          .WindowOpenedOrChanged.window? |
+          select(.is_floating == false) |
+          .workspace_id // empty
+        ' <<< "$event")"
+        [ -n "$workspace_id" ] || continue
+
+        output="$(${pkgs.niri}/bin/niri msg --json workspaces |
+          ${pkgs.jq}/bin/jq -r --argjson workspace_id "$workspace_id" '
+            map(select(.id == $workspace_id))[0].output // empty
+          ')"
+        [ "$output" = "DP-2" ] || continue
+
+        windows="$(${pkgs.niri}/bin/niri msg --json windows)"
+        tiled_count="$(${pkgs.jq}/bin/jq -r \
+          --argjson workspace_id "$workspace_id" '
+            map(select(.workspace_id == $workspace_id and .is_floating == false)) | length
+          ' <<< "$windows")"
+
+        if [ "$tiled_count" -eq 1 ]; then
+          ${pkgs.niri}/bin/niri msg action set-window-width --id "$window_id" "100%"
+          ${pkgs.niri}/bin/niri msg action set-window-height --id "$window_id" "50%"
+          continue
+        fi
+
+        column="$(${pkgs.jq}/bin/jq -r --argjson window_id "$window_id" '
+          map(select(.id == $window_id))[0].layout.pos_in_scrolling_layout[0] // empty
+        ' <<< "$windows")"
+        [ -n "$column" ] || continue
+
+        left_column_count="$(${pkgs.jq}/bin/jq -r \
+          --argjson workspace_id "$workspace_id" \
+          --argjson column "$column" '
+            map(select(
+              .workspace_id == $workspace_id and
+              .is_floating == false and
+              .layout.pos_in_scrolling_layout[0] == ($column - 1)
+            )) | length
+          ' <<< "$windows")"
+
+        ${pkgs.niri}/bin/niri msg action set-window-width --id "$window_id" "100%"
+        ${pkgs.niri}/bin/niri msg action set-window-height --id "$window_id" "50%"
+
+        # Join a single window to the left, but never add a third row. If the
+        # left column already holds a pair, this window starts the next pair.
+        if [ "$left_column_count" -eq 1 ]; then
+          ${pkgs.niri}/bin/niri msg action consume-or-expel-window-left --id "$window_id"
+          ${pkgs.niri}/bin/niri msg action set-window-width --id "$window_id" "100%"
+          ${pkgs.niri}/bin/niri msg action set-window-height --id "$window_id" "50%"
+        fi
+      done
   '';
 in
 {
@@ -75,12 +200,15 @@ in
     nerd-fonts.symbols-only
     swaybg
     swayimg
+    swayidle
     swaylock
     vanilla-dmz
     wl-clipboard
-    # xwayland-satellite # Re-enable temporarily for X11-only apps under Niri.
+    xwayland-satellite
     niriWallpaper
     niriPowerMenu
+    niriAutoSuspend
+    niriPortraitStack
   ];
 
   xdg.configFile = {
@@ -106,6 +234,15 @@ in
       output "eDP-1" {
           mode "1920x1080"
           scale 1
+          position x=1080 y=420
+      }
+
+      // Portrait monitor to the left of the laptop display.
+      output "DP-2" {
+          mode "1920x1080"
+          scale 1
+          transform "90"
+          position x=0 y=0
       }
 
       // Match the compact classic cursor used by the X11/DWM session.
@@ -172,6 +309,8 @@ in
       spawn-at-startup "waybar"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
+      spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "${pkgs.swaylock}/bin/swaylock -f -c 000000" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "${pkgs.swaylock}/bin/swaylock -f -c 000000"
+      spawn-at-startup "${niriPortraitStack}/bin/niri-portrait-stack"
       // Kime is temporarily disabled in Niri. Uncomment to restore Wayland input.
       // spawn-at-startup "${pkgs.kime}/bin/kime"
 
@@ -197,8 +336,8 @@ in
 
           Mod+J hotkey-overlay-title="Focus column left (wrap)" { focus-column-left-or-last; }
           Mod+K hotkey-overlay-title="Focus column right (wrap)" { focus-column-right-or-first; }
-          Mod+Shift+J hotkey-overlay-title="Move column left" { move-column-left; }
-          Mod+Shift+K hotkey-overlay-title="Move column right" { move-column-right; }
+          Mod+Shift+J hotkey-overlay-title="Move column left or to monitor left" { move-column-left-or-to-monitor-left; }
+          Mod+Shift+K hotkey-overlay-title="Move column right or to monitor right" { move-column-right-or-to-monitor-right; }
           Mod+Shift+H hotkey-overlay-title="Move column to first" { move-column-to-first; }
           Mod+Shift+L hotkey-overlay-title="Move column to last" { move-column-to-last; }
           Mod+H hotkey-overlay-title="Decrease column width" { set-column-width "-5%"; }
@@ -234,7 +373,7 @@ in
 
           Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
           Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
-          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "swaylock -f -c 282a36 & sleep 0.2; niri msg action power-off-monitors"; }
+          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "swaylock -f -c 000000 & sleep 0.2; niri msg action power-off-monitors"; }
           Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
           // Wob displays the result; Wiremix is the interactive mixer alternative.
