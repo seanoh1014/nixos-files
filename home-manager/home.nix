@@ -23,9 +23,18 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     LESSCHARSET = "utf-8";
+    CODEX_COMPUTER_USE_FORCE_YDOTOOL_KEYBOARD = "1";
+    CODEX_COMPUTER_USE_FORCE_YDOTOOL_POINTER = "1";
   };
 
   home.stateVersion = "22.11"; # Keep unchanged after initial setup.
+
+  dconf.settings."org/gnome/desktop/interface".toolkit-accessibility = true;
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications."x-scheme-handler/codex" = [ "codex-desktop.desktop" ];
+  };
 
   home.packages = with pkgs; [
     # Browsers
@@ -113,6 +122,7 @@
 
     # Development
     codex
+    inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop-computer-use-ui
     hugo
     nodejs
     libgcc

@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -83,5 +84,6 @@
           ];
         };
       };
+      packages.${system}.chatgpt-desktop = inputs.codex-desktop-linux.packages.${system}.codex-desktop-computer-use-ui;
     };
 }
