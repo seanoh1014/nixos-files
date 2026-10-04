@@ -13,6 +13,7 @@
     # ./dotfiles/fonts.nix
     ./dotfiles/zsh.nix
     ./dotfiles/zathura.nix
+    ./dotfiles/fbii.nix
 
     # Hyprland
     # ./dotfiles/hyprland/hyprland.nix
@@ -42,7 +43,7 @@
 
   home.packages = with pkgs; [
     # Terminal e-book reader with inline images
-    (callPackage ../packages/fbii.nix { })
+    (callPackage ../packages/fbii { })
 
     # Browsers
     firefox

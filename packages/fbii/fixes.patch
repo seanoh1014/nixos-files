@@ -1,0 +1,68 @@
+diff --git a/src/config/defaults.rs b/src/config/defaults.rs
+index a25fbbd..22b4ba9 100644
+--- a/src/config/defaults.rs
++++ b/src/config/defaults.rs
+@@ -1,6 +1,7 @@
+ use serde::{Deserialize, Serialize};
+ 
+ #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
++#[serde(default)]
+ pub struct TypographyConfig {
+     pub measure: u16,
+     pub line_spacing: u8,
+@@ -24,6 +25,7 @@ impl Default for TypographyConfig {
+ }
+ 
+ #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
++#[serde(default)]
+ pub struct DisplayConfig {
+     pub simplified_mode: bool,
+     pub respect_epub_css: bool,
+diff --git a/src/config/mod.rs b/src/config/mod.rs
+index 94cf26b..17f5a71 100644
+--- a/src/config/mod.rs
++++ b/src/config/mod.rs
+@@ -10,6 +10,7 @@ use std::collections::HashMap;
+ use std::path::{Path, PathBuf};
+ 
+ #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
++#[serde(default)]
+ pub struct Config {
+     pub theme: String,
+     pub typography: TypographyConfig,
+diff --git a/src/formats/epub.rs b/src/formats/epub.rs
+index 2a6addf..f33ecb6 100644
+--- a/src/formats/epub.rs
++++ b/src/formats/epub.rs
+@@ -398,7 +398,7 @@ fn parse_html_nodes(node: Node, content: &mut Vec<Block>) {
+                 if let Some(src) = child.attribute("src") {
+                     let alt = child.attribute("alt").map(|s| s.to_string());
+                     content.push(Block::Image {
+-                        key: src.to_string(),
++                        key: image_key(src),
+                         alt,
+                     });
+                 }
+@@ -474,7 +474,7 @@ fn parse_html_inlines(node: Node, out: &mut Vec<Inline>) {
+                     if let Some(src) = child.attribute("src") {
+                         let alt = child.attribute("alt").map(|s| s.to_string());
+                         out.push(Inline::Image {
+-                            key: src.to_string(),
++                            key: image_key(src),
+                             alt,
+                         });
+                     }
+@@ -486,3 +486,13 @@ fn parse_html_inlines(node: Node, out: &mut Vec<Inline>) {
+         }
+     }
+ }
++
++/// Resources are stored by bare filename too, so strip relative path parts
++/// like `../Images/` from an `<img src>`.
++fn image_key(src: &str) -> String {
++    Path::new(src)
++        .file_name()
++        .and_then(|f| f.to_str())
++        .unwrap_or(src)
++        .to_string()
++}

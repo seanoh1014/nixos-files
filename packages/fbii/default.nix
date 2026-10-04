@@ -13,6 +13,10 @@ rustPlatform.buildRustPackage {
   pname = "fbii";
   version = "0.1.0-unstable-2026-10-04";
 
+  # Resolve <img src="../Images/x.jpg"> to stored resources, and allow a
+  # partial config.toml (missing keys fall back to defaults).
+  patches = [ ./fixes.patch ];
+
   cargoLock.lockFile = "${src}/Cargo.lock";
 
   doCheck = false;
