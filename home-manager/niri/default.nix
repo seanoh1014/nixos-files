@@ -27,6 +27,18 @@ let
     exec ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
   '';
 
+  # Dynamic wallpaper: every 15 minutes pick a random image and reload swaybg.
+  # Just a shell loop and sleep on top of the existing swaybg, so nearly free.
+  niriWallpaperCycle = pkgs.writeShellScriptBin "niri-wallpaper-cycle" ''
+    state_file="''${XDG_STATE_HOME:-$HOME/.local/state}/niri/wallpaper"
+    mkdir -p "''${state_file%/*}"
+    while sleep "''${1:-900}"; do
+      ${pkgs.findutils}/bin/find -L /home/ohsean/wallpaper -maxdepth 1 -type f \
+        | ${pkgs.coreutils}/bin/shuf -n 1 > "$state_file"
+      ${niriWallpaper}/bin/niri-wallpaper --reload
+    done
+  '';
+
   niriPowerMenu = pkgs.writeShellScriptBin "niri-power-menu" ''
     set -eu
 
@@ -250,6 +262,7 @@ in
     wl-clipboard
     xwayland-satellite
     niriWallpaper
+    niriWallpaperCycle
     niriPowerMenu
     niriAutoSuspend
     niriPortraitStack
@@ -360,6 +373,7 @@ in
       spawn-sh-at-startup "while true; do waybar; sleep 1; done"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
+      spawn-at-startup "${niriWallpaperCycle}/bin/niri-wallpaper-cycle"
       spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "${pkgs.swaylock}/bin/swaylock -f -c 000000" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "${pkgs.swaylock}/bin/swaylock -f -c 000000"
       spawn-at-startup "${niriPortraitStack}/bin/niri-portrait-stack"
       // Kime is temporarily disabled in Niri. Uncomment to restore Wayland input.
@@ -424,6 +438,7 @@ in
 
           Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
           Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
+          Mod+Alt+W hotkey-overlay-title="Toggle dynamic wallpaper" { spawn-sh "pkill -f 'bin/[n]iri-wallpaper-cycle' || niri-wallpaper-cycle"; }
           Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "swaylock -f -c 000000 & sleep 0.2; niri msg action power-off-monitors"; }
           Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
