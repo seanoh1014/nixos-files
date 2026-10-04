@@ -402,6 +402,7 @@ in
           Mod+Shift+C hotkey-overlay-title="Close window" { close-window; }
           Super+Tab hotkey-overlay-title="Focus previous workspace" { focus-workspace-previous; }
           Mod+Shift+Space hotkey-overlay-title="Toggle floating window" { toggle-window-floating; }
+          Mod+Ctrl+Space hotkey-overlay-title="Switch focus floating/tiling" { switch-focus-between-floating-and-tiling; }
 
           Mod+I hotkey-overlay-title="Focus window or workspace up" { focus-window-or-workspace-up; }
           Mod+O hotkey-overlay-title="Focus window or workspace down" { focus-window-or-workspace-down; }
