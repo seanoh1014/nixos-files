@@ -41,6 +41,9 @@
   };
 
   home.packages = with pkgs; [
+    # Terminal e-book reader with inline images
+    (callPackage ../packages/fbii.nix { })
+
     # Browsers
     firefox
     (brave.overrideAttrs (old: {
