@@ -44,4 +44,19 @@
       set highlight-active-color	    "#EA76CB"
      '';
   };
+
+  # Read by zathura-pdf-mupdf for EPUBs; overrides publisher styling that breaks layout
+  xdg.configFile."zathura/epub.css".text = ''
+    body, p, div, span, li, td, blockquote {
+      font-family: serif !important;
+      font-size: 1em !important;
+      line-height: 1.4 !important;
+      text-align: left !important;
+    }
+    body { margin: 0 !important; padding: 0.5em !important; }
+    p { margin: 0 0 0.6em 0 !important; text-indent: 0 !important; }
+    h1, h2, h3, h4, h5, h6 { font-family: sans-serif !important; line-height: 1.2 !important; }
+    img, svg, table { max-width: 100% !important; height: auto !important; }
+    pre, code { font-family: monospace !important; white-space: pre-wrap !important; }
+  '';
 }
