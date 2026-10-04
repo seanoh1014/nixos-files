@@ -7,7 +7,7 @@
     ./dotfiles/neovim.nix
     ./vscode.nix
     ./claude-desktop.nix
-    ./hermes.nix
+    # ./hermes.nix
     ./niri # Comment out this line to remove all Niri user configuration.
     # ./dwm-session.nix # Uncomment this line to restore all DWM user configuration.
     # ./dotfiles/fonts.nix
