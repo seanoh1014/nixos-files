@@ -56,6 +56,8 @@
     description = "ohsean";
     extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
     packages = with pkgs; [];
+    # Keep user services (hermes-agent) running after logout.
+    linger = true;
   };
 
 
@@ -163,15 +165,15 @@
 
   #dns
   services.resolved = {
-    enable = false;
-    settings.Resolve.DNS = ''
-      [Resolve]
-      DNS=45.90.28.0#31c977.dns.xnextdn.io
-      DNS=2a07:a8c0::#31c977.dns.nextdns.io
-      DNS=45.90.30.0#31c977.dns.nextdns.io
-      DNS=2a07:a8c1::#31c977.dns.nextdns.io
-      DNSOverTLS=yes
-    '';
+    enable = true;
+  #  settings.Resolve.DNS = ''
+  #    [Resolve]
+  #    DNS=45.90.28.0#31c977.dns.xnextdn.io
+  #    DNS=2a07:a8c0::#31c977.dns.nextdns.io
+  #    DNS=45.90.30.0#31c977.dns.nextdns.io
+  #    DNS=2a07:a8c1::#31c977.dns.nextdns.io
+  #    DNSOverTLS=yes
+  #  '';
   #  dnsovertls = "true";
   #  dnssec = "true";
   };

@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     claude-code-nixpkgs.url = "github:NixOS/nixpkgs/master";
+    # feather 2.9.1 fails to build against abseil 20260817; pinned until fixed upstream.
+    nixpkgs-feather.url = "github:nixos/nixpkgs/aca4d95fce4914b3892661bcb80b8087293536c6";
     codex-desktop-linux.url = "github:ilysenko/codex-desktop-linux";
     # Repackages Anthropic's official Linux .deb.
     claude-desktop = {
@@ -14,6 +16,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hermes-agent.url = "github:NousResearch/hermes-agent";
     tmux-which-key = {
       url = "github:alexwforsythe/tmux-which-key";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -90,6 +93,7 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [
             inputs.nix-doom-emacs-unstraightened.homeModule
+            inputs.hermes-agent.homeManagerModules.default
             ./home-manager/home.nix
             #./tws/flake.nix
             # hyprland.homeManagerModules.default

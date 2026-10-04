@@ -10,7 +10,9 @@
 
   programs.ydotool.enable = true;
   services.gnome.at-spi2-core.enable = true;
-  users.users.ohsean.extraGroups = [ "ydotool" ];
+  # uinput lets desktop-control-mcp create an absolute pointer for Claude.
+  hardware.uinput.enable = true;
+  users.users.ohsean.extraGroups = [ "ydotool" "uinput" ];
 
   # Match the DWM session's setxkbmap + xcape behavior without X11 tools:
   # Caps Lock and Left Ctrl act as Control immediately, emit Escape when

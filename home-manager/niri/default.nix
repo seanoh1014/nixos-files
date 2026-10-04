@@ -182,6 +182,50 @@ let
         fi
       done
   '';
+
+  # Niri expels a window from a multi-window column when maximizing it and
+  # never puts it back, so remember the stack and rejoin it on unmaximize.
+  niriMaximizeToggle = pkgs.writeShellScriptBin "niri-maximize-toggle" ''
+    set -u
+
+    niri=${pkgs.niri}/bin/niri
+    jq=${pkgs.jq}/bin/jq
+    state_dir="$XDG_RUNTIME_DIR/niri-maximize"
+    mkdir -p "$state_dir"
+
+    pos() {
+      $niri msg --json focused-window |
+        $jq -r '.layout.pos_in_scrolling_layout // empty | map(tostring) | join(" ")'
+    }
+
+    output="$($niri msg --json focused-output | $jq -r '.name // empty')"
+    if [ "$output" != "DP-2" ]; then
+      exec $niri msg action maximize-window-to-edges
+    fi
+
+    id="$($niri msg --json focused-window | $jq -r '.id // empty')"
+    [ -n "$id" ] || exit 0
+    state="$state_dir/$id"
+    read -r col row <<< "$(pos)"
+
+    $niri msg action maximize-window-to-edges
+
+    if [ -f "$state" ]; then
+      read -r saved_col saved_row < "$state"
+      rm -f "$state"
+      # Only rejoin if the window is still where the maximize left it.
+      [ "$col" = "$saved_col" ] || exit 0
+      $niri msg action consume-or-expel-window-left
+      [ "$saved_row" = 1 ] && $niri msg action move-window-up
+      $niri msg action set-window-height "50%"
+      exit 0
+    fi
+
+    read -r new_col _ <<< "$(pos)"
+    if [ -n "$col" ] && [ "$new_col" != "$col" ]; then
+      echo "$new_col $row" > "$state"
+    fi
+  '';
 in
 {
   imports = [
@@ -306,6 +350,12 @@ in
           default-window-height { proportion 0.5; }
       }
 
+      // Claude's workspace (nested sway) opens without taking focus.
+      window-rule {
+          match app-id="^wlroots$"
+          open-focused false
+      }
+
       // Relaunch waybar if it crashes (e.g. when PipeWire restarts during a rebuild).
       spawn-sh-at-startup "while true; do waybar; sleep 1; done"
       spawn-at-startup "mako"
@@ -332,7 +382,7 @@ in
           Mod+Space repeat=false hotkey-overlay-title="Toggle overview" { toggle-overview; }
           Mod+P hotkey-overlay-title="Open application launcher" { spawn "fuzzel"; }
           Mod+Shift+Return hotkey-overlay-title="Open terminal" { spawn "foot"; }
-          Mod+F hotkey-overlay-title="Maximize window" { maximize-window-to-edges; }
+          Mod+F hotkey-overlay-title="Maximize window" { spawn "${niriMaximizeToggle}/bin/niri-maximize-toggle"; }
           Mod+B hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
 
           Mod+J hotkey-overlay-title="Focus column left (wrap)" { focus-column-left-or-last; }

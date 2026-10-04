@@ -7,6 +7,9 @@
   ];
 
   networking.hostName = "thinkpad-t14";
+
+  # Mullvad GUI requires the system daemon to manage VPN connections.
+  services.mullvad-vpn.enable = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.kernelParams = [ "psmouse.synaptics_intertouch=1" ];
 

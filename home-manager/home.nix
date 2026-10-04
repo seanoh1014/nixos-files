@@ -6,6 +6,8 @@
     ./tmux.nix
     ./dotfiles/neovim.nix
     ./vscode.nix
+    ./claude-desktop.nix
+    ./hermes.nix
     ./niri # Comment out this line to remove all Niri user configuration.
     # ./dwm-session.nix # Uncomment this line to restore all DWM user configuration.
     # ./dotfiles/fonts.nix
@@ -48,7 +50,10 @@
         )
       '';
     }))
-    # mullvad-browser
+    mullvad-browser
+
+    # Crypto
+    eigenwallet
 
     # Command-line and system tools
     unzip
@@ -90,8 +95,8 @@
     usbmuxd2
     filezilla
     syncthing
-    scrcpy
-    android-tools
+    #scrcpy
+    #android-tools
     # nextdns
     # opensnitch-ui
 
@@ -100,10 +105,10 @@
     blueman
 
     # Containers and virtualization
-    distrobox
     docker
-    qemu
-    virt-manager
+    #distrobox
+    #qemu
+    #virt-manager
     # podman
     # podman-compose
     # docker-compose
@@ -186,6 +191,8 @@
 
     # Security and credentials
     pkgs.gnome-keyring
+    inputs.nixpkgs-feather.legacyPackages.${pkgs.stdenv.hostPlatform.system}.feather
+    mullvad-vpn
     # gnupg
     # pinentry-gtk2
 
