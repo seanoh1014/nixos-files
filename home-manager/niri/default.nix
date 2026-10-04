@@ -306,7 +306,8 @@ in
           default-window-height { proportion 0.5; }
       }
 
-      spawn-at-startup "waybar"
+      // Relaunch waybar if it crashes (e.g. when PipeWire restarts during a rebuild).
+      spawn-sh-at-startup "while true; do waybar; sleep 1; done"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
       spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "${pkgs.swaylock}/bin/swaylock -f -c 000000" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "${pkgs.swaylock}/bin/swaylock -f -c 000000"
