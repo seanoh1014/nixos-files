@@ -83,19 +83,26 @@ let
 
     seen_ids=" "
 
+    # One long-running jq reduces each relevant event to a short line, so
+    # focus, workspace and title events no longer spawn processes.
     ${pkgs.niri}/bin/niri msg --json event-stream |
-      while IFS= read -r event; do
-        initial_ids="$(${pkgs.jq}/bin/jq -r '
-          .WindowsChanged.windows? // empty | map(.id | tostring) | join(" ")
-        ' <<< "$event")"
-        if [ -n "$initial_ids" ]; then
-          seen_ids="$seen_ids$initial_ids "
-
+      ${pkgs.jq}/bin/jq --unbuffered -r '
+        if .WindowsChanged then
+          "init " + (.WindowsChanged.windows | map(.id | tostring) | join(" "))
+        elif .WindowClosed then
+          "closed"
+        elif .WindowOpenedOrChanged then
+          .WindowOpenedOrChanged.window |
+          "opened \(.id) \(if .is_floating then "" else .workspace_id // "" end)"
+        else empty end
+      ' |
+      while read -r kind window_id workspace_id; do
+        if [ "$kind" = init ]; then
+          seen_ids="$seen_ids$window_id $workspace_id "
           continue
         fi
 
-        closed_id="$(${pkgs.jq}/bin/jq -r '.WindowClosed.id? // empty' <<< "$event")"
-        if [ -n "$closed_id" ]; then
+        if [ "$kind" = closed ]; then
           workspaces="$(${pkgs.niri}/bin/niri msg --json workspaces)"
           windows="$(${pkgs.niri}/bin/niri msg --json windows)"
           top_only_ids="$(${pkgs.jq}/bin/jq -r --argjson workspaces "$workspaces" '
@@ -121,20 +128,10 @@ let
           continue
         fi
 
-        window_id="$(${pkgs.jq}/bin/jq -r \
-          '.WindowOpenedOrChanged.window.id? // empty' <<< "$event")"
-        [ -n "$window_id" ] || continue
-
         case "$seen_ids" in
           *" $window_id "*) continue ;;
         esac
         seen_ids="$seen_ids$window_id "
-
-        workspace_id="$(${pkgs.jq}/bin/jq -r '
-          .WindowOpenedOrChanged.window? |
-          select(.is_floating == false) |
-          .workspace_id // empty
-        ' <<< "$event")"
         [ -n "$workspace_id" ] || continue
 
         output="$(${pkgs.niri}/bin/niri msg --json workspaces |

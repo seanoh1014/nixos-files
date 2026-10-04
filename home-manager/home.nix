@@ -102,10 +102,8 @@
 
     # Power and hardware
     alsa-utils
-    blueman
 
     # Containers and virtualization
-    docker
     #distrobox
     #qemu
     #virt-manager
@@ -152,7 +150,7 @@
     # git-remote-gcrypt
 
     # Documents and productivity
-    texliveFull
+    texliveMedium
     texstudio
     sioyek
     tradingview
@@ -206,9 +204,7 @@
       user.name = "seanoh1014";
       user.email = "ohsean1014@gmail.com";
       credential = {
-        helper = "${
-            pkgs.git.override { withLibsecret = true; }
-          }/bin/git-credential-libsecret";
+        helper = "${pkgs.gitFull}/bin/git-credential-libsecret";
         "https://github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
         "https://gist.github.com".helper = "!${pkgs.gh}/bin/gh auth git-credential";
       };

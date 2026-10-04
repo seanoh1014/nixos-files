@@ -66,7 +66,7 @@ in
       };
 
       network = {
-        interval = 5;
+        interval = 30;
         format-wifi = "󰖩";
         format-ethernet = "";
         format-disconnected = "󰖪";
@@ -87,7 +87,7 @@ in
 
       battery = {
         bat = "BAT0";
-        interval = 5;
+        interval = 30;
         states = {
           warning = 20;
           critical = 10;
