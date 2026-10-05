@@ -507,7 +507,7 @@ in
           text = cmd[update:1000] date +"%H:%M"
           font_size = 50
           font_family = FiraCode Nerd Font
-          color = rgb(8be9fd)
+          color = rgb(7aa2f7)
           position = 0, 130
           halign = center
           valign = center
@@ -518,7 +518,7 @@ in
           text = cmd[update:60000] date +"%A, %B %d"
           font_size = 14
           font_family = FiraCode Nerd Font
-          color = rgb(f8f8f2)
+          color = rgb(bb9af7)
           position = 0, 85
           halign = center
           valign = center
@@ -529,9 +529,9 @@ in
           font_family = FiraCode Nerd Font
           size = 260, 55
           outline_thickness = 2
-          outer_color = rgb(8be9fd)
-          inner_color = rgb(282a36)
-          font_color = rgb(f8f8f2)
+          outer_color = rgb(7aa2f7)
+          inner_color = rgb(1a1b26)
+          font_color = rgb(c0caf5)
           fade_on_empty = false
           dots_center = true
           placeholder_text =
