@@ -18,19 +18,33 @@ let
       ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
   '';
 
-  # PS3-style wave wallpaper; it plays its intro each time it starts.
+  # Animated wallpapers. The wave plays its intro each time it starts.
   wave = "${pkgs.shaderbg}/bin/shaderbg --fps 60 '*' ${./wave.frag}";
+  ether = "${pkgs.shaderbg}/bin/shaderbg --fps 60 '*' ${./ether.frag}";
 
-  # Lock; if the wave is running, stop it once the lock covers it and start
-  # it again after unlock so its intro fades in from black.
+  # Switch the animated wallpaper between the wave and Ether.
+  niriShaderToggle = pkgs.writeShellScript "niri-shader-toggle" ''
+    case "$(${pkgs.procps}/bin/pgrep -ax shaderbg)" in
+      *wave.frag*) next="${ether}" ;;
+      *) next="${wave}" ;;
+    esac
+    ${pkgs.procps}/bin/pkill -x shaderbg
+    ${pkgs.toybox}/bin/pkill swaybg
+    exec ${pkgs.niri}/bin/niri msg action spawn-sh -- "$next"
+  '';
+
+  # Lock; if a shader wallpaper is running, stop it once the lock covers it
+  # and start the same one again after unlock (the wave's intro fades in).
   niriLock = pkgs.writeShellScriptBin "niri-lock" ''
     hyprlock &
     lock=$!
     sleep 1
     kill -0 $lock 2>/dev/null || exit
+    shader=$(${pkgs.procps}/bin/pgrep -ax shaderbg)
     if ${pkgs.procps}/bin/pkill -x shaderbg; then
       wait $lock
-      exec ${wave}
+      set -f
+      exec ''${shader#* }
     fi
   '';
 
@@ -434,6 +448,7 @@ in
 
           Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
           Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
+          Mod+Ctrl+W hotkey-overlay-title="Switch animated wallpaper" { spawn "${niriShaderToggle}"; }
           Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "niri-lock & sleep 1; niri msg action power-off-monitors"; }
           Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
