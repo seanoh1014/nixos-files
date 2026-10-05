@@ -31,10 +31,15 @@ let
   # PS3-style wave wallpaper; it plays its intro each time it starts.
   wave = "${pkgs.shaderbg}/bin/shaderbg --fps 60 '*' ${./wave.frag}";
 
-  # Lock, then restart the wave after unlock so its intro plays on wake.
+  # Lock, stop the wave once the lock covers it, and start it again after
+  # unlock so its intro fades in from black.
   niriLock = pkgs.writeShellScriptBin "niri-lock" ''
-    hyprlock || exit
+    hyprlock &
+    lock=$!
+    sleep 1
+    kill -0 $lock 2>/dev/null || exit
     ${pkgs.procps}/bin/pkill -x shaderbg
+    wait $lock
     exec ${wave}
   '';
 
