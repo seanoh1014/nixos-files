@@ -8,39 +8,30 @@ let
     ConditionEnvironment=XDG_SESSION_TYPE=x11
   '';
 
+  # Shows the image picked in the swayimg gallery in place of the wave.
   niriWallpaper = pkgs.writeShellScriptBin "niri-wallpaper" ''
     set -eu
-
-    state_file="''${XDG_STATE_HOME:-$HOME/.local/state}/niri/wallpaper"
-    wallpaper="/home/ohsean/wallpaper/astolfo.png"
-
-    if [ -r "$state_file" ] && IFS= read -r saved < "$state_file" && [ -f "$saved" ]; then
-      wallpaper="$saved"
-    fi
-
-    if [ "''${1:-}" = "--reload" ]; then
-      ${pkgs.toybox}/bin/pkill shaderbg || true
-      ${pkgs.toybox}/bin/pkill swaybg || true
-      exec ${pkgs.niri}/bin/niri msg action spawn -- \
-        ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
-    fi
-
-    exec ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
+    IFS= read -r wallpaper < "''${XDG_STATE_HOME:-$HOME/.local/state}/niri/wallpaper"
+    ${pkgs.toybox}/bin/pkill shaderbg || true
+    ${pkgs.toybox}/bin/pkill swaybg || true
+    exec ${pkgs.niri}/bin/niri msg action spawn -- \
+      ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
   '';
 
   # PS3-style wave wallpaper; it plays its intro each time it starts.
   wave = "${pkgs.shaderbg}/bin/shaderbg --fps 60 '*' ${./wave.frag}";
 
-  # Lock, stop the wave once the lock covers it, and start it again after
-  # unlock so its intro fades in from black.
+  # Lock; if the wave is running, stop it once the lock covers it and start
+  # it again after unlock so its intro fades in from black.
   niriLock = pkgs.writeShellScriptBin "niri-lock" ''
     hyprlock &
     lock=$!
     sleep 1
     kill -0 $lock 2>/dev/null || exit
-    ${pkgs.procps}/bin/pkill -x shaderbg
-    wait $lock
-    exec ${wave}
+    if ${pkgs.procps}/bin/pkill -x shaderbg; then
+      wait $lock
+      exec ${wave}
+    fi
   '';
 
   niriPowerMenu = pkgs.writeShellScriptBin "niri-power-menu" ''
@@ -588,7 +579,7 @@ in
         file:write(image.path, "\n")
         file:close()
 
-        local success = os.execute("${niriWallpaper}/bin/niri-wallpaper --reload")
+        local success = os.execute("${niriWallpaper}/bin/niri-wallpaper")
         if success then
           swayimg.exit()
         else
