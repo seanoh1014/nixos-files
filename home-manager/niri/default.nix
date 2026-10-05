@@ -34,11 +34,8 @@ let
   # Lock, then restart the wave after unlock so its intro plays on wake.
   niriLock = pkgs.writeShellScriptBin "niri-lock" ''
     hyprlock || exit
-    # Start the new wave before stopping the old one so nothing shows between.
-    old=$(${pkgs.procps}/bin/pgrep -x shaderbg)
-    ${wave} &
-    sleep 0.5
-    kill $old
+    ${pkgs.procps}/bin/pkill -x shaderbg
+    exec ${wave}
   '';
 
   niriPowerMenu = pkgs.writeShellScriptBin "niri-power-menu" ''
@@ -345,6 +342,8 @@ in
 
       // Keep transparent workspace backgrounds free of Overview shadows.
       overview {
+          // Black, so the moment between waves matches the intro's black start.
+          backdrop-color "#000000"
           workspace-shadow {
               off
           }
