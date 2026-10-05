@@ -3,7 +3,7 @@
 
 const vec3 u_primary = vec3(0.478, 0.635, 0.969);   // #7aa2f7
 const vec3 u_secondary = vec3(0.733, 0.604, 0.969); // #bb9af7
-const vec3 u_surface = vec3(0.141, 0.157, 0.231);   // #24283b
+const vec3 u_surface = vec3(0.102, 0.106, 0.149);   // #1a1b26
 const vec3 u_error = vec3(0.969, 0.463, 0.557);     // #f7768e
 
 vec3 saturate(vec3 color, float amount) {
