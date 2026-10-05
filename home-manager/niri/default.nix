@@ -34,8 +34,11 @@ let
   # Lock, then restart the wave after unlock so its intro plays on wake.
   niriLock = pkgs.writeShellScriptBin "niri-lock" ''
     hyprlock || exit
-    ${pkgs.procps}/bin/pkill -x shaderbg
-    exec ${wave}
+    # Start the new wave before stopping the old one so nothing shows between.
+    old=$(${pkgs.procps}/bin/pgrep -x shaderbg)
+    ${wave} &
+    sleep 0.5
+    kill $old
   '';
 
   niriPowerMenu = pkgs.writeShellScriptBin "niri-power-menu" ''
@@ -506,6 +509,13 @@ in
       general {
           hide_cursor = false
           ignore_empty_input = true
+      }
+
+      animations {
+          enabled = true
+          bezier = linear, 1, 1, 0, 0
+          animation = fadeIn, 1, 5, linear
+          animation = fadeOut, 1, 5, linear
       }
 
       background {
