@@ -40,10 +40,11 @@ let
 
     case "$choice" in
       "Lock")
-        ${pkgs.swaylock}/bin/swaylock -f -c 000000
+        hyprlock
         ;;
       "Suspend")
-        ${pkgs.swaylock}/bin/swaylock -f -c 000000
+        hyprlock &
+        sleep 1
         ${pkgs.systemd}/bin/systemctl suspend
         ;;
       "Log out")
@@ -242,7 +243,6 @@ in
     swaybg
     swayimg
     swayidle
-    swaylock
     vanilla-dmz
     wl-clipboard
     xwayland-satellite
@@ -357,7 +357,7 @@ in
       spawn-sh-at-startup "while true; do waybar; sleep 1; done"
       spawn-at-startup "mako"
       spawn-at-startup "${niriWallpaper}/bin/niri-wallpaper"
-      spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "${pkgs.swaylock}/bin/swaylock -f -c 000000" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "${pkgs.swaylock}/bin/swaylock -f -c 000000"
+      spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "hyprlock &" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "hyprlock & sleep 1"
       spawn-at-startup "${niriPortraitStack}/bin/niri-portrait-stack"
       // Kime is temporarily disabled in Niri. Uncomment to restore Wayland input.
       // spawn-at-startup "${pkgs.kime}/bin/kime"
@@ -422,7 +422,7 @@ in
 
           Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
           Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
-          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "swaylock -f -c 000000 & sleep 0.2; niri msg action power-off-monitors"; }
+          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "hyprlock & sleep 1; niri msg action power-off-monitors"; }
           Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
           // Wob displays the result; Wiremix is the interactive mixer alternative.
@@ -486,6 +486,59 @@ in
       [border]
       width=2
       radius=0
+    '';
+
+    "hypr/hyprlock.conf".text = ''
+      general {
+          hide_cursor = false
+          ignore_empty_input = true
+      }
+
+      background {
+          monitor =
+          path = screenshot
+          blur_passes = 3
+          blur_size = 7
+          brightness = 0.6
+      }
+
+      label {
+          monitor =
+          text = cmd[update:1000] date +"%H:%M"
+          font_size = 50
+          font_family = FiraCode Nerd Font
+          color = rgb(8be9fd)
+          position = 0, 130
+          halign = center
+          valign = center
+      }
+
+      label {
+          monitor =
+          text = cmd[update:60000] date +"%A, %B %d"
+          font_size = 14
+          font_family = FiraCode Nerd Font
+          color = rgb(f8f8f2)
+          position = 0, 85
+          halign = center
+          valign = center
+      }
+
+      input-field {
+          monitor =
+          font_family = FiraCode Nerd Font
+          size = 260, 55
+          outline_thickness = 2
+          outer_color = rgb(8be9fd)
+          inner_color = rgb(282a36)
+          font_color = rgb(f8f8f2)
+          fade_on_empty = false
+          dots_center = true
+          placeholder_text =
+          position = 0, 0
+          halign = center
+          valign = center
+      }
     '';
 
     "swayimg/init.lua".text = ''

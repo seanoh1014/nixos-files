@@ -162,6 +162,8 @@
 
   # docker
   virtualisation.docker.enable = true;
+  # Start dockerd on first use through docker.socket instead of at boot.
+  virtualisation.docker.enableOnBoot = false;
 
   #dns
   services.resolved = {

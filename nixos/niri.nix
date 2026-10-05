@@ -9,6 +9,7 @@
   };
 
   programs.ydotool.enable = true;
+  programs.hyprlock.enable = true;
   services.gnome.at-spi2-core.enable = true;
   # uinput lets desktop-control-mcp create an absolute pointer for Claude.
   hardware.uinput.enable = true;
