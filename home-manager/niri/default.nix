@@ -28,6 +28,16 @@ let
     exec ${pkgs.swaybg}/bin/swaybg -i "$wallpaper" -m fill
   '';
 
+  # PS3-style wave wallpaper; it plays its intro each time it starts.
+  wave = "${pkgs.shaderbg}/bin/shaderbg --fps 60 '*' ${./wave.frag}";
+
+  # Lock, then restart the wave after unlock so its intro plays on wake.
+  niriLock = pkgs.writeShellScriptBin "niri-lock" ''
+    hyprlock || exit
+    ${pkgs.procps}/bin/pkill -x shaderbg
+    exec ${wave}
+  '';
+
   niriPowerMenu = pkgs.writeShellScriptBin "niri-power-menu" ''
     set -eu
 
@@ -41,10 +51,10 @@ let
 
     case "$choice" in
       "Lock")
-        hyprlock
+        ${niriLock}/bin/niri-lock &
         ;;
       "Suspend")
-        hyprlock &
+        ${niriLock}/bin/niri-lock &
         sleep 1
         ${pkgs.systemd}/bin/systemctl suspend
         ;;
@@ -248,6 +258,7 @@ in
     wl-clipboard
     xwayland-satellite
     niriWallpaper
+    niriLock
     niriPowerMenu
     niriAutoSuspend
     niriPortraitStack
@@ -285,6 +296,8 @@ in
           scale 1
           transform "90"
           position x=0 y=0
+          // Lets the 60fps wave present evenly on this 300Hz panel.
+          variable-refresh-rate
       }
 
       // Match the compact classic cursor used by the X11/DWM session.
@@ -357,8 +370,8 @@ in
       // Relaunch waybar if it crashes (e.g. when PipeWire restarts during a rebuild).
       spawn-sh-at-startup "while true; do waybar; sleep 1; done"
       spawn-at-startup "mako"
-      spawn-at-startup "${pkgs.shaderbg}/bin/shaderbg" "*" "${./wave.frag}"
-      spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "hyprlock &" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "hyprlock & sleep 1"
+      spawn-sh-at-startup "${wave}"
+      spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "${niriLock}/bin/niri-lock &" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "${niriLock}/bin/niri-lock & sleep 1"
       spawn-at-startup "${niriPortraitStack}/bin/niri-portrait-stack"
       // Kime is temporarily disabled in Niri. Uncomment to restore Wayland input.
       // spawn-at-startup "${pkgs.kime}/bin/kime"
@@ -423,7 +436,7 @@ in
 
           Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
           Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
-          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "hyprlock & sleep 1; niri msg action power-off-monitors"; }
+          Mod+X hotkey-overlay-title="Lock and turn off displays" { spawn-sh "niri-lock & sleep 1; niri msg action power-off-monitors"; }
           Mod+Shift+E hotkey-overlay-title="Open power menu" { spawn "niri-power-menu"; }
 
           // Wob displays the result; Wiremix is the interactive mixer alternative.

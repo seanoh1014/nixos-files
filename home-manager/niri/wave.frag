@@ -6,18 +6,51 @@ const vec3 u_secondary = vec3(0.733, 0.604, 0.969); // #bb9af7
 const vec3 u_surface = vec3(0.102, 0.106, 0.149);   // #1a1b26
 const vec3 u_error = vec3(0.969, 0.463, 0.557);     // #f7768e
 
+// Orbit's intro, played from shaderbg start: fade in from black while the
+// wave rushes in at up to 34x speed, then settles to normal speed.
+const float INTRO = 4.5;       // seconds
+const float PEAK = 34.0;       // peak speed
+const float PEAK_START = 0.05; // fractions of INTRO
+const float PEAK_END = 0.08;
+const float REVEAL_END = 0.22;
+const float DECAY = 10.0;
+
+// Integral of Orbit's speed curve, so motion stays continuous.
+float introTime(float t) {
+    float p = min(t / INTRO, 1.0);
+    float m;
+    if (p < PEAK_START) {
+        float u = p / PEAK_START;
+        m = 0.01 * p + (PEAK - 0.01) * PEAK_START * (u * u * u - 0.5 * u * u * u * u);
+    } else {
+        float a = 0.01 * PEAK_START + (PEAK - 0.01) * PEAK_START * 0.5;
+        if (p < PEAK_END) {
+            m = a + PEAK * (p - PEAK_START);
+        } else {
+            float b = a + PEAK * (PEAK_END - PEAK_START);
+            float q = (p - PEAK_END) / (1.0 - PEAK_END);
+            float e = exp(-DECAY);
+            m = b + (1.0 - PEAK_END) * (q + (PEAK - 1.0) / (1.0 - e)
+                * ((1.0 - exp(-DECAY * q)) / DECAY - e * q));
+        }
+    }
+    return m * INTRO + max(t - INTRO, 0.0);
+}
+
 vec3 saturate(vec3 color, float amount) {
     float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
     return mix(vec3(luminance), color, amount);
 }
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+    float time = introTime(iTime);
+    float reveal = clamp(iTime / (REVEAL_END * INTRO), 0.0, 1.0);
     vec2 local = fragCoord / iResolution.xy;
     vec2 global = local;
     float x = global.x;
     float y = global.y;
 
-    float drift = iTime * 0.3;
+    float drift = time * 0.3;
     float wave = sin(x * 6.28318 * 1.12 + drift) * 0.12
                + sin(x * 6.28318 * 0.47 - drift * 0.61) * 0.04;
     float crest = 0.57 + wave;
@@ -32,7 +65,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     float side_glow = smoothstep(0.32, 0.0, abs(distance_to_crest)) * 0.09;
 
     // Low-opacity companion waves make the main ribbon feel suspended in motion.
-    float drift_a = iTime * 0.4;
+    float drift_a = time * 0.4;
     float wave_a = sin(x * 6.28318 * 0.78 - drift_a + 1.8) * 0.055
                  + sin(x * 6.28318 * 1.9 + drift_a * 0.7) * 0.018;
     float wave_b = sin(x * 6.28318 * 0.54 + drift_a * 0.72 - 0.8) * 0.07;
@@ -84,7 +117,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec3 lower_color = mix(rich_secondary, rich_surface, 0.36);
     vec3 accent = mix(rich_primary, rich_error, 0.28);
 
-    float background_morph = 0.5 + 0.5 * sin(iTime * 0.015 + x * 2.4 + sin(y * 5.0));
+    float background_morph = 0.5 + 0.5 * sin(time * 0.015 + x * 2.4 + sin(y * 5.0));
     vec3 atmospheric_a = mix(dark_surface, rich_secondary * 0.16, background_morph);
     vec3 atmospheric_b = mix(rich_surface * 0.12, rich_primary * 0.07, 1.0 - background_morph);
     vec3 color = mix(black, atmospheric_a, smoothstep(0.0, 0.7, y) * 0.7);
@@ -110,5 +143,6 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     // Keep the empty upper and lower thirds nearly black for contrast.
     color *= 0.78 + 0.06 * smoothstep(0.0, 1.0, local.x);
+    color *= reveal * reveal;
     fragColor = vec4(color, 1.0);
 }
