@@ -407,7 +407,7 @@ in
           Mod+Shift+Return hotkey-overlay-title="Open terminal" { spawn "foot"; }
           Mod+F hotkey-overlay-title="Maximize window" { spawn "${niriMaximizeToggle}/bin/niri-maximize-toggle"; }
           Mod+B hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
-          Mod+Shift+B hotkey-overlay-title="Toggle waybar" { spawn "${pkgs.procps}/bin/pkill" "-SIGUSR1" "-x" "waybar"; }
+          Mod+Shift+B hotkey-overlay-title="Toggle waybar" { spawn "${pkgs.procps}/bin/pkill" "-SIGUSR1" "-x" "-f" "waybar"; }
 
           Mod+J hotkey-overlay-title="Focus column left (wrap)" { focus-column-left-or-last; }
           Mod+K hotkey-overlay-title="Focus column right (wrap)" { focus-column-right-or-first; }
