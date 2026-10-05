@@ -357,7 +357,7 @@ in
       // Relaunch waybar if it crashes (e.g. when PipeWire restarts during a rebuild).
       spawn-sh-at-startup "while true; do waybar; sleep 1; done"
       spawn-at-startup "mako"
-      spawn-at-startup "${pkgs.shaderbg}/bin/shaderbg" "--fps" "60" "*" "${./wave.frag}"
+      spawn-at-startup "${pkgs.shaderbg}/bin/shaderbg" "*" "${./wave.frag}"
       spawn-at-startup "${pkgs.swayidle}/bin/swayidle" "-w" "timeout" "300" "hyprlock &" "timeout" "600" "${pkgs.niri}/bin/niri msg action power-off-monitors" "resume" "${pkgs.niri}/bin/niri msg action power-on-monitors" "timeout" "900" "${niriAutoSuspend}/bin/niri-auto-suspend battery" "timeout" "1800" "${niriAutoSuspend}/bin/niri-auto-suspend ac" "before-sleep" "hyprlock & sleep 1"
       spawn-at-startup "${niriPortraitStack}/bin/niri-portrait-stack"
       // Kime is temporarily disabled in Niri. Uncomment to restore Wayland input.
@@ -505,7 +505,7 @@ in
           text = cmd[update:1000] date +"%H:%M"
           font_size = 50
           font_family = FiraCode Nerd Font
-          color = rgb(7aa2f7)
+          color = rgb(c0caf5)
           position = 0, 130
           halign = center
           valign = center
