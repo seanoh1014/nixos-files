@@ -7,6 +7,7 @@
     ./dotfiles/neovim.nix
     ./vscode.nix
     ./claude-desktop.nix
+    ./games.nix
     # ./hermes.nix
     ./niri # Comment out this line to remove all Niri user configuration.
     # ./dwm-session.nix # Uncomment this line to restore all DWM user configuration.
@@ -74,8 +75,6 @@
     # Media
     mpv
     discord
-    steamcmd
-    umu-launcher
     # ytfzf
     # youtube-tui
     # yt-dlp-light
