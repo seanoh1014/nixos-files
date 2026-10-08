@@ -245,6 +245,19 @@ let
       echo "$new_col $row" > "$state"
     fi
   '';
+
+  # Rotate DP-2 between portrait and landscape until the next config reload.
+  niriRotateMonitor = pkgs.writeShellScript "niri-rotate-monitor" ''
+    niri=${pkgs.niri}/bin/niri
+    transform="$($niri msg --json outputs | ${pkgs.jq}/bin/jq -r '."DP-2".logical.transform')"
+    if [ "$transform" = "Normal" ]; then
+      $niri msg output DP-2 transform 90
+      $niri msg output eDP-1 position set 1080 420
+    else
+      $niri msg output DP-2 transform normal
+      $niri msg output eDP-1 position set 1920 0
+    fi
+  '';
 in
 {
   imports = [
@@ -448,6 +461,7 @@ in
           Mod+Ctrl+Up hotkey-overlay-title="Move window up" { move-window-up; }
           Mod+Ctrl+Down hotkey-overlay-title="Move window down" { move-window-down; }
 
+          Mod+Shift+R hotkey-overlay-title="Rotate external monitor" { spawn "${niriRotateMonitor}"; }
           Mod+Shift+S hotkey-overlay-title="Take screenshot" { screenshot; }
           Mod+Shift+W hotkey-overlay-title="Open wallpaper gallery" { spawn "swayimg" "--gallery" "/home/ohsean/wallpaper"; }
           Mod+Ctrl+W hotkey-overlay-title="Switch animated wallpaper" { spawn "${niriShaderToggle}"; }
