@@ -74,6 +74,7 @@
     # Media
     mpv
     discord
+    steamcmd
     # ytfzf
     # youtube-tui
     # yt-dlp-light
