@@ -404,6 +404,7 @@ in
           Mod+Shift+Slash hotkey-overlay-title="Show important hotkeys" { show-hotkey-overlay; }
           Mod+Space repeat=false hotkey-overlay-title="Toggle overview" { toggle-overview; }
           Mod+P hotkey-overlay-title="Open application launcher" { spawn "fuzzel"; }
+          Mod+Shift+P hotkey-overlay-title="Launch a game" { spawn "play"; }
           Mod+Shift+Return hotkey-overlay-title="Open terminal" { spawn "foot"; }
           Mod+F hotkey-overlay-title="Maximize window" { spawn "${niriMaximizeToggle}/bin/niri-maximize-toggle"; }
           Mod+B hotkey-overlay-title="Toggle fullscreen" { fullscreen-window; }
