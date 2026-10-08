@@ -75,6 +75,7 @@
     mpv
     discord
     steamcmd
+    umu-launcher
     # ytfzf
     # youtube-tui
     # yt-dlp-light
