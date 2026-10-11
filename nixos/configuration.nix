@@ -24,6 +24,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -154,7 +155,20 @@
       extraRules = [{
         users = [ "ohsean" ];
         keepEnv = true;
-        persist = true;  
+        persist = true;
+      }
+      # `play` pauses keyd so Caps/Ctrl taps don't send Escape in games.
+      {
+        users = [ "ohsean" ];
+        noPass = true;
+        cmd = "/run/current-system/sw/bin/systemctl";
+        args = [ "stop" "keyd" ];
+      }
+      {
+        users = [ "ohsean" ];
+        noPass = true;
+        cmd = "/run/current-system/sw/bin/systemctl";
+        args = [ "start" "keyd" ];
       }];
     };
     rtkit.enable = true;
