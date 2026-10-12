@@ -74,8 +74,6 @@
 
     # Media
     mpv
-    chafa
-    imagemagick
     discord
     # ytfzf
     # youtube-tui
