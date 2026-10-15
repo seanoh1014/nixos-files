@@ -124,6 +124,17 @@ let
           continue
         fi
 
+        # Stack top/bottom only while DP-2 is rotated to portrait.
+        transform="$(${pkgs.niri}/bin/niri msg --json outputs |
+          ${pkgs.jq}/bin/jq -r '."DP-2".logical.transform // "Normal"')"
+        if [ "$transform" = Normal ]; then
+          case "$seen_ids" in
+            *" $window_id "*) ;;
+            *) [ "$kind" = opened ] && seen_ids="$seen_ids$window_id " ;;
+          esac
+          continue
+        fi
+
         if [ "$kind" = closed ]; then
           workspaces="$(${pkgs.niri}/bin/niri msg --json workspaces)"
           windows="$(${pkgs.niri}/bin/niri msg --json windows)"
@@ -247,16 +258,62 @@ let
   '';
 
   # Rotate DP-2 between portrait and landscape until the next config reload.
+  # Its windows are re-tiled to match: top/bottom pairs in portrait, one
+  # window per column in landscape.
   niriRotateMonitor = pkgs.writeShellScript "niri-rotate-monitor" ''
     niri=${pkgs.niri}/bin/niri
-    transform="$($niri msg --json outputs | ${pkgs.jq}/bin/jq -r '."DP-2".logical.transform')"
+    jq=${pkgs.jq}/bin/jq
+    transform="$($niri msg --json outputs | $jq -r '."DP-2".logical.transform')"
     if [ "$transform" = "Normal" ]; then
+      portrait=1
       $niri msg output DP-2 transform 90
       $niri msg output eDP-1 position set 1080 420
     else
+      portrait=0
       $niri msg output DP-2 transform normal
       $niri msg output eDP-1 position set 1920 0
     fi
+
+    # One line per DP-2 column: "<workspace id> <window ids top to bottom>".
+    workspaces="$($niri msg --json workspaces)"
+    columns="$($niri msg --json windows | $jq -r --argjson workspaces "$workspaces" '
+      ($workspaces | map(select(.output == "DP-2") | .id)) as $ids |
+      map(select(.is_floating == false and (.workspace_id as $w | $ids | index($w))))
+      | sort_by(.layout.pos_in_scrolling_layout) | group_by(.workspace_id)[]
+      | group_by(.layout.pos_in_scrolling_layout[0])[]
+      | "\(.[0].workspace_id) \(map(.id) | join(" "))"
+    ')"
+
+    pending="" last_ws=""
+    while read -r ws first rest; do
+      [ -n "$ws" ] || continue
+      if [ "$portrait" = 1 ]; then
+        # Join each lone column onto the lone column to its left.
+        [ "$ws" = "$last_ws" ] || pending=""
+        last_ws="$ws"
+        if [ -n "$rest" ]; then
+          pending=""
+        elif [ -n "$pending" ]; then
+          $niri msg action consume-or-expel-window-left --id "$first"
+          pending=""
+        else
+          pending="$first"
+        fi
+        for id in $first $rest; do
+          $niri msg action set-window-width --id "$id" "100%"
+          $niri msg action set-window-height --id "$id" "50%"
+        done
+      else
+        # Expel lower windows bottom-up so they keep their order as columns.
+        for id in $(printf '%s\n' $rest | tac); do
+          $niri msg action consume-or-expel-window-right --id "$id"
+        done
+        for id in $first $rest; do
+          $niri msg action set-window-width --id "$id" "50%"
+          $niri msg action reset-window-height --id "$id"
+        done
+      fi
+    done <<< "$columns"
   '';
 in
 {
