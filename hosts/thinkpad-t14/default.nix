@@ -13,6 +13,12 @@
   boot.loader.efi.efiSysMountPoint = "/boot";
   boot.kernelParams = [ "psmouse.synaptics_intertouch=1" ];
 
+  # The Intel AX201 lags badly (100ms-2s to the router) on this Wi-Fi 6 mesh;
+  # falling back to Wi-Fi 5 brings it to ~1ms.
+  boot.extraModprobeConfig = ''
+    options iwlwifi disable_11ax=1
+  '';
+
   # This laptop exposes the internal speakers and headphone jack as separate
   # UCM profiles. Prefer the speaker profile and its sink so DisplayPort audio
   # from a speakerless monitor cannot silently become the default output.
