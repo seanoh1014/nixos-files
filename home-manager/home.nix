@@ -129,6 +129,7 @@
     # Development
     codex
     claude-code
+    pi-coding-agent
     inputs.codex-desktop-linux.packages.${pkgs.stdenv.hostPlatform.system}.codex-desktop-computer-use-ui
     # FHS variant so MCP servers launched via npx/uvx/docker can run.
     inputs.claude-desktop.packages.${pkgs.stdenv.hostPlatform.system}.claude-desktop-fhs
