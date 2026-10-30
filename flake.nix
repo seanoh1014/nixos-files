@@ -61,7 +61,20 @@
         config.allowUnfree = true;
         overlays = [
           (final: prev: {
-            claude-code = claudeCodePkgs.claude-code;
+            # Preloads packages/no-agent-summary.js, which stops the agent_summary
+            # timer (re-sends each background agent's transcript every ~30s).
+            # Separate wrapper so the real binary keeps its .claude-wrapped name.
+            claude-code = prev.symlinkJoin {
+              name = "claude-code-${claudeCodePkgs.claude-code.version}";
+              inherit (claudeCodePkgs.claude-code) version meta;
+              paths = [ claudeCodePkgs.claude-code ];
+              nativeBuildInputs = [ prev.makeWrapper ];
+              postBuild = ''
+                rm $out/bin/claude
+                makeWrapper ${claudeCodePkgs.claude-code}/bin/claude $out/bin/claude \
+                  --prefix BUN_OPTIONS " " "--preload=${./packages/no-agent-summary.js}"
+              '';
+            };
           })
           inputs.tmux-which-key.overlays.default
           inputs.nix-vscode-extensions.overlays.default
