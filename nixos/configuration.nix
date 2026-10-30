@@ -71,6 +71,7 @@
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    keyd # `keyd bind` for play's per-window Caps/Ctrl remap
     git
     brightnessctl
   ];
@@ -157,18 +158,18 @@
         keepEnv = true;
         persist = true;
       }
-      # `play` pauses keyd so Caps/Ctrl taps don't send Escape in games.
+      # `play` turns off keyd's Caps/Ctrl remap while a game window is focused.
       {
         users = [ "ohsean" ];
         noPass = true;
-        cmd = "/run/current-system/sw/bin/systemctl";
-        args = [ "stop" "keyd" ];
+        cmd = "/run/current-system/sw/bin/keyd";
+        args = [ "bind" "capslock=capslock" "leftcontrol=leftcontrol" ];
       }
       {
         users = [ "ohsean" ];
         noPass = true;
-        cmd = "/run/current-system/sw/bin/systemctl";
-        args = [ "start" "keyd" ];
+        cmd = "/run/current-system/sw/bin/keyd";
+        args = [ "bind" "reset" ];
       }];
     };
     rtkit.enable = true;

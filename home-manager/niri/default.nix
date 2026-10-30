@@ -108,15 +108,43 @@ let
     # One long-running jq reduces each relevant event to a short line, so
     # focus, workspace and title events no longer spawn processes.
     ${pkgs.niri}/bin/niri msg --json event-stream |
-      ${pkgs.jq}/bin/jq --unbuffered -r '
-        if .WindowsChanged then
-          "init " + (.WindowsChanged.windows | map(.id | tostring) | join(" "))
-        elif .WindowClosed then
-          "closed"
-        elif .WindowOpenedOrChanged then
-          .WindowOpenedOrChanged.window |
-          "opened \(.id) \(if .is_floating then "" else .workspace_id // "" end)"
-        else empty end
+      ${pkgs.jq}/bin/jq --unbuffered -nr '
+        # Remember layouts before a close: querying afterward loses the
+        # closed window and cannot identify its former stack partner.
+        foreach inputs as $event ({windows: {}, line: null};
+          .line = null |
+          if $event.WindowsChanged then
+            .windows = ($event.WindowsChanged.windows |
+              map({key: (.id | tostring), value: .}) | from_entries) |
+            .line = ("init " + ($event.WindowsChanged.windows | map(.id | tostring) | join(" ")))
+          elif $event.WindowOpenedOrChanged then
+            $event.WindowOpenedOrChanged.window as $window |
+            .windows[($window.id | tostring)] = $window |
+            .line = "opened \($window.id) \(if $window.is_floating then "" else $window.workspace_id // "" end)"
+          elif $event.WindowLayoutsChanged then
+            reduce $event.WindowLayoutsChanged.changes[] as $change (.;
+              ($change[0] | tostring) as $id |
+              if .windows[$id] then .windows[$id].layout = $change[1] else . end)
+          elif $event.WindowClosed then
+            ($event.WindowClosed.id | tostring) as $id |
+            .windows[$id] as $closed |
+            if $closed != null and $closed.is_floating == false
+              and $closed.layout.pos_in_scrolling_layout != null then
+              [.windows[] | select(
+                .workspace_id == $closed.workspace_id and
+                .is_floating == false and
+                .layout.pos_in_scrolling_layout[0] == $closed.layout.pos_in_scrolling_layout[0]
+              )] as $column |
+              if ($column | length) == 2 then
+                ($column[] | select(.id != $closed.id)) as $peer |
+                if $peer.layout.pos_in_scrolling_layout[1] < $closed.layout.pos_in_scrolling_layout[1] then
+                  .line = "closed \($peer.id) \($peer.workspace_id)"
+                else . end
+              else . end
+            else . end |
+            del(.windows[$id])
+          else . end;
+          .line // empty)
       ' |
       while read -r kind window_id workspace_id; do
         if [ "$kind" = init ]; then
@@ -136,28 +164,15 @@ let
         fi
 
         if [ "$kind" = closed ]; then
-          workspaces="$(${pkgs.niri}/bin/niri msg --json workspaces)"
-          windows="$(${pkgs.niri}/bin/niri msg --json windows)"
-          top_only_ids="$(${pkgs.jq}/bin/jq -r --argjson workspaces "$workspaces" '
-            . as $windows |
-            $workspaces[] |
-            select(.output == "DP-2") |
-            .id as $workspace_id |
-            [$windows[] | select(
-              .workspace_id == $workspace_id and .is_floating == false
-            )] |
-            group_by(.layout.pos_in_scrolling_layout[0]) |
-            .[] |
-            select(length == 1) |
-            .[0].id
-          ' <<< "$windows")"
+          output="$(${pkgs.niri}/bin/niri msg --json workspaces |
+            ${pkgs.jq}/bin/jq -r --argjson workspace_id "$workspace_id" '
+              map(select(.id == $workspace_id))[0].output // empty
+            ')"
+          [ "$output" = "DP-2" ] || continue
 
-          # Keep every unpaired top window half-height, including windows in
-          # later scrolling columns rather than only the workspace's first.
-          for top_id in $top_only_ids; do
-            ${pkgs.niri}/bin/niri msg action set-window-width --id "$top_id" "100%"
-            ${pkgs.niri}/bin/niri msg action set-window-height --id "$top_id" "50%"
-          done
+          # Only the upper member of the affected pair keeps half height.
+          # Leave unrelated columns and workspaces at their chosen sizes.
+          ${pkgs.niri}/bin/niri msg action set-window-height --id "$window_id" "50%"
           continue
         fi
 

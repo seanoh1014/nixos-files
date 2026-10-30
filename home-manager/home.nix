@@ -44,7 +44,7 @@
   home.packages = with pkgs; [
     # Browsers
     firefox
-    (brave.overrideAttrs (old: {
+    (brave-origin.overrideAttrs (old: {
       preFixup = (old.preFixup or "") + ''
         gappsWrapperArgs+=(
           --add-flags "--enable-features=TouchpadOverscrollHistoryNavigation"
@@ -57,6 +57,7 @@
     eigenwallet
 
     # Command-line and system tools
+    bubblewrap
     unzip
     p7zip
     gh
@@ -152,7 +153,7 @@
     # git-remote-gcrypt
 
     # Documents and productivity
-    texliveMedium
+    (texliveMedium.withPackages (ps: [ ps.tagpdf ]))
     texstudio
     sioyek
     tradingview
