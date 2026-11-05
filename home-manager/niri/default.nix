@@ -503,6 +503,7 @@ in
           Mod+Shift+L hotkey-overlay-title="Move column to last" { move-column-to-last; }
           Mod+H hotkey-overlay-title="Decrease column width" { set-column-width "-5%"; }
           Mod+L hotkey-overlay-title="Increase column width" { set-column-width "+5%"; }
+          Mod+R hotkey-overlay-title="Switch Preset Column Widths" { switch-preset-column-width; }
           Mod+N hotkey-overlay-title="Consume or expel window left" { consume-or-expel-window-left; }
           Mod+M hotkey-overlay-title="Consume or expel window right" { consume-or-expel-window-right; }
           Mod+Shift+N hotkey-overlay-title="Consume window into column" { consume-window-into-column; }
