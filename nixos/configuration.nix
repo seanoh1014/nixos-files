@@ -129,6 +129,8 @@
 
   services.flatpak.enable = true;
 
+  services.tailscale.enable = true;
+
   #programs.light.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;

@@ -12,6 +12,7 @@
         update = "doas nixos-rebuild switch";
         z = "zathura";
         c = "nix-shell -p libgccjit";
+        books-sync = "rsync -a --delete --info=stats1 -e 'ssh -i ~/ssh/ssh-key-2022-07-06.key' ~/Books/ ubuntu@132.226.24.160:Books/";
       };
 
       envExtra = ''
