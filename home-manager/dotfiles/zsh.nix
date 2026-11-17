@@ -1,6 +1,13 @@
 { config, pkgs, lib, ... }:
 
 {
+    # Mirror ~/Books to the library server (a command, not an alias, so it also works from scripts).
+    home.packages = [
+      (pkgs.writeShellScriptBin "books-sync" ''
+        exec ${pkgs.rsync}/bin/rsync -a --delete --info=stats1 -e "ssh -i $HOME/ssh/ssh-key-2022-07-06.key" "$HOME/Books/" ubuntu@132.226.24.160:Books/
+      '')
+    ];
+
     programs.zsh = {
       enable = true;
       # dotDir = ".config/zsh";
@@ -12,7 +19,6 @@
         update = "doas nixos-rebuild switch";
         z = "zathura";
         c = "nix-shell -p libgccjit";
-        books-sync = "rsync -a --delete --info=stats1 -e 'ssh -i ~/ssh/ssh-key-2022-07-06.key' ~/Books/ ubuntu@132.226.24.160:Books/";
       };
 
       envExtra = ''
