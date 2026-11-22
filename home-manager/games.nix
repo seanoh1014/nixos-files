@@ -50,8 +50,11 @@ let
       done &
     trap 'pkill -P $$; normal_keys' EXIT
 
+    # UMU-Proton ships without Wine's Wayland driver; GE-Proton has it, so
+    # games run as native Wayland windows instead of through xwayland-satellite.
     cd "$(dirname "$exe")"
-    PROTON_ENABLE_WAYLAND=1 GAMEID="umu-''${appid:-0}" ${pkgs.umu-launcher}/bin/umu-run "$exe"
+    PROTONPATH="$HOME/.local/share/Steam/compatibilitytools.d/GE-Proton11-12-x86_64" \
+      PROTON_ENABLE_WAYLAND=1 GAMEID="umu-''${appid:-0}" ${pkgs.umu-launcher}/bin/umu-run "$exe"
   '';
 in
 {
