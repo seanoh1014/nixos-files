@@ -54,7 +54,8 @@ let
     # games run as native Wayland windows instead of through xwayland-satellite.
     cd "$(dirname "$exe")"
     PROTONPATH="$HOME/.local/share/Steam/compatibilitytools.d/GE-Proton11-12-x86_64" \
-      PROTON_ENABLE_WAYLAND=1 GAMEID="umu-''${appid:-0}" ${pkgs.umu-launcher}/bin/umu-run "$exe"
+      PROTON_ENABLE_WAYLAND=1 GAMEID="umu-''${appid:-0}" \
+      /run/current-system/sw/bin/gamemoderun ${pkgs.umu-launcher}/bin/umu-run "$exe"
   '';
 
   # Update every steamcmd-installed game in ~/Games and all Workshop mods

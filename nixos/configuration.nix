@@ -55,7 +55,7 @@
   users.users.ohsean = {
     isNormalUser = true;
     description = "ohsean";
-    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker" "gamemode" ];
     packages = with pkgs; [];
     # Keep user services (hermes-agent) running after logout.
     linger = true;
@@ -132,6 +132,8 @@
   services.tailscale.enable = true;
 
   #programs.light.enable = true;
+  # `play` runs games under gamemoderun: performance CPU governor while a game is open.
+  programs.gamemode.enable = true;
   programs.zsh.enable = true;
   users.users.ohsean.shell = pkgs.zsh;
 
