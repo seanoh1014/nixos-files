@@ -56,11 +56,65 @@ let
     PROTONPATH="$HOME/.local/share/Steam/compatibilitytools.d/GE-Proton11-12-x86_64" \
       PROTON_ENABLE_WAYLAND=1 GAMEID="umu-''${appid:-0}" ${pkgs.umu-launcher}/bin/umu-run "$exe"
   '';
+
+  # Update every steamcmd-installed game in ~/Games and all Workshop mods
+  # downloaded for it. Games that are running are skipped. Runs daily via the
+  # update-games timer below; when nothing changed steamcmd only checks.
+  update-games = pkgs.writeShellScriptBin "update-games" ''
+    set -u
+
+    # Account steamcmd last logged in with (its cached login is reused).
+    user="$(awk '/"Accounts"/ { f = 1; next } f && /"/ { gsub(/[\t"]/, ""); print; exit }' \
+      "$HOME/.local/share/Steam/config/config.vdf")"
+    [ -n "$user" ] || { echo "No cached steamcmd login; run: steamcmd +login <user> +quit" >&2; exit 1; }
+
+    failed=""
+    for dir in "$HOME"/Games/*/; do
+      dir="''${dir%/}"
+      appid="$(ls "$dir"/steamapps/appmanifest_*.acf 2>/dev/null | grep -v _228980 | head -n1 | grep -o '[0-9]\+\.acf' | cut -d. -f1)"
+      [ -n "$appid" ] || continue
+      if pgrep -f -- "$dir/" >/dev/null; then
+        echo "== $(basename "$dir") is running, skipped"
+        continue
+      fi
+
+      args=(+app_update "$appid")
+      for mod in "$dir/steamapps/workshop/content/$appid"/*/; do
+        [ -d "$mod" ] && args+=(+workshop_download_item "$appid" "$(basename "$mod")")
+      done
+
+      echo "== $(basename "$dir") ($appid, $(( (''${#args[@]} - 2) / 3 )) mods)"
+      ${pkgs.steamcmd}/bin/steamcmd +@sSteamCmdForcePlatformType windows \
+        +force_install_dir "$dir" +login "$user" "''${args[@]}" +quit </dev/null ||
+        failed="$failed $(basename "$dir")"
+    done
+
+    [ -z "$failed" ] || { echo "Problems updating:$failed" >&2; exit 1; }
+    echo "All games and mods up to date."
+  '';
 in
 {
   home.packages = [
     pkgs.steamcmd
     pkgs.umu-launcher
     play
+    update-games
   ];
+
+  systemd.user.services.update-games = {
+    Unit.Description = "Update steamcmd games and Workshop mods in ~/Games";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${update-games}/bin/update-games";
+    };
+  };
+  systemd.user.timers.update-games = {
+    Unit.Description = "Daily game and mod updates";
+    Timer = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "1h";
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
 }
